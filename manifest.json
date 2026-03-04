@@ -1,0 +1,55 @@
+{
+    "KR": {
+        "Middle_1-1": {
+            "STD-11-01": "curriculum.kr.middle.grade1_1.std_11_01",
+            "STD-11-02": "curriculum.kr.middle.grade1_1.std_11_02",
+            "STD-11-03": "curriculum.kr.middle.grade1_1.std_11_03",
+            "STD-11-04": "curriculum.kr.middle.grade1_1.std_11_04",
+            "STD-11-05": "curriculum.kr.middle.grade1_1.std_11_05",
+            "STD-11-06": "curriculum.kr.middle.grade1_1.std_11_06",
+            "STD-11-07": "curriculum.kr.middle.grade1_1.std_11_07",
+            "STD-11-08": "curriculum.kr.middle.grade1_1.std_11_08",
+            "STD-11-09": "curriculum.kr.middle.grade1_1.std_11_09",
+            "STD-11-10": "curriculum.kr.middle.grade1_1.std_11_10"
+        },
+        "Middle_1-2": {
+            "STD-12-01": "curriculum.kr.middle.grade1_2.std_12_01",
+            "STD-12-02": "curriculum.kr.middle.grade1_2.std_12_02",
+            "STD-12-03": "curriculum.kr.middle.grade1_2.std_12_03",
+            "STD-12-04": "curriculum.kr.middle.grade1_2.std_12_04",
+            "STD-12-05": "curriculum.kr.middle.grade1_2.std_12_05",
+            "STD-12-06": "curriculum.kr.middle.grade1_2.std_12_06",
+            "STD-12-07": "curriculum.kr.middle.grade1_2.std_12_07",
+            "STD-12-08": "curriculum.kr.middle.grade1_2.std_12_08"
+        },
+        "Middle_2-1": {
+            "STD-21-01": "curriculum.kr.middle.grade2_1.std_21_01",
+            "STD-21-02": "curriculum.kr.middle.grade2_1.std_21_02",
+            "STD-21-03": "curriculum.kr.middle.grade2_1.std_21_03",
+            "STD-21-04": "curriculum.kr.middle.grade2_1.std_21_04",
+            "STD-21-05": "curriculum.kr.middle.grade2_1.std_21_05",
+            "STD-21-06": "curriculum.kr.middle.grade2_1.std_21_06",
+            "STD-21-07": "curriculum.kr.middle.grade2_1.std_21_07",
+            "STD-21-08": "curriculum.kr.middle.grade2_1.std_21_08"
+        },
+        "High_Common": {
+            "STD-HIGH-01": "curriculum.kr.high.common.std_high_01",
+            "STD-HIGH-02": "curriculum.kr.high.common.std_high_02",
+            "STD-HIGH-03": "curriculum.kr.high.common.std_high_03",
+            "STD-HIGH-04": "curriculum.kr.high.common.std_high_04",
+            "STD-HIGH-05": "curriculum.kr.high.common.std_high_05",
+            "STD-HIGH-06": "curriculum.kr.high.common.std_high_06",
+            "STD-HIGH-07": "curriculum.kr.high.common.std_high_07",
+            "STD-HIGH-08": "curriculum.kr.high.common.std_high_08",
+            "STD-HIGH-09": "curriculum.kr.high.common.std_high_09",
+            "STD-HIGH-10": "curriculum.kr.high.common.std_high_10",
+            "STD-HIGH-11": "curriculum.kr.high.common.std_high_11",
+            "STD-HIGH-12": "curriculum.kr.high.common.std_high_12",
+            "STD-HIGH-13": "curriculum.kr.high.common.std_high_13",
+            "STD-HIGH-14": "curriculum.kr.high.common.std_high_14",
+            "STD-HIGH-15": "curriculum.kr.high.common.std_high_15"
+        }
+    },
+    "US": {
+    }
+}

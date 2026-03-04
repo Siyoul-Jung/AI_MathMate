@@ -1,0 +1,233 @@
+[
+  {
+    "단원": "I. 다항식",
+    "유형": "다항식의 내림차순과 오름차순",
+    "id": "MATH1_I_P04_01",
+    "content": "다음 다항식을 [ ] 안의 문자에 대하여 내림차순과 오름차순으로 각각 정리하시오. (1) 4x^3y+3xy-2x^2+5xy^2 [x] (2) 5y^2+2x^2-3xy^2-6y^3+7 [y]",
+    "logic": "polynomial_ordering",
+    "template_vars": {
+      "expression_1": "4x^3y+3xy-2x^2+5xy^2",
+      "target_var_1": "x",
+      "expression_2": "5y^2+2x^2-3xy^2-6y^3+7",
+      "target_var_2": "y"
+    },
+    "source_ref": "[cite: 1]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "다항식의 전개와 계수",
+    "id": "MATH1_I_P36_04",
+    "content": "(2x-1)^3(x+3)^2을 전개한 식에서 x^3의 계수를 구하시오.",
+    "logic": "polynomial_expansion_coefficient",
+    "template_vars": {
+      "expression": "(2x-1)^3(x+3)^2",
+      "target_term": "x^3"
+    },
+    "source_ref": "[cite: 2]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "조립제법",
+    "id": "MATH1_I_P36_08",
+    "content": "다음 나눗셈의 몫과 나머지를 조립제법을 이용하여 구하시오. (4x^3-7x+1) ÷ (2x-1)",
+    "logic": "synthetic_division",
+    "template_vars": {
+      "dividend": "4x^3-7x+1",
+      "divisor": "2x-1"
+    },
+    "source_ref": "[cite: 3]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "항등식의 미정계수법",
+    "id": "MATH1_I_MID_01",
+    "content": "다음 등식이 x에 대한 항등식이 되도록 실수 a, b, c의 값을 정하시오. x^3+ax^2-24 = (x+b)(x^2+cx-12)",
+    "logic": "identity_undetermined_coefficients",
+    "source_ref": "[cite: 34]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "나머지 정리",
+    "id": "MATH1_I_MID_03",
+    "content": "다항식 P(x) = x^3+ax^2+13x+9를 x+1로 나누었을 때, 나머지가 2이다. 이때 실수 a의 값을 구하시오.",
+    "logic": "remainder_theorem",
+    "constraints": {
+      "divisor": "x+1",
+      "remainder": 2
+    },
+    "source_ref": "[cite: 34]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "인수분해 공식의 활용",
+    "id": "MATH1_I_MID_02_02",
+    "content": "다항식 x^4-8x^2+16이 (x+a)^2(x-b)^2으로 인수분해될 때, 실수 a, b에 대하여 a-b의 값을 구하시오. (단, a>0, b>0)",
+    "logic": "factorization_perfect_square",
+    "source_ref": "[cite: 35]"
+  },
+  {
+    "단원": "I. 다항식",
+    "유형": "곱셈 공식의 변형 (대단원 평가)",
+    "id": "MATH1_I_TEST_05",
+    "content": "x+y=3, x^3+y^3=18일 때, x^2+y^2의 값은?",
+    "logic": "multiplication_formula_transformation",
+    "template_vars": {
+      "sum_val": 3,
+      "cube_sum_val": 18,
+      "target": "x^2+y^2"
+    },
+    "source_ref": "[cite: 92]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "복소수가 서로 같을 조건",
+    "id": "MATH1_II_01_02",
+    "content": "다음 등식을 만족시키는 실수 x, y의 값을 구하시오. (2x+y) + (x-3y)i = 11+2i",
+    "logic": "complex_equality",
+    "source_ref": "[cite: 17]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "이차방정식의 판별식",
+    "id": "MATH1_II_02_03",
+    "content": "이차방정식 x^2-2(m-5)x+m^2=0이 실근을 갖도록 하는 정수 m의 최댓값을 구하시오.",
+    "logic": "discriminant_real_roots",
+    "constraints": {
+      "condition": "D >= 0",
+      "target_var": "m",
+      "objective": "maximum_integer"
+    },
+    "source_ref": "[cite: 38]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "제한된 범위에서 이차함수의 최대·최소",
+    "id": "MATH1_II_04_02",
+    "content": "x의 값의 범위가 -1 < x < 1일 때, 이차함수 y=x^2-4x+a의 최솟값은 -1이다. 이때 실수 a의 값을 구하시오.",
+    "logic": "quadratic_min_value_with_range",
+    "source_ref": "[cite: 41]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "연립이차방정식",
+    "id": "MATH1_II_06_01",
+    "content": "다음 연립방정식을 푸시오. x-y=-1, x^2+2xy+y^2=4",
+    "logic": "system_of_quadratic_equations",
+    "source_ref": "[cite: 23]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "연립일차부등식",
+    "id": "MATH1_II_MID_03",
+    "content": "연립부등식 2x+a<9, 3x-9>6 의 해가 b<x<7이 되도록 하는 실수 a, b의 값을 구하시오. (단, b<7)",
+    "logic": "system_of_linear_inequalities_coefficients",
+    "source_ref": "[cite: 44]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "이차부등식 활용 (실생활 도형)",
+    "id": "MATH1_II_TEST_23",
+    "content": "길이가 36 cm인 철사를 이용하여 다음 조건을 만족시키는 직사각형을 만들 때, 가로 길이의 최댓값과 최솟값을 구하시오. (가) 가로의 길이가 세로의 길이의 두 배보다 짧지 않다. (나) 넓이는 32 cm^2 이상이다.",
+    "logic": "quadratic_inequality_geometry_application",
+    "source_ref": "[cite: 100]"
+  },
+  {
+    "단원": "III. 경우의 수",
+    "유형": "합의 법칙과 곱의 법칙",
+    "id": "MATH1_III_01_02",
+    "content": "1부터 50까지 자연수 중 5의 배수 또는 11의 배수의 개수를 구하시오.",
+    "logic": "addition_rule_multiples",
+    "template_vars": {
+      "range_max": 50,
+      "num1": 5,
+      "num2": 11
+    },
+    "source_ref": "[cite: 26]"
+  },
+  {
+    "단원": "III. 경우의 수",
+    "유형": "자연수의 개수 (조건부 순열)",
+    "id": "MATH1_III_MID_10",
+    "content": "5개의 수 0, 2, 4, 6, 8 중에서 서로 다른 3개를 택하여 세 자리 자연수를 만들 때, 3의 배수의 개수를 구하시오.",
+    "logic": "permutation_number_formation",
+    "constraints": {
+      "condition": "sum of digits is multiple of 3"
+    },
+    "source_ref": "[cite: 73]"
+  },
+  {
+    "단원": "III. 경우의 수",
+    "유형": "이웃하는 경우의 수 (순열)",
+    "id": "MATH1_III_MID_03",
+    "content": "남학생 4명과 여학생 3명이 일렬로 줄을 설 때, 양 끝에 남학생이 서고 여학생 3명이 모두 이웃하여 서는 경우의 수를 구하시오.",
+    "logic": "permutation_adjacent_and_endpoints",
+    "source_ref": "[cite: 48]"
+  },
+  {
+    "단원": "III. 경우의 수",
+    "유형": "조합의 활용",
+    "id": "MATH1_III_MID_02",
+    "content": "어느 동아리에서 동아리에 속한 1학년 학생 6명과 2학년 학생 4명 중에서 3명을 뽑을 때, 3명의 학년이 모두 같은 경우의 수를 구하시오.",
+    "logic": "combination_same_group",
+    "source_ref": "[cite: 49]"
+  },
+  {
+    "단원": "III. 경우의 수",
+    "유형": "다각형과 대각선 (조합 대단원 평가)",
+    "id": "MATH1_III_TEST_16",
+    "content": "변의 개수가 n인 정다각형의 대각선의 개수가 104일 때, n의 값은?",
+    "logic": "combination_polygon_diagonals",
+    "formula": "nC2 - n = 104",
+    "source_ref": "[cite: 104]"
+  },
+  {
+    "단원": "IV. 행렬",
+    "유형": "행렬의 뜻과 성분",
+    "id": "MATH1_IV_01_02",
+    "content": "2x3 행렬 A의 (i, j) 성분 a_ij가 다음과 같을 때, 행렬 A를 구하시오. a_ij = i+j-3",
+    "logic": "matrix_elements_generation",
+    "template_vars": {
+      "rows": 2,
+      "cols": 3,
+      "rule": "i+j-3"
+    },
+    "source_ref": "[cite: 30]"
+  },
+  {
+    "단원": "IV. 행렬",
+    "유형": "서로 같은 행렬",
+    "id": "MATH1_IV_MID_06",
+    "content": "두 행렬 A=[[a+b, 0],], B=[[-6, 0], [7, ab]]에 대하여 등식 A=B가 성립할 때, a^2+b^2의 값을 구하시오. (단, a, b는 실수)",
+    "logic": "matrix_equality",
+    "data_matrix": {
+      "A": [["a+b", 0],],
+      "B": [[-6, 0], [7, "ab"]]
+    },
+    "source_ref": "[cite: 51]"
+  },
+  {
+    "단원": "IV. 행렬",
+    "유형": "행렬의 방정식과 연산",
+    "id": "MATH1_IV_MID_02",
+    "content": "두 행렬 A=[[-3, 1],], B=[[0, -4],]에 대하여 등식 4X-B=2X-3(-2A+B)를 만족시키는 행렬 X를 구하시오.",
+    "logic": "matrix_linear_equation",
+    "source_ref": "[cite: 52]"
+  },
+  {
+    "단원": "IV. 행렬",
+    "유형": "단위행렬과 행렬의 곱셈",
+    "id": "MATH1_IV_TEST_12",
+    "content": "행렬 A=[, [-1, 2]]에 대하여 등식 A^2-3A+kE=O를 만족시키는 실수 k의 값은? (단, E는 이차정사각행렬, O는 영행렬)",
+    "logic": "matrix_polynomial_equation",
+    "source_ref": "[cite: 109]"
+  },
+  {
+    "단원": "II. 방정식과 부등식",
+    "유형": "수행 과제 (실생활 부등식)",
+    "id": "MATH1_PERF_II_01",
+    "content": "놀이기구 1개를 이용하는 데 대기 30분, 타는 데 10분으로 총 40분이 걸린다. 또 다른 놀이기구로 이동하는 데 5분이 걸린다. 오전 10시에 입장하여 처음 이용할 놀이기구로 이동하는 시간은 제외할 때, 민수가 입장하여 놀이기구 x개를 다 타는 데까지 걸리는 총 시간을 분 단위 부등식 기호 없이 식으로 나타내시오.",
+    "logic": "linear_inequality_word_problem",
+    "equation_gen": "40x + 5(x-1)",
+    "source_ref": "[cite: 87, 88]"
+  }
+]
