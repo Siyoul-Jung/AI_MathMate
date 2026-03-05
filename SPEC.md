@@ -15,7 +15,7 @@ See memory/constitution.md for the core architectural principles and immutable r
 ## 3. Directory Structure
 
 ```text
-c:\MathGenerator\
+c:\AI_MathMate\
 ├── core\                  # Core logic & utilities
 ├── curriculum\            # Content generation modules
 ├── frontend\              # Next.js application
@@ -39,7 +39,7 @@ c:\MathGenerator\
 
 ## 5. 디렉토리 구조 (Directory Structure)
 ```text
-c:\MathGenerator\
+c:\AI_MathMate\
 ├── core\                  # 핵심 공통 모듈
 ├── curriculum\            # 교육과정별 문제 생성 로직
 ├── frontend\              # Next.js 웹 애플리케이션

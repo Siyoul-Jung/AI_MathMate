@@ -1,6 +1,6 @@
-# MathGenerator Project
+# AI_MathMate Project
 
-수학 문제 생성 및 워크북 관리를 위한 웹 애플리케이션 프로젝트입니다.
+Next.js와 Python(FastAPI)을 활용한 수학 문제 자동 생성 및 워크북 관리 플랫폼입니다.
 
 ## 📂 프로젝트 구조
 
@@ -13,6 +13,7 @@
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Math Rendering**: KaTeX, React-KaTeX
+- **Development**: AI-Assisted with Google Gemini (Vibe Coding Methodology)
 
 ## 🚀 시작하기 (Getting Started)
 
@@ -21,8 +22,8 @@
 ### 1. 저장소 클론
 
 ```bash
-git clone https://github.com/your-username/MathGenerator.git
-cd MathGenerator
+git clone https://github.com/Siyoul-Jung/AI_MathMate.git
+cd AI_MathMate
 ```
 
 ### 2. 의존성 설치 및 실행

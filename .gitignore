@@ -28,3 +28,10 @@ yarn-error.log*
 # IDE settings (선택 사항, 팀 프로젝트 시 공유하기도 함)
 .vscode/
 .idea/
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.spec
