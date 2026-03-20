@@ -1,0 +1,12 @@
+{
+  "p_id": "P10",
+  "title": "Sudoku-style Grid Enumeration",
+  "domain": "Combinatorics",
+  "difficulty_band": "EXPERT",
+  "dna_tags": ["Permutations", "Grid Constraints", "Franel Numbers"],
+  "drill_config": {
+    "L1": "Simple row permutations (raw factorial).",
+    "L2": "Mini-grid enumeration with basic Sudoku-lite constraints.",
+    "L3": "Large grid decomposition with balanced partition modeling."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "unit_meta": { "subject": "Common_Math_1", "unit_id": "U3", "unit_name": "III. 경우의 수" },
+  "problems": [
+    {
+      "section": "계산력 강화 문제 [cite: 610-726]",
+      "items": [
+        { "id": "BS-3-CAL-01", "level": "Basic", "cite": 617, "text": "소희네 집에서 박물관까지 가는 버스 노선은 4가지, 지하철 노선은 3가지가 있다. 버스 또는 지하철로 소희네 집에서 박물관까지 가는 경우의 수를 구하시오." },
+        { "id": "BS-3-CAL-02", "level": "Basic", "cite": 620, "text": "1부터 50까지 자연수 중 5의 배수 또는 11의 배수의 개수를 구하시오." },
+        { "id": "BS-3-CAL-03", "level": "Basic", "cite": 622, "text": "서로 다른 두 개의 주사위 A, B를 동시에 던질 때 나오는 눈의 수의 차가 4 이상이 되는 경우의 수를 구하시오." },
+        { "id": "BS-3-CAL-04", "level": "Basic", "cite": 625, "text": "x, y가 자연수일 때, 부등식 2x+y≤6을 만족시키는 순서쌍 (x, y)의 개수를 구하시오." },
+        { "id": "BS-3-CAL-05", "level": "Basic", "cite": 635, "text": "세 지점 A, B, C를 연결하는 도로망에서 지점 A에서 지점 C까지 가는 방법의 수를 구하시오. (단, 같은 지점은 두 번 이상 지나지 않는다.)" },
+        { "id": "BS-3-CAL-06", "level": "Basic", "cite": 642, "text": "두 자리 자연수 중에서 십의 자리 수는 3의 배수, 일의 자리 수는 8의 약수인 것의 개수를 구하시오." },
+        { "id": "BS-3-CAL-07", "level": "Basic", "cite": 644, "text": "다음 수의 약수의 개수를 구하시오. (1) 144 (2) 300" },
+        { "id": "BS-3-CAL-08", "level": "Basic", "cite": 651, "text": "(a+b+c)(d+e)(x+y+z)를 전개하였을 때, (1) 모든 항의 개수 (2) x를 포함한 항의 개수를 구하시오." },
+        { "id": "BS-3-CAL-09", "level": "Basic", "cite": 661, "text": "다음 값을 구하시오. (1) 3P2 (2) 7P3 (3) 5P4 (4) 10P1" },
+        { "id": "BS-3-CAL-10", "level": "Basic", "cite": 666, "text": "등식 nP2=72를 만족시키는 자연수 n의 값을 구하시오." },
+        { "id": "BS-3-CAL-11", "level": "Basic", "cite": 672, "text": "(1) 후보 6명 중 회장, 부회장, 서기를 각각 1명씩 뽑는 경우의 수 (2) 회원 9명 중 4명을 뽑아 이어달리기 순서를 정하는 경우의 수 (3) 문자 P, O, W, E, R 중 서로 다른 3개를 택해 만들 수 있는 문자열 개수" },
+        { "id": "BS-3-CAL-12", "level": "Basic", "cite": 684, "text": "빈칸에 알맞은 수를 써넣으시오. (1) 5! (2) 7P4 (3) 9P0 (4) 2! * 5P3" },
+        { "id": "BS-3-CAL-13", "level": "Basic", "cite": 695, "text": "(1) 학생 4명을 일렬로 세우는 경우의 수 (2) 서로 다른 음식 6가지를 일렬로 배열하는 경우의 수" },
+        { "id": "BS-3-CAL-14", "level": "Basic", "cite": 698, "text": "6개의 문자 a, b, c, d, e, f를 일렬로 나열할 때, (1) a가 맨 마지막에 오도록 (2) a, b, c가 서로 이웃하도록 (3) 모음이 양 끝에 오도록 하는 경우의 수" },
+        { "id": "BS-3-CAL-15", "level": "Basic", "cite": 709, "text": "다음 값을 구하시오. (1) 4C2 (2) nC3=20 (3) 6C6 (4) 10C0" },
+        { "id": "BS-3-CAL-16", "level": "Basic", "cite": 716, "text": "등식 nC2=10을 만족시키는 자연수 n의 값을 구하시오." },
+        { "id": "BS-3-CAL-17", "level": "Basic", "cite": 721, "text": "(1) 학생 7명 중 임원 4명을 뽑는 방법의 수 (2) 펜 6자루 중 2자루를 택하는 방법의 수" },
+        { "id": "BS-3-CAL-18", "level": "Basic", "cite": 725, "text": "도넛 8개와 음료수 5잔 중 도넛 3개와 음료수 2잔을 고르는 경우의 수를 구하시오." }
+      ]
+    },
+    {
+      "section": "소단원 확인 문제 [cite: 1086-1147]",
+      "items": [
+        { "id": "BS-3-SUB-01", "level": "Standard", "cite": 1092, "text": "1~20까지 카드 중 (1) 3의 배수 또는 7의 배수를 뽑는 경우의 수 (2) 짝수 또는 15의 약수를 뽑는 경우의 수" },
+        { "id": "BS-3-SUB-02", "level": "Standard", "cite": 1100, "text": "x, y가 자연수일 때, 부등식 4x+5y≤17을 만족시키는 순서쌍 (x, y)의 개수를 구하시오." },
+        { "id": "BS-3-SUB-03", "level": "Standard", "cite": 1105, "text": "인문 사회 3분야와 자연 과학 2분야 프로그램 중 각각 1분야를 택하는 방법의 수를 구하시오." },
+        { "id": "BS-3-SUB-04", "level": "Standard", "cite": 1094, "text": "도로망에서 지점 A에서 지점 E까지 가는 방법의 수를 구하시오. (단, 같은 지점은 두 번 이상 지나지 않는다.)" },
+        { "id": "BS-3-SUB-05", "level": "Standard", "cite": 1101, "text": "280과 720의 공약수의 개수는?" },
+        { "id": "BS-3-SUB-06", "level": "Standard", "cite": 1109, "text": "10원짜리 동전 3개, 100원짜리 동전 4개, 500원짜리 동전 2개를 사용하여 지불할 수 있는 방법의 수를 구하시오. (0원 제외)" },
+        { "id": "BS-3-SUB-07", "level": "Standard", "cite": 1117, "text": "등식을 만족시키는 n의 값: (1) nP3=60 (2) 2nP3=100*nP2" },
+        { "id": "BS-3-SUB-08", "level": "Standard", "cite": 1123, "text": "0, 1, 2, 3, 4, 5 중 서로 다른 4개를 택해 만든 네 자리 자연수 중 짝수의 개수를 구하시오." },
+        { "id": "BS-3-SUB-09", "level": "Standard", "cite": 1126, "text": "남학생 4명, 여학생 3명이 일렬로 설 때, (1) 양 끝에 남학생이 서고 여학생 3명이 이웃하는 경우 (2) 남학생끼리 이웃하지 않는 경우의 수" },
+        { "id": "BS-3-SUB-10", "level": "Standard", "cite": 1119, "text": "집, 편의점, 학교 도로망에서 집에서 편의점을 거쳐 학교까지 가는 최단 경로의 수를 구하시오." },
+        { "id": "BS-3-SUB-11", "level": "Standard", "cite": 1124, "text": "police의 6개 문자를 모두 사용해 만든 문자열 중 적어도 한쪽 끝에 자음이 오는 문자열의 개수를 구하시오." },
+        { "id": "BS-3-SUB-12", "level": "Standard", "cite": 1129, "text": "0, 1, 2, 3, 4 중 서로 다른 3개를 택해 만든 세 자리 자연수 중 220보다 작은 수의 개수를 구하시오." },
+        { "id": "BS-3-SUB-13", "level": "Standard", "cite": 1136, "text": "등식을 만족시키는 n 또는 r의 값: (1) nC3=20 (2) 9Cr=9C4 (r≠4)" },
+        { "id": "BS-3-SUB-14", "level": "Standard", "cite": 1141, "text": "1학년 6명, 2학년 4명 중 3명을 뽑을 때, 3명의 학년이 모두 같은 경우의 수를 구하시오." },
+        { "id": "BS-3-SUB-15", "level": "Standard", "cite": 1144, "text": "빵 7개와 음료 5개 중 빵 3개와 음료 2개를 택하는 경우의 수를 구하시오." },
+        { "id": "BS-3-SUB-16", "level": "Standard", "cite": 1139, "text": "체험관에서 3개를 선택할 때 경찰관 체험 1개를 반드시 포함하는 방법의 수가 55일 때 n의 값을 구하시오." },
+        { "id": "BS-3-SUB-17", "level": "Standard", "cite": 1143, "text": "A, B, C 포함 공 7개 중 3개를 꺼낼 때, (a) A 포함 경우의 수 (b) B 제외 C 포함 경우의 수. a+b의 값을 구하시오." },
+        { "id": "BS-3-SUB-18", "level": "Standard", "cite": 1146, "text": "합동인 정사각형 8개를 이어 붙인 도형에서 정사각형이 아닌 직사각형의 개수를 구하시오." }
+      ]
+    },
+    {
+      "section": "중단원 수준별 문제 ",
+      "items": [
+        { "id": "BS-3-MID-01", "level": "Basic", "cite": 1618, "text": "주사위 두 개 던질 때 합이 6의 약수 또는 4의 배수가 되는 경우의 수" },
+        { "id": "BS-3-MID-02", "level": "Basic", "cite": 1621, "text": "1, 2, 3, 4 카드 중 2장을 뽑아 만든 두 자리 자연수 중 홀수의 개수" },
+        { "id": "BS-3-MID-03", "level": "Basic", "cite": 1623, "text": "60과 132의 공약수의 개수" },
+        { "id": "BS-3-MID-04", "level": "Basic", "cite": 1617, "text": "등식 만족 n, r 구하기: (1) 6Pr * 4! = 720, (2) nC1 + nC2 = 36" },
+        { "id": "BS-3-MID-05", "level": "Basic", "cite": 1622, "text": "남학생 2명, 여학생 3명이 연달아 레슨받는 남학생의 경우의 수" },
+        { "id": "BS-3-MID-06", "level": "Basic", "cite": 1625, "text": "국가유산 5곳, 박물관 3곳 중 유산 2곳, 박물관 1곳 택하는 경우" },
+        { "id": "BS-3-MID-07", "level": "Standard", "cite": 1631, "text": "3x+2y+z=15 만족하는 자연수 순서쌍 개수" },
+        { "id": "BS-3-MID-08", "level": "Standard", "cite": 1632, "text": "주사위 두 개 던질 때 합이 짝수가 되는 경우의 수" },
+        { "id": "BS-3-MID-09", "level": "Standard", "cite": 1634, "text": "평행선 위 점들로 넓이가 2인 사각형 만드는 경우의 수" },
+        { "id": "BS-3-MID-10", "level": "Standard", "cite": 1630, "text": "0, 2, 4, 6, 8 중 3개로 만든 세 자리 자연수 중 3의 배수 개수" },
+        { "id": "BS-3-MID-11", "level": "Standard", "cite": 1633, "text": "10개 컵 중 n개를 나열하는 방법이 720일 때 n" },
+        { "id": "BS-3-MID-12", "level": "Standard", "cite": 1637, "text": "어린이 3명과 어른 n명 중 어린이 이웃 서는 경우 144일 때 n" },
+        { "id": "BS-3-MID-13", "level": "Standard", "cite": 1641, "text": "의자 10개에 학생 3명이 어느 누구도 이웃하지 않게 앉는 방법" },
+        { "id": "BS-3-MID-14", "level": "Standard", "cite": 1642, "text": "1, 2, 3, 4, 5로 만든 다섯 자리 자연수 중 75번째 작은 수" },
+        { "id": "BS-3-MID-15", "level": "Standard", "cite": 1646, "text": "윤우 포함 6명 중 3명 정화 시 윤우 제외 경우의 수" },
+        { "id": "BS-3-MID-16", "level": "Standard", "cite": 1643, "text": "피자 6종, 파스타 7종 중 피자 2종(불고기 포함), 파스타 3종(토마토 제외) 주문" },
+        { "id": "BS-3-MID-17", "level": "Standard", "cite": 1648, "text": "별 모양 도형 위 10개 점 중 사각형 만들 수 있는 4개 점 선택 경우" },
+        { "id": "BS-3-MID-18", "level": "Standard", "cite": 1651, "text": "학생 9명을 2명, 3명, 4명 모둠으로 나누는 방법" },
+        { "id": "BS-3-MID-19", "level": "Advanced", "cite": 1656, "text": "a, b, c, d, e 나열 시 자리별 제외 조건(a 제외 등) 만족 경우" },
+        { "id": "BS-3-MID-20", "level": "Advanced", "cite": 1671, "text": "영역 6개를 4색 이하로 인접 영역 다르게 칠하는 방법" },
+        { "id": "BS-3-MID-21", "level": "Advanced", "cite": 1661, "text": "축제 부스 6개에 동아리(고등3, 중등2, 일반1) 배정 조건 만족 경우" },
+        { "id": "BS-3-MID-22", "level": "Advanced", "cite": 1679, "text": "파란 공 7개, 노란 공 5개를 상자 2개에 조건(파란 공 > 노란 공 등) 만족 배분" }
+      ]
+    },
+    {
+      "section": "수행 과제 [cite: 1895-1943]",
+      "items": [
+        { "id": "BS-3-TASK-01", "level": "Standard", "cite": 1900, "text": "각 경우의 수 경로 게임: 출발점에서 장소까지 도달하는 경로 찾기" },
+        { "id": "BS-3-TASK-02", "level": "Standard", "cite": 1942, "text": "도착 장소 변경을 위한 문제 수정 과제" }
+      ]
+    },
+    {
+      "section": "대단원 TEST [cite: 2217-2323]",
+      "items": [
+        { "id": "BS-3-TST-01", "level": "Basic", "cite": 2220, "text": "클래식 6곡, 가요 5곡 중 한 곡 택하는 경우의 수" },
+        { "id": "BS-3-TST-02", "level": "Advanced", "cite": 2231, "text": "세 자연수가 삼각형 세 변일 때 3x+2y+z<11 만족 순서쌍 개수" },
+        { "id": "BS-3-TST-03", "level": "Standard", "cite": 2241, "text": "주사위 두 눈 a, b가 이차함수와 직선의 교점 2개 조건 만족하는 개수" },
+        { "id": "BS-3-TST-04", "level": "Standard", "cite": 2225, "text": "네 지점 도로망에서 A에서 C까지 가는 방법의 수" },
+        { "id": "BS-3-TST-05", "level": "Standard", "cite": 2234, "text": "십의 자리 짝수, 일의 자리 소수인 두 자리 자연수 개수" },
+        { "id": "BS-3-TST-06", "level": "Standard", "cite": 2244, "text": "전개식 항의 개수 a, 특정 문자 포함 항 b일 때 a+b" },
+        { "id": "BS-3-TST-07", "level": "Standard", "cite": 2252, "text": "주사위 3개 던질 때 적어도 1개는 홀수가 나오는 경우" },
+        { "id": "BS-3-TST-08", "level": "Advanced", "cite": 2257, "text": "영역 7개를 3색 이하로 인접 영역 다르게 칠하는 방법" },
+        { "id": "BS-3-TST-09", "level": "Standard", "cite": 2271, "text": "0, 1, 2, 3, 4 중 4개를 택해 만든 네 자리 자연수 중 4의 배수 개수" },
+        { "id": "BS-3-TST-10", "level": "Advanced", "cite": 2255, "text": "1~5 나열 시 짝수 이웃 a, 양 끝 홀수 b, 두 조건 동시 c일 때 a+b+c" },
+        { "id": "BS-3-TST-11", "level": "Advanced", "cite": 2268, "text": "예약 좌석 5개에 교사와 학생 이웃 및 열 분리 조건 만족 착석 방법" },
+        { "id": "BS-3-TST-12", "level": "Advanced", "cite": 2286, "text": "A~F 나열 시 특정 문자 중 적어도 2개 이웃하는 방법" },
+        { "id": "BS-3-TST-13", "level": "Basic", "cite": 2291, "text": "nP2 * nC2 + 4! 등의 복합 연산 식 계산" },
+        { "id": "BS-3-TST-14", "level": "Standard", "cite": 2302, "text": "노란 공 포함 n개 중 3개 택할 때 포함 경우 = 미포함 경우일 때 n" },
+        { "id": "BS-3-TST-15", "level": "Standard", "cite": 2289, "text": "배우 6명을 역할 A, B 각 3명씩 나누는 팀 구성 방법" },
+        { "id": "BS-3-TST-16", "level": "Standard", "cite": 2297, "text": "정다각형 대각선 개수가 104일 때 변의 개수 n" },
+        { "id": "BS-3-TST-17", "level": "Advanced", "cite": 2308, "text": "형광펜 7자루를 세 연필꽂이에 빈 곳 없이 서로 다른 개수로 넣는 경우" },
+        { "id": "BS-3-TST-18", "level": "Advanced", "cite": 2321, "text": "지역 A, B 회원 중 적어도 1명씩 포함해 4명 뽑는 경우" },
+        { "id": "BS-3-TST-19", "level": "Advanced", "cite": 2317, "text": "친구 10명 중 쌍둥이 2명 동시 초대 또는 동시 미초대 경우" },
+        { "id": "BS-3-TST-20", "level": "Advanced", "cite": 2322, "text": "8개 문자 사용 문자열 중 적어도 한쪽 끝 자음 오는 개수" },
+        { "id": "BS-3-TST-21", "level": "Advanced", "cite": 2316, "text": "1~6 중 4개 택해 만든 네 자리 자연수 중 3의 배수 개수" },
+        { "id": "BS-3-TST-22", "level": "Advanced", "cite": 2319, "text": "정사면체 모서리 위 10개 점 연결해 만들 수 있는 삼각형 개수" },
+        { "id": "BS-3-TST-23", "level": "Standard", "cite": 2320, "text": "세 자리 자연수 중 각 자리 수의 곱이 홀수인 것의 개수" }
+      ]
+    }
+  ]
+}

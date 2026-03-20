@@ -1,0 +1,12 @@
+{
+  "p_id": "P13",
+  "title": "Expected Regions in a Disk",
+  "domain": "Combinatorics / Geometry",
+  "difficulty_band": "MASTER",
+  "dna_tags": ["Euler Region Count", "Probability", "Expected Value"],
+  "drill_config": {
+    "L1": "Basic Euler formula for disk partitioning by chords.",
+    "L2": "Geometric probability of chord intersections with sector constraints.",
+    "L3": "Linearity of expectation for total region count."
+  }
+}

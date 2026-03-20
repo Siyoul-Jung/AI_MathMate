@@ -1,0 +1,12 @@
+{
+  "p_id": "P01",
+  "title": "Bases and Divisibility",
+  "domain": "Number Theory",
+  "difficulty_band": "CHALLENGER",
+  "dna_tags": ["Number Bases", "Divisibility", "Modular Arithmetic"],
+  "drill_config": {
+    "L1": "Direct base evaluation (base-b to base-10).",
+    "L2": "Smallest base searching with single divisibility constraint.",
+    "L3": "Comprehensive sum of possible bases under variable constraints."
+  }
+}

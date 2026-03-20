@@ -1,0 +1,12 @@
+{
+  "p_id": "P15",
+  "title": "Modular Cubic Residue Triples",
+  "domain": "Number Theory",
+  "difficulty_band": "MASTER",
+  "dna_tags": ["Modular Arithmetic", "Cubic Residues", "Recursion / LTE"],
+  "drill_config": {
+    "L1": "Counting cubic residues modulo powers of 3.",
+    "L2": "Ordered pair counts for binary cubic modular sums.",
+    "L3": "Recursive triples counting for advanced modular divisibility."
+  }
+}

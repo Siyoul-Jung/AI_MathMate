@@ -1,0 +1,394 @@
+[
+  {
+    "unit_meta": {
+      "large_unit": "I. 다항식",
+      "medium_unit": "1. 다항식의 연산",
+      "small_unit": "1-1. 다항식"
+    },
+    "problems": [
+      {
+        "id": "BS-1-1-01",
+        "level": "Basic",
+        "type_tag": "Calculation_Basic",
+        "achievement_standard": "다항식의 덧셈과 뺄셈을 할 수 있다. [cite: 1800]",
+        "instruction": "01 다음 식을 계산하시오. [cite: 1212]",
+        "questions": [
+          "(1) (4x^3+2x^2-1)+(-x^3+x+4) [cite: 1213]",
+          "(2) (x^3-4x^2+5)+(3x^3-x^2+x-2) [cite: 1214]"
+        ]
+      },
+      {
+        "id": "BS-1-1-02",
+        "level": "Basic",
+        "type_tag": "Calculation_Subtraction",
+        "achievement_standard": "다항식의 덧셈과 뺄셈을 할 수 있다. [cite: 1800]",
+        "instruction": "02 다음 식을 계산하시오. [cite: 1215]",
+        "questions": [
+          "(1) (2x^3-3x+11)-(4x^3+2x^2+x+6) [cite: 1223]",
+          "(2) (3x^3+x^2-3x)-(2x^3+4x^2-3x+4) [cite: 1225]"
+        ]
+      },
+      {
+        "id": "BS-1-1-03",
+        "level": "Basic",
+        "type_tag": "Expansion_Distributive",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "03 다음 식을 전개하시오. [cite: 1226]",
+        "questions": [
+          "(1) (a+2)(2a^2-3a+1) [cite: 1227]",
+          "(2) (x-y)(x+y+2) [cite: 1227]"
+        ]
+      },
+      {
+        "id": "BS-1-1-04",
+        "level": "Basic",
+        "type_tag": "Expansion_Formula",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "04 다음 식을 전개하시오. [cite: 1218]",
+        "questions": [
+          "(1) (a-b+2c)^2 [cite: 1219]",
+          "(2) (4x+y)^3 [cite: 1220]",
+          "(3) (x-3y)^3 [cite: 1221]",
+          "(4) (2a-b)(4a^2+2ab+b^2) [cite: 1222]"
+        ]
+      },
+      {
+        "id": "BS-1-1-05",
+        "level": "Basic",
+        "type_tag": "Division_Process",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "05 다음은 다항식 x^3-4x^2+5x+3을 x-2로 나누는 과정을 나타낸 것이다. 이때 실수 a, b, c, d의 값을 구하시오. [cite: 1224, 1229]"
+      },
+      {
+        "id": "BS-1-1-06",
+        "level": "Standard",
+        "type_tag": "Expression_Substitution",
+        "achievement_standard": "다항식의 덧셈과 뺄셈을 할 수 있다. [cite: 1800]",
+        "instruction": "06 세 다항식 A=2x^3+4x^2-x+1, B=-x^3-x^2-x+4, C=x^3+x+1에 대하여 다음 식을 계산하시오. [cite: 1234, 1235, 1236, 1237, 1238]",
+        "questions": [
+          "(1) 2A+B-3(A+C) [cite: 1239]",
+          "(2) 3(A+B)-2(B-C)-B [cite: 1240]"
+        ]
+      },
+      {
+        "id": "BS-1-1-07",
+        "level": "Standard",
+        "type_tag": "Equation_Polynomial",
+        "achievement_standard": "다항식의 덧셈과 뺄셈을 할 수 있다. [cite: 1800]",
+        "instruction": "07 두 다항식 A=x^2+2xy+6y^2, B=1/2x^2-xy+y^2에 대하여 등식 2X-A=A+4B를 만족시키는 다항식 X를 구하시오. [cite: 1246, 1247, 1248]"
+      },
+      {
+        "id": "BS-1-1-08",
+        "level": "Standard",
+        "type_tag": "Coefficient_Extraction",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "08 (x+3y-1)(2x+y+4)를 전개한 식에서 xy의 계수를 a, y의 계수를 b라고 할 때, a+b의 값을 구하시오. [cite: 1252]"
+      },
+      {
+        "id": "BS-1-1-09",
+        "level": "Standard",
+        "type_tag": "Expansion_Advanced",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "09 다음 식을 전개하시오. [cite: 1242]",
+        "questions": [
+          "(1) (x+2)(x-3)(x^2-x+1) [cite: 1243]",
+          "(2) (x-3)(x-1)(x+2)(x+4) [cite: 1244]"
+        ]
+      },
+      {
+        "id": "BS-1-1-10",
+        "level": "Standard",
+        "type_tag": "Modeling_Geometric",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "10 밑면이 정사각형인 어떤 직육면체 모양의 상자는 높이가 밑면의 한 변의 길이보다 3cm 더 길다. 밑면의 한 변의 길이를 x cm, 이 상자의 부피를 A cm^3, 이 상자의 겉넓이를 B cm^2라고 할 때, A-2B를 x에 대한 다항식으로 나타내시오. [cite: 1249, 1250, 1251]"
+      },
+      {
+        "id": "BS-1-1-11",
+        "level": "Standard",
+        "type_tag": "Formula_Continuous",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "11 x^16=376일 때, (x-1)(x+1)(x^2+1)(x^4+1)(x^8+1)의 값을 구하시오. [cite: 1253, 1254]"
+      },
+      {
+        "id": "BS-1-1-12",
+        "level": "Standard",
+        "type_tag": "Identity_Transformation",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "12 a+b+c=6, a^2+b^2+c^2=14, abc=6일 때, 1/a+1/b+1/c의 값은? [cite: 1257, 1258]",
+        "options": [
+          "① 11/6",
+          "② 7/2",
+          "③ 11",
+          "④ 15",
+          "⑤ 22/3"
+        ]
+      },
+      {
+        "id": "BS-1-1-13",
+        "level": "Standard",
+        "type_tag": "Identity_Calculation",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "13 x=√3+1, y=√3-1일 때, y^2/x + x^2/y의 값을 구하시오. [cite: 1263]"
+      },
+      {
+        "id": "BS-1-1-14",
+        "level": "Standard",
+        "type_tag": "Division_Validation",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "14 다항식 A를 x^2-2x+3으로 나누었더니 몫이 2x-1이고 나머지가 4x+1이었다. 이때 다항식 A는? [cite: 1267, 1268]",
+        "options": [
+          "① 2x^3+5x^2+12x-2",
+          "② 2x^3+5x^2-12x-2",
+          "③ 2x^3-5x^2+12x-2",
+          "④ 2x^3-5x^2-12x+2",
+          "⑤ 2x^3-5x^2-12x-2 [cite: 1269, 1270, 1271, 1272, 1284]"
+        ]
+      },
+      {
+        "id": "BS-1-1-15",
+        "level": "Standard",
+        "type_tag": "Find_Divisor",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "15 다항식 x^3-2x^2+x+7을 다항식 A로 나누었더니 몫이 x-3이고 나머지가 19이었다. 이때 다항식 A를 구하시오. [cite: 1264]"
+      },
+      {
+        "id": "BS-1-1-16",
+        "level": "Standard",
+        "type_tag": "Multi_Step_Division",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "16 다항식 P(x)를 x^2-x+3으로 나누었을 때 몫은 2x+1이고, 나머지는 27이다. 다항식 P(x)를 x+2로 나누었을 때, 몫과 나머지를 구하시오. [cite: 1265, 1266]"
+      },
+      {
+        "id": "BS-1-1-17",
+        "level": "Standard",
+        "type_tag": "Synthetic_Division_Adv",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "17 다음은 조립제법을 이용하여 다항식 2x^3-3x^2-1을 2x+1로 나누었을 때, 몫과 나머지를 구하는 과정을 나타낸 것이다. 이때 실수 a, b, c, d의 값을 구하고, 몫과 나머지를 구하시오. [cite: 1273, 1274, 1275]"
+      },
+      {
+        "id": "BS-1-1-18",
+        "level": "Advanced",
+        "type_tag": "Constraint_Identity",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "18 x^2+5x-2=0일 때, (x+1)(x+2)(x+3)(x+4)의 값을 구하시오. [cite: 1288, 1290]"
+      },
+      {
+        "id": "BS-1-1-19",
+        "level": "Advanced",
+        "type_tag": "High_Degree_Coefficient",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "19 (1-x+x^2-x^3+···+x^100)^2을 전개한 식에서 x^3의 계수를 구하시오. [cite: 1292]"
+      },
+      {
+        "id": "BS-1-1-20",
+        "level": "Advanced",
+        "type_tag": "Geometric_Identity_Fusion",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "20 어느 직육면체의 대각선의 길이는 √35이고 모든 모서리의 길이의 합은 40일 때, 이 직육면체의 겉넓이를 구하시오. [cite: 1291]"
+      },
+      {
+        "id": "BS-1-1-21",
+        "level": "Advanced",
+        "type_tag": "Complex_Division_System",
+        "achievement_standard": "다항식의 곱셈과 나눗셈을 할 수 있다. [cite: 1800]",
+        "instruction": "21 두 다항식 A, B를 x-1로 나누었을 때 몫은 각각 x+2, x+3이고, 나머지는 각각 1, 3이다. 다항식 xA+B를 x^2+x+1로 나누었을 때, 몫과 나머지를 구하시오. [cite: 1293, 1294]"
+      }
+    ]
+  },
+  {
+    "unit_meta": {
+      "large_unit": "I. 다항식",
+      "medium_unit": "2. 나머지 정리와 인수분해",
+      "cite_range": "1296-1371"
+    },
+    "problems": [
+      {
+        "id": "BS-1-2-01",
+        "level": "Basic",
+        "cite": 1301,
+        "type_tag": "Identity_Coefficient_Comparison",
+        "instruction": "01 다음 등식이 x에 대한 항등식이 되도록 실수 a, b, c의 값을 정하시오.",
+        "sub_questions": [
+          "(1) 2x^2+ax+b=(cx+1)(x-2) [cite: 1303]",
+          "(2) 3x^2-3x-4=ax(x-1)+bx(x+1)+c(x+1)(x-1) [cite: 1304, 1305]"
+        ]
+      },
+      {
+        "id": "BS-1-2-02",
+        "level": "Basic",
+        "cite": 1306,
+        "type_tag": "Remainder_Theorem_Basic",
+        "instruction": "02 다항식 P(x)=3x^3+3x^2-x-2를 다음 일차식으로 나누었을 때 나머지를 구하시오.",
+        "sub_questions": [
+          "(1) x-1 [cite: 1308]",
+          "(2) 3x-1 [cite: 1310]"
+        ]
+      },
+      {
+        "id": "BS-1-2-03",
+        "level": "Basic",
+        "cite": 1314,
+        "type_tag": "Remainder_Theorem_Unknown",
+        "instruction": "03 다항식 P(x)=x^3-3x^2+ax+1을 x+1로 나누었을 때, 나머지가 -7이다. 이때 실수 a의 값을 구하시오. [cite: 1315]"
+      },
+      {
+        "id": "BS-1-2-04",
+        "level": "Basic",
+        "cite": 1300,
+        "type_tag": "Factor_Theorem_Unknown",
+        "instruction": "04 다항식 P(x)=x^3+ax^2+3x-2가 x-2로 나누어떨어질 때, 실수 a의 값을 구하시오. [cite: 1300]"
+      },
+      {
+        "id": "BS-1-2-05",
+        "level": "Basic",
+        "cite": 1311,
+        "type_tag": "Factorization_Square_Sum",
+        "instruction": "05 다음 다항식을 인수분해하시오.",
+        "sub_questions": [
+          "(1) x^2+4y^2+z^2-4xy+4yz-2zx [cite: 1312]",
+          "(2) 9x^2+y^2+4z^2-6xy-4yz+12zx [cite: 1313]"
+        ]
+      },
+      {
+        "id": "BS-1-2-06",
+        "level": "Basic",
+        "cite": 1316,
+        "type_tag": "Factorization_Formula_Basic",
+        "instruction": "06 다음 다항식을 인수분해하시오.",
+        "sub_questions": [
+          "(1) x^3-27 [cite: 1317]",
+          "(2) 27x^3+8y^3 [cite: 1318]",
+          "(3) 27x^3+27x^2+9x+1 [cite: 1319]",
+          "(4) 8x^3-12x^2y+6xy^2-y^3 [cite: 1320]"
+        ]
+      },
+      {
+        "id": "BS-1-2-07",
+        "level": "Standard",
+        "cite": 1324,
+        "type_tag": "Taylor_Expansion_Identity",
+        "instruction": "07 등식 x^3+x^2-4x+5=(x-1)^3+a(x-1)^2+b(x-1)+c 가 x에 대한 항등식이 되도록 실수 a, b, c의 값을 정하시오. [cite: 1325, 1326, 1328]"
+      },
+      {
+        "id": "BS-1-2-08",
+        "level": "Standard",
+        "cite": 1331,
+        "type_tag": "Division_Unknown_Remainder",
+        "instruction": "08 다항식 x^3+ax^2+b를 x^2+x-3으로 나누었을 때, 나머지가 x+1이다. 이때 a-b의 값을 구하시오. (단, a, b는 실수) [cite: 1331]"
+      },
+      {
+        "id": "BS-1-2-09",
+        "level": "Standard",
+        "cite": 1334,
+        "type_tag": "Remainder_Theorem_System",
+        "instruction": "09 다항식 P(x)=x^3-3x^2+ax+b를 x+1로 나누었을 때 나머지가 -2이고, x-1로 나누었을 때 나머지가 8이다. 이때 실수 a, b의 값을 구하시오. [cite: 1334, 1335]"
+      },
+      {
+        "id": "BS-1-2-10",
+        "level": "Standard",
+        "cite": 1329,
+        "type_tag": "Complex_Remainder_Synthesis",
+        "instruction": "10 다항식 P(x)를 x^2-1로 나누었을 때 나머지가 x+4이고, x^2-3x+2로 나누었을 때 나머지가 4x+1이다. P(x)를 x^2-x-2로 나누었을 때, 나머지를 구하시오. [cite: 1329, 1330]"
+      },
+      {
+        "id": "BS-1-2-11",
+        "level": "Standard",
+        "cite": 1332,
+        "type_tag": "Remainder_Arithmetic_Sum",
+        "instruction": "11 다항식 3x^3+ax^2+x+2를 x-1, x+1로 나누었을 때 나머지를 각각 A, B라고 하면 A+B=8이다. 이때 실수 a의 값을 구하시오. [cite: 1332, 1333]"
+      },
+      {
+        "id": "BS-1-2-12",
+        "level": "Standard",
+        "cite": 1336,
+        "type_tag": "Functional_Remainder_Evaluation",
+        "instruction": "12 다항식 P(x)를 x^2-3x+2로 나누었을 때 몫을 Q(x), 나머지를 x+1이라고 하자. P(x)+P(x-1)을 x-2로 나누었을 때, 나머지를 구하시오. [cite: 1336, 1337]"
+      },
+      {
+        "id": "BS-1-2-13",
+        "level": "Standard",
+        "cite": 1340,
+        "type_tag": "Factor_Theorem_Divisibility",
+        "instruction": "13 다항식 P(x)=x^3-6x^2+ax+b가 x^2-2x-3으로 나누어떨어질 때, 실수 a, b의 값을 구하시오. [cite: 1340]"
+      },
+      {
+        "id": "BS-1-2-14",
+        "level": "Standard",
+        "cite": 1342,
+        "type_tag": "Substituted_Factor_Theorem",
+        "instruction": "14 다항식 P(x)=x^3+ax^2-3x+1에 대하여 P(x+1)이 x+2를 인수로 가질 때, 실수 a의 값을 구하시오. [cite: 1342]"
+      },
+      {
+        "id": "BS-1-2-15",
+        "level": "Standard",
+        "cite": 1344,
+        "type_tag": "Factorization_Biquadratic_Expression",
+        "instruction": "15 다항식 x^4+7x^2y^2+12y^4을 인수분해하시오. [cite: 1344]"
+      },
+      {
+        "id": "BS-1-2-16",
+        "level": "Standard",
+        "cite": 1345,
+        "type_tag": "Factorization_Common_Block",
+        "instruction": "16 다음 중 다항식 (x-3)(x-2)(x+1)(x+2)-5의 인수는?",
+        "options": [
+          "① x^2-x-3",
+          "② x^2-x-4",
+          "③ x^2-x-5",
+          "④ x^2-x-7",
+          "⑤ x^2-x-8"
+        ],
+        "cite": "1346, 1348, 1349, 1350, 1351, 1355"
+      },
+      {
+        "id": "BS-1-2-17",
+        "level": "Standard",
+        "cite": 1341,
+        "type_tag": "Arithmetic_Factorization_Application",
+        "instruction": "17 인수분해를 이용하여 (2025^3-1)/(2025*2026+1)의 값을 구하시오. [cite: 1341]"
+      },
+      {
+        "id": "BS-1-2-18",
+        "level": "Standard",
+        "cite": 1343,
+        "type_tag": "Factor_Combination_Perfect_Square",
+        "instruction": "18 이차항의 계수가 1인 두 이차식 P(x), Q(x)의 곱이 x^4-9x^2-4x+12이다. P(x)가 완전제곱식일 때, Q(x)를 구하시오. [cite: 1343]"
+      },
+      {
+        "id": "BS-1-2-19",
+        "level": "Standard",
+        "cite": 1352,
+        "type_tag": "Geometric_Volume_Factorization",
+        "instruction": "19 밑면이 정사각형인 어떤 직육면체 모양의 상자의 높이가 x+2이다. 이 상자의 부피가 x^3+4x^2+5x+2일 때, 밑면의 한 변의 길이를 x에 대한 식으로 나타내시오. [cite: 1352, 1353, 1354]"
+      },
+      {
+        "id": "BS-1-2-20",
+        "level": "Advanced",
+        "cite": 1359,
+        "type_tag": "Coefficient_Summation_Odd",
+        "instruction": "20 실수 a0, a1, a2, ..., a10에 대하여 등식 (2x^2-x-2)^5 = a0+a1x+a2x^2+...+a10x^10이 x에 대한 항등식일 때, a1+a3+a5+a7+a9의 값을 구하시오. [cite: 1359, 1360, 1361, 1363]"
+      },
+      {
+        "id": "BS-1-2-21",
+        "level": "Advanced",
+        "cite": 1366,
+        "type_tag": "Quotient_Polynomial_Remainder",
+        "instruction": "21 다항식 x^3-2x^2+ax+6을 x+1로 나누었을 때 몫은 Q(x), 나머지는 2이고, Q(x)를 x+2로 나누었을 때 나머지는 b이다. 이때 a+b의 값을 구하시오. (단, a, b는 실수) [cite: 1366, 1367]"
+      },
+      {
+        "id": "BS-1-2-22",
+        "level": "Advanced",
+        "cite": 1364,
+        "type_tag": "Mixed_Order_Remainder_Theorem",
+        "instruction": "22 다항식 P(x)를 x^2+2로 나누었을 때 나머지는 x+8이고, x-3으로 나누었을 때 나머지는 0이다. P(x)를 (x^2+2)(x-3)으로 나누었을 때, 나머지를 구하시오. [cite: 1364, 1365]"
+      },
+      {
+        "id": "BS-1-2-23",
+        "level": "Advanced",
+        "cite": 1368,
+        "type_tag": "Geometric_Triangle_Classification",
+        "instruction": "23 삼각형 ABC의 세 변의 길이 a, b, c에 대하여 등식 a^3+b^3+a^2b+ab^2-ac^2-bc^2=0이 성립할 때, 삼각형 ABC는 어떤 삼각형인지 말하시오. [cite: 1368, 1369]"
+      }
+    ]
+  }
+]
