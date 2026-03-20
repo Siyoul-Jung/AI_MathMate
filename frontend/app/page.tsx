@@ -259,6 +259,13 @@ export default function Home() {
       try {
         const data = await api.generateAmcProblem(targetPid, targetMode, targetLevel);
         
+        if (data.error) {
+          console.error('API Error:', data.error);
+          alert(`Problem Generation Failed: ${data.error}`);
+          setLoading(false);
+          return;
+        }
+
         if (targetMode === 'DRILL') {
           setDrillProblem({ ...data, p_id: targetPid });
           setDrillSelectedAnswer(null);

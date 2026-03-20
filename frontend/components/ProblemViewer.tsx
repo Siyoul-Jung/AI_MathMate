@@ -78,7 +78,7 @@ export default function ProblemViewer({
           if (imgPart.startsWith('![') && imgPart.includes('](')) {
             const alt = imgPart.match(/!\[(.*?)\]/)?.[1] || 'image';
             const url = imgPart.match(/\((.*?)\)/)?.[1] || '';
-            const fullUrl = url.startsWith('http') ? url : `http://localhost:8001/${url}`;
+            const fullUrl = url.startsWith('http') ? url : `http://localhost:8002/${url}`;
             return (
               <div key={`${i}-${j}-${imgIdx}`} className="my-6 flex justify-center">
                 <img 
@@ -160,7 +160,7 @@ export default function ProblemViewer({
           {problem.image && (
             <div className="mt-6 flex justify-center">
               <img 
-                src={problem.image.startsWith('http') ? problem.image : `http://localhost:8001/${problem.image}`} 
+                src={problem.image.startsWith('http') ? problem.image : `http://localhost:8002/${problem.image}`} 
                 alt="Problem Illustration" 
                 className="max-w-full rounded-lg shadow-sm border border-slate-100"
               />

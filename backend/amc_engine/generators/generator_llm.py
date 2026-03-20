@@ -41,7 +41,8 @@ def generate_variant_with_gemini(final_prompt):
         
         # 응답 텍스트 추출 및 JSON 파싱
         content = response.choices[0].message.content
-        return json.loads(content)
+        # Return raw content for pipeline manager to handle parsing and feedback
+        return content
 
     except Exception as e:
         print(f"⚠️ LLM 호출 중 오류 발생: {e}")
