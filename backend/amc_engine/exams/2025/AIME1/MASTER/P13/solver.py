@@ -8,8 +8,9 @@ import os
 class Solver:
     DNA = {
         "context_type": "combinatorics_geometry",
-        "category": "Number Theory",
+        "category": "Combinatorics / Geometry",
         "specific_tag": "EXPECTED-REGIONS-DISK",
+        "has_image": True,
         "level": 13
     }
     DRILL_LEVELS = [1, 2, 3]
@@ -61,21 +62,25 @@ class Solver:
 
     @classmethod
     def generate_seed(cls):
-        m = random.randint(1, 15)
-        n = random.randint(10, 60)
-        quadrants = 2 * m
-        total_lines = m + n
+        # Original AIME 2025 I #13 logic. 
+        # Avoid original m=10 (diameters)
+        for _ in range(200):
+            m = random.randint(4, 25) 
+            if m == 10: continue
+            
+            n = random.randint(5, 80)
+            quadrants = 2 * m
+            total_lines = m + n
 
-        p_inter = (1 / 3) * (1 + 1 / (m ** 2))
-        expected_t = int(round((m + n + 1) + (n * (n - 1) / 2) * p_inter))
-
-        return {
-            'm': m,
-            'quadrants': quadrants,
-            'n': n,
-            'total_lines': total_lines,
-            'expected_t': expected_t
-        }
+            p_inter = (1 / 3) * (1 + 1 / (m ** 2))
+            expected_t = int(round((m + n + 1) + (n * (n - 1) / 2) * p_inter))
+            
+            if 0 < expected_t < 1000:
+                return {
+                    'm': m, 'quadrants': quadrants, 'n': n,
+                    'total_lines': total_lines, 'expected_t': expected_t
+                }
+        return {'m': 6, 'quadrants': 12, 'n': 30, 'total_lines': 36, 'expected_t': 185}
 
     @classmethod
     def generate_image(cls, seed, filepath):

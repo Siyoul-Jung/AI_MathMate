@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
 import sys
 
-# Ensure backend directory is in sys.path for internal imports
+# Ensure the backend directory is in the system path for internal imports
 backend_dir = os.path.dirname(os.path.abspath(__file__))
 if backend_dir not in sys.path:
     sys.path.append(backend_dir)
@@ -12,13 +13,45 @@ if backend_dir not in sys.path:
 from app.api.v1.endpoints import problems
 from app.core.config import settings
 
+# Initialize FastAPI with professional metadata for Swagger UI
 app = FastAPI(
-    title=settings.PROJECT_NAME,
+    title=f"🚀 {settings.PROJECT_NAME}",
+    description="""
+AI_MathMate API powers a sophisticated AIME problem generation engine.
+It uses a solver-centric pipeline to generate deterministic math problems 
+and leverages LLMs for narrative weaving.
+
+## Core Features
+* **AIME Mock Generation**: Full 15-problem mock exams.
+* **Drill Workshop**: Targeted concept practice with LV1-LV3 difficulty.
+* **Problem Verification**: Zero-hallucination verification using symbolic math.
+""",
     version=settings.VERSION,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
 
-# CORS configuration
+# Global Exception Handler for Resilience
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """
+    Catches all unhandled exceptions and returns a professional JSON response.
+    This prevents the API from leaking sensitive tracebacks in production.
+    """
+    # Log the error for internal monitoring
+    print(f"ERROR: Unhandled exception occurred: {exc}")
+    
+    return JSONResponse(
+        status_code=500,
+        content={
+            "status": "error",
+            "message": "An unexpected internal server error occurred.",
+            "detail": str(exc) if settings.PROJECT_NAME.lower() == "test" else "Please contact support."
+        },
+    )
+
+# CORS configuration for local development and potential production origins
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -32,19 +65,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files for images
+# Mount static files to serve generated problem illustrations
 images_path = os.path.join(backend_dir, 'amc_engine', 'images')
 if not os.path.exists(images_path):
     os.makedirs(images_path)
 app.mount("/images", StaticFiles(directory=images_path), name="images")
 
-# Include Routers
-app.include_router(problems.router, prefix="/api") # Keeping /api prefix for compatibility
+# Register API routers with descriptive tags
+app.include_router(
+    problems.router, 
+    prefix="/api", 
+    tags=["AIME Problem Engine"]
+)
 
-@app.get("/")
+@app.get("/", tags=["Health Check"])
 def read_root():
-    return {"message": f"{settings.PROJECT_NAME} is running"}
+    """Returns the API status and project name."""
+    return {"status": "online", "project": settings.PROJECT_NAME}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8002, reload=True)
+    # Log startup message
+    print(f"Starting {settings.PROJECT_NAME} API at http://0.0.0.0:8088")
+    uvicorn.run("main:app", host="0.0.0.0", port=8088, reload=True)

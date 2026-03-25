@@ -19,16 +19,20 @@ class Solver:
         Answer = (N+3)^2 / 12 + 3
         N ∈ {3, 9, ..., 105} (18가지, AIME 정답 ≤ 999 보장)
         """
-        # N = 6k+3 for k = 0..17 → answer: k=0→6, k=17→(108²/12+3=972+3=975)
-        k = random.randint(0, 17)
-        N = 6 * k + 3
-        ans = (N + 3) ** 2 // 12 + 3
-        return {
-            'N': N,
-            'expected_t': ans,
-            'P1': (-1, -1, N + 2),
-            'P2': (N/3, N/3, N/3)
-        }
+        # Original AIME 2025 I #12 used N=75 (Ans: 510)
+        for _ in range(50):
+            k = random.randint(0, 17)
+            N = 6 * k + 3
+            if N == 75: continue
+            
+            ans = (N + 3) ** 2 // 12 + 3
+            return {
+                'N': N,
+                'expected_t': ans,
+                'P1': (-1, -1, N + 2),
+                'P2': (round(N/3,1), round(N/3,1), round(N/3,1))
+            }
+        return {'N': 33, 'expected_t': 111, 'P1': (-1, -1, 35), 'P2': (11.0, 11.0, 11.0)}
 
     @classmethod
     def generate_drill_seed(cls, level):

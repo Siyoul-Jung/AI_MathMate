@@ -1,12 +1,17 @@
 {
-  "p_id": "P11",
-  "title": "Sawtooth and Parabola Intersections",
-  "domain": "Algebra",
-  "difficulty_band": "MASTER",
-  "dna_tags": ["Piecewise Functions", "Periodicity", "Quadratic Equations"],
-  "drill_config": {
-    "L1": "Evaluating periodic sawtooth values at specific points.",
-    "L2": "Finding all solutions for f(x) = k over a fixed interval.",
-    "L3": "Modeling signal/sensor intersections with sum of y-coordinates."
-  }
+    "p_id": "P11",
+    "title": "Sawtooth and Parabola Intersections",
+    "domain": "Algebra",
+    "difficulty_band": "MASTER",
+    "dna_tags": [
+        "Piecewise Functions",
+        "Periodicity",
+        "Quadratic Equations"
+    ],
+    "drill_config": {
+        "L1": "Evaluating periodic sawtooth values at specific points.",
+        "L2": "Finding all solutions for f(x) = k over a fixed interval.",
+        "L3": "Modeling signal/sensor intersections with sum of y-coordinates."
+    },
+    "engine_id": "AIME1-2025-P11"
 }

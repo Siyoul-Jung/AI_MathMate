@@ -1,0 +1,18 @@
+{
+    "p_id": "P07",
+    "title": "Conditional Alphabetical Pairings",
+    "domain": "Combinatorics",
+    "dna_tags": [
+        "COUNTING",
+        "PAIRING",
+        "PROBABILITY",
+        "ORDERING"
+    ],
+    "drill_config": {
+        "L1": "Calculating total number of ways to group letters into pairs",
+        "L2": "Probability of a specific letter being in the first word",
+        "L3": "Full ordering constraint: letter in the alphabetically last word"
+    },
+    "difficulty_band": "EXPERT",
+    "engine_id": "AIME1-2025-P07"
+}

@@ -1,0 +1,18 @@
+{
+    "p_id": "P06",
+    "title": "Isosceles Tangential Trapezoids",
+    "domain": "Geometry",
+    "dna_tags": [
+        "TRAPEZOID",
+        "INSCRIBED-CIRCLE",
+        "AREA",
+        "PITOT-THEOREM"
+    ],
+    "drill_config": {
+        "L1": "Basic trapezoid area calculation",
+        "L2": "Tangential quadrilateral property (Pitot's Theorem)",
+        "L3": "Solving for parallel sides using area and radius"
+    },
+    "difficulty_band": "EXPERT",
+    "engine_id": "AIME1-2025-P06"
+}

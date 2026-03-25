@@ -79,12 +79,15 @@ export default function Home() {
 
 
   // --- AMC / AIME Exclusive State ---
-  const [amcProblemNum, setAmcProblemNum] = useState<string>('P01');
+  const [amcProblemNum, setAmcProblemNum] = useState<string>('');
   const [amcMode, setAmcMode] = useState<'MOCK' | 'DRILL'>('MOCK');
   const [drillLevel, setDrillLevel] = useState<number>(1);
-  const [amcLevels, setAmcLevels] = useState<number[]>([1, 2]); 
+  const [amcLevels, setAmcLevels] = useState<number[]>([1, 2, 3]); 
   const [amcBand, setAmcBand] = useState<string>('CHALLENGER');
   const [amcMetadata, setAmcMetadata] = useState<any>(null);
+  const [amcArchives, setAmcArchives] = useState<any>({});
+  const [amcYear, setAmcYear] = useState<string>('2025');
+  const [amcExam, setAmcExam] = useState<string>('AIME1');
 
   // Filter standards corresponding to the currently selected grade
   const currentStandards = ALL_STANDARDS.filter(s => s.grade === grade);
@@ -200,18 +203,20 @@ export default function Home() {
     }
   };
 
-  // Refresh analysis data when opening dashboard
-  useEffect(() => { 
-    if (showDashboard) {
-      fetchAnalysis();
-      fetchAdvice();
-    } 
-  }, [showDashboard, category]);
+  // Fetch AIME Archives
+  useEffect(() => {
+    if (category === 'AIME') {
+      api.fetchAmcArchives().then(data => {
+        setAmcArchives(data.archives || {});
+      });
+    }
+  }, [category]);
+
 
   // Fetch AIME drill level metadata
   useEffect(() => {
     if (category === 'AIME' && grade === 'AIME_1' && amcProblemNum) {
-      api.fetchAmcLevels(amcProblemNum)
+      api.fetchAmcLevels(amcProblemNum, amcYear, amcExam)
         .then(data => {
           const levels = data.levels || [1, 2, 3];
           setAmcLevels(levels);
@@ -225,6 +230,13 @@ export default function Home() {
           console.error('Failed to fetch AIME levels:', err);
           setAmcLevels([1, 2, 3]);
         });
+    }
+  }, [amcProblemNum, amcYear, amcExam, category, grade]);
+
+  // Clear AIME metadata when mission is unselected
+  useEffect(() => {
+    if (category === 'AIME' && grade === 'AIME_1' && !amcProblemNum) {
+      setAmcMetadata(null);
     }
   }, [amcProblemNum, category, grade]);
 
@@ -241,11 +253,18 @@ export default function Home() {
         else if (amcBand === 'EXPERT') problems = ['P06', 'P07', 'P08', 'P09', 'P10'];
         else if (amcBand === 'MASTER') problems = ['P11', 'P12', 'P13', 'P14', 'P15'];
         
-        const implemented = ['P01', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15'];
+        const implemented = ['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P07', 'P08', 'P09', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15'];
         const available = problems.filter(p => implemented.includes(p));
         
-        if (available.length > 0) {
-          targetPid = available[Math.floor(Math.random() * available.length)];
+        if (available.length > 1) {
+          // Exclude current mission to avoid "stagnant" content perception
+          const others = available.filter(p => p !== amcProblemNum);
+          targetPid = others[Math.floor(Math.random() * others.length)];
+        } else if (available.length === 1) {
+          targetPid = available[0];
+        }
+        
+        if (targetPid) {
           setAmcProblemNum(targetPid);
         }
       }
@@ -257,8 +276,15 @@ export default function Home() {
       
       setLoading(true);
       try {
-        const data = await api.generateAmcProblem(targetPid, targetMode, targetLevel);
+        const data = await api.generateAmcProblem(targetPid, targetMode, targetLevel, amcYear, amcExam);
         
+        if (data.status === 'REGENERATING' || data.error === 'MISSION_BEING_CLEANSED') {
+          // Special handling for background cleansing/generation
+          alert(`🧬 High-fidelity regeneration in progress for ${targetPid}. Please try another mission for a moment or wait 30-60s for the deep cleansing to finish.`);
+          setLoading(false);
+          return;
+        }
+
         if (data.error) {
           console.error('API Error:', data.error);
           alert(`Problem Generation Failed: ${data.error}`);
@@ -322,7 +348,7 @@ export default function Home() {
     if (!prob) return;
     setActiveMode('study');
     setCategory('AIME');
-    setAmcMode('DRILL');
+    // We stay in MOCK mode to keep the bridge context, but we will show the drillProblem UI
     setActiveTab('problem');
     const pid = prob.p_id || 'P01';
     setAmcProblemNum(pid);
@@ -711,7 +737,6 @@ export default function Home() {
             <button
               onClick={() => {
                 setActiveTab('settings');
-                if (category === 'AIME') setAmcMode('MOCK');
               }}
               className={`flex-1 py-3 text-sm font-bold text-center transition-all border-b-2 ${
                 activeTab === 'settings'
@@ -738,9 +763,8 @@ export default function Home() {
         {/* Settings Tab */}
         {activeMode === 'study' && activeTab === 'settings' ? (
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 animate-fade-in">
-            <div className="mb-6">
-              {category === 'AIME' && grade === 'AIME_1' ? (
-                <AIMEModule
+            {category === 'AIME' && grade === 'AIME_1' ? (
+                <AIMEModule 
                   loading={loading}
                   amcMode={amcMode}
                   setAmcMode={setAmcMode}
@@ -748,39 +772,48 @@ export default function Home() {
                   setAmcBand={setAmcBand}
                   amcProblemNum={amcProblemNum}
                   setAmcProblemNum={setAmcProblemNum}
+                  amcYear={amcYear}
+                  setAmcYear={setAmcYear}
+                  amcExam={amcExam}
+                  setAmcExam={setAmcExam}
                   amcLevels={amcLevels}
                   drillLevel={drillLevel}
                   setDrillLevel={setDrillLevel}
                   amcMetadata={amcMetadata}
+                  amcArchives={amcArchives}
                   themeClasses={themeClasses}
+                  onGenerate={() => generateProblem()}
                 />
-              ) : (
-                <PracticeModule
-                  grade={grade}
-                  setGrade={setGrade}
-                  standard={standard}
-                  setStandard={setStandard}
-                  type={type}
-                  setType={setType}
-                  difficulty={difficulty}
-                  setDifficulty={setDifficulty}
-                  qType={qType}
-                  setQType={setQType}
-                  grades={GRADES_MAP[category] || []}
-                  standards={currentStandards}
-                  types={types}
-                  themeClasses={themeClasses}
-                />
-              )}
-            </div>
+            ) : (
+              <PracticeModule
+                grade={grade}
+                setGrade={setGrade}
+                standard={standard}
+                setStandard={setStandard}
+                type={type}
+                setType={setType}
+                difficulty={difficulty}
+                setDifficulty={setDifficulty}
+                qType={qType}
+                setQType={setQType}
+                grades={GRADES_MAP[category] || []}
+                standards={currentStandards}
+                types={types}
+                themeClasses={themeClasses}
+              />
+            )}
             {activeMode === 'study' && (
-                  <button 
-                onClick={() => generateProblem()}
-                disabled={loading || (category === 'AIME' && grade === 'AIME_1' ? !amcProblemNum : !type)}
-                className={`w-full py-4 ${themeClasses.button} text-white font-bold rounded-xl transition-all disabled:bg-slate-300 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0`}
-              >
-                {loading ? 'Generating...' : 'Generate Problem'}
-              </button>
+              <div className="mt-8 pt-6 border-t border-slate-100 flex justify-center">
+                <button 
+                  onClick={() => generateProblem()}
+                  disabled={loading || (category === 'AIME' && grade === 'AIME_1' 
+                    ? (amcMode === 'DRILL' && !amcProblemNum) 
+                    : !type)}
+                  className={`w-full py-4 ${themeClasses.button} text-white font-bold rounded-xl transition-all disabled:bg-slate-300 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0`}
+                >
+                  {loading ? 'Generating...' : 'Generate Problem'}
+                </button>
+              </div>
             )}
           </div>
         ) : null}
@@ -812,27 +845,47 @@ export default function Home() {
         )}
 
         {/* Problem Solving Tab */}
-        {activeMode === 'study' && activeTab === 'problem' && problem && (
+        {activeMode === 'study' && activeTab === 'problem' && (problem || drillProblem) && (
           <>
-            <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-8 flex flex-col md:flex-row items-center justify-between gap-4 animate-fade-in flex-wrap">
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8 flex flex-col md:flex-row items-center justify-between gap-5 animate-fade-in flex-wrap">
              <div className="flex flex-col items-center sm:items-start">
                 {category === 'AIME' ? (
                   <>
-                    <span className="text-[10px] text-orange-500 font-black uppercase tracking-[0.2em] mb-1">
-                      CHALLENGE PHASE
-                    </span>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xl font-black text-slate-800 tracking-tighter italic uppercase">
-                        {problem.band || 'CHALLENGER'} Phase
+                    <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                      <span className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-wider border ${
+                        (problem?.band || amcBand) === 'MASTER' ? 'bg-rose-50 text-rose-600 border-rose-100' : 
+                        (problem?.band || amcBand) === 'EXPERT' ? 'bg-indigo-50 text-indigo-600 border-indigo-100' : 
+                        'bg-blue-50 text-blue-600 border-blue-100'
+                      }`}>
+                        {(problem?.band || amcBand) === 'MASTER' ? 'MASTER PHASE' : (problem?.band || amcBand) === 'EXPERT' ? 'EXPERT PHASE' : 'CHALLENGER PHASE'}
                       </span>
-                      {amcMode !== 'DRILL' && (
-                        <span className="px-2 py-0.5 bg-slate-100 text-slate-400 text-[10px] font-bold rounded border border-slate-200 uppercase">
-                          Session Progress
+                      <span className="text-[10px] text-slate-300 font-medium">•</span>
+                      <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                        AIME MODULE
+                      </span>
+                      {problem?.engine_id && (
+                        <span className="ml-1 px-2 py-0.5 bg-slate-50 text-slate-400 text-[9px] font-bold tracking-tight rounded border border-slate-100 italic">
+                          source: {problem.engine_id.replace(/aime/g, 'AIME').replace(/p/g, 'P').replace(/-/g, ' ')}
                         </span>
                       )}
                     </div>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                        Current Challenge
+                      </h2>
+                      {amcMode !== 'DRILL' && (
+                        <div className="flex items-center gap-1.5 px-2 py-1 bg-slate-50 text-slate-400 rounded-lg border border-slate-100 group cursor-help transition-all hover:bg-white" title="Insights will be unlocked upon submission">
+                          <span className="text-[10px] font-bold uppercase tracking-tighter italic">Locked</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
                      {amcMode !== 'DRILL' && (
-                        <span className="text-xs text-slate-400 font-medium tracking-tight">Analysis and type info will be revealed after submission or in Drill mode.</span>
+                        <p className="text-[11px] text-slate-400 font-medium mt-1 leading-none">
+                          Details and conceptual DNA will be revealed after submission.
+                        </p>
                      )}
                   </>
                 ) : (
@@ -847,54 +900,57 @@ export default function Home() {
               <div className="flex flex-wrap gap-2 w-full md:w-auto justify-center md:justify-end">
                 <button
                   onClick={() => setShowScratchpad(!showScratchpad)}
-                  className={`flex-1 md:flex-none px-4 py-2.5 text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${showScratchpad ? 'bg-slate-800 text-white shadow-inner' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                  className={`flex-1 md:flex-none px-4 py-2.5 text-xs font-black uppercase tracking-tight rounded-xl transition-all flex items-center justify-center gap-2 ${showScratchpad ? 'bg-slate-900 text-white shadow-lg ring-4 ring-slate-100' : 'bg-white border border-slate-200 text-slate-600 hover:border-slate-300 hover:shadow-sm'}`}
                 >
-                  <span>✏️</span>
-                  {showScratchpad ? 'Close Scratchpad' : 'Scratchpad'}
+                  <span className="text-sm">✏️</span>
+                  {showScratchpad ? 'Hide Pad' : 'Scratchpad'}
                 </button>
                 <button
                   onClick={() => setShowGraph(true)}
-                  className="flex-1 md:flex-none px-4 py-2.5 text-sm font-bold bg-white border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
+                  className="flex-1 md:flex-none px-4 py-2.5 text-xs font-black uppercase tracking-tight bg-white border border-slate-200 text-slate-600 rounded-xl hover:border-slate-300 hover:shadow-sm transition-all flex items-center justify-center gap-2"
                 >
-                  <span>📈</span>
+                  <span className="text-sm">📈</span>
                   Graph
                 </button>
                 <button
                   onClick={() => generateProblem()}
-                  disabled={loading}
-                  className={`flex-1 md:flex-none px-4 py-2.5 text-sm font-bold text-white rounded-xl ${themeClasses.button} shadow-sm transition-all flex items-center justify-center gap-2`}
+                  disabled={loading || amcMode === 'DRILL' || !!drillProblem}
+                  className={`flex-1 md:flex-none px-5 py-2.5 text-xs font-black uppercase tracking-tight text-white rounded-xl ${themeClasses.button} shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 ${(amcMode === 'DRILL' || !!drillProblem) ? 'opacity-20 cursor-not-allowed grayscale shadow-none' : ''}`}
+                  title={amcMode === 'DRILL' ? "Next Problem navigation is for Mock mode only. Use Shuffle below for variants." : drillProblem ? "Close Drill Workshop to continue Mock." : ""}
                 >
-                    {loading ? (
+                  {loading ? (
                     <>
-                      <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <svg className="animate-spin h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Generating...
+                      Loading
                     </>
-                  ) : 'Next Problem'}
+                  ) : 'Next Question'}
                 </button>
              </div>
             </div>
 
             <div className="relative space-y-12">
               {/* Main Mock Problem */}
-              <div className={drillProblem ? "opacity-60 grayscale-[0.5] transition-all" : ""}>
-                <ProblemViewer
-                  problem={problem}
-                  selectedAnswer={selectedAnswer}
-                  isCorrect={isCorrect}
-                  showExplanation={showExplanation}
-                  hintIndex={hintIndex}
-                  onAnswerClick={(ans) => handleAnswerClick(ans, false)}
-                  setHintIndex={setHintIndex}
-                  setShowExplanation={setShowExplanation}
-                  themeColor={themeColor}
-                  onDrillClick={category === 'AIME' ? (lvl) => handleDrillBridge(problem, lvl) : undefined}
-                  band={problem.band}
-                  metadata={null}
-                />
-              </div>
+              {problem && (
+                <div className={drillProblem ? "opacity-60 grayscale-[0.5] transition-all mb-12" : "mb-12"}>
+                  <ProblemViewer
+                    problem={problem}
+                    selectedAnswer={selectedAnswer}
+                    isCorrect={isCorrect}
+                    showExplanation={showExplanation}
+                    hintIndex={hintIndex}
+                    onAnswerClick={(ans) => handleAnswerClick(ans, false)}
+                    setHintIndex={setHintIndex}
+                    setShowExplanation={setShowExplanation}
+                    themeColor={themeColor}
+                    onDrillClick={category === 'AIME' && !drillProblem ? (lvl) => handleDrillBridge(problem, lvl) : undefined}
+                    band={problem.band}
+                    metadata={null}
+                  />
+                </div>
+              )}
 
               {/* Drill Workshop (Scaffolding Area) */}
               {drillProblem && (
@@ -912,18 +968,38 @@ export default function Home() {
                         <p className="text-[10px] text-indigo-500 font-bold uppercase tracking-widest">Mastering the underlying DNA</p>
                       </div>
                     </div>
-                    <button 
-                      onClick={() => {
-                        setDrillProblem(null);
-                        setAmcMode('MOCK');
-                        if (selectedAnswer !== null) setShowExplanation(true);
-                      }}
-                      className="text-indigo-400 hover:text-indigo-600 transition-colors p-2 hover:bg-white rounded-full shadow-sm"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => generateProblem(amcProblemNum, 'DRILL', drillLevel)}
+                        disabled={loading}
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-indigo-600 text-[10px] font-black uppercase rounded-lg border border-indigo-100 shadow-sm hover:shadow-md hover:bg-indigo-50 transition-all disabled:opacity-50"
+                      >
+                        {loading ? (
+                          <svg className="animate-spin h-3 w-3" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        ) : '🔄 Shuffle'}
+                      </button>
+                      <button 
+                        onClick={() => {
+                          setDrillProblem(null);
+                          if (problem) {
+                            // If we bridged from a Mock problem, stay there
+                            setAmcMode('MOCK');
+                            if (selectedAnswer !== null) setShowExplanation(true);
+                          } else {
+                            // If we were in Practice Hub (Drill mode)
+                            setActiveTab('settings');
+                          }
+                        }}
+                        className="text-indigo-400 hover:text-indigo-600 transition-colors p-2 hover:bg-white rounded-full shadow-sm"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
 
                   {amcMetadata && (

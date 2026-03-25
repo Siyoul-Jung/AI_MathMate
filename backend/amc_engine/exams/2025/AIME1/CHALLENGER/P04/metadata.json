@@ -1,0 +1,17 @@
+{
+    "p_id": "P04",
+    "title": "Quadratic Forms and Lattice Points",
+    "domain": "Algebra / Number Theory",
+    "dna_tags": [
+        "QUADRATIC-FACTORING",
+        "LATTICE-POINTS",
+        "INTEGER-EQUATIONS",
+        "BOUNDED-COUNTING"
+    ],
+    "drill_config": {
+        "L1": "Factoring quadratic forms Ax^2 + Bxy + Cy^2",
+        "L2": "Counting lattice points on a line ax + by = 0 in a square"
+    },
+    "difficulty_band": "CHALLENGER",
+    "engine_id": "AIME1-2025-P04"
+}

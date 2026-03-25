@@ -7,7 +7,7 @@ if backend_root not in sys.path:
 from amc_engine.pipeline_manager import run_factory
 
 # 설정
-SOLVERS = ["P01", "P10", "P11", "P12", "P13", "P14", "P15"]
+SOLVERS = ["P01", "P09", "P10", "P11", "P12", "P13", "P14", "P15"]
 MODES = [
     ("MOCK", None),
     ("DRILL", 1),

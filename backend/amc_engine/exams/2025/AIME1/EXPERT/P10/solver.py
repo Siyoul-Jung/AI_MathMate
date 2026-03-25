@@ -42,23 +42,14 @@ class Solver:
 
     @classmethod
     def generate_seed(cls):
-        # valid Ks
-        # K=1: 3x3 grid (3 blocks of 3x1) -> answer 38
-        # K=2: 3x6 grid (3 blocks of 3x2) -> answer 38
-        # K=3: 3x9 grid (3 blocks of 3x3) -> answer 81
-        # K=4: 3x12 grid (3 blocks of 3x4) -> answer 292
-        # K=5: 3x15 grid (3 blocks of 3x5) -> answer 792
-        # K=6: 3x18 grid -> S(6) = 14716 -> 14716/4 = 3679 -> 3679 is prime? 
-        # Limits K up to 5 to avoid answers > 1000
-        
-        possible_Ks = [1, 2, 3, 4, 5]
-        for _ in range(20):
-            K = random.choice(possible_Ks)
+        # Copyright-Safe: Avoid K=3 (Original AIME 2025 I #10)
+        for _ in range(50):
+            K = random.choice([1, 2, 4, 5])
             ans = cls.compute_exact_answer(K)
-            if 0 < ans < 1000:
+            if 0 <= ans <= 999:
                 return {'K': K, 'expected_t': ans}
                 
-        return cls.GOLDEN_SEEDS[0]
+        return {'K': 2, 'expected_t': 38} # Non-original fallback
 
     def execute(self):
         return self.payload['expected_t']

@@ -36,9 +36,10 @@ venv/
 .venv/
 *.spec
 
-# Generated database files (개인 생성 데이터)
+# Generated database files
 *.db
 **/*.db
+!backend/amc_engine/amc_factory.db
 
 # Python execution artifacts
 **/__pycache__/

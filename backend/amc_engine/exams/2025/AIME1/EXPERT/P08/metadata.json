@@ -1,0 +1,16 @@
+{
+    "p_id": "P08",
+    "title": "Complex Plane Fixed-Point Tangency",
+    "domain": "Complex Numbers",
+    "dna_tags": [
+        "COMPLEX-GEOMETRY",
+        "TANGENCY-CIRCLE-LINE"
+    ],
+    "drill_config": {
+        "L1": "Distance from point to line in complex plane",
+        "L2": "Finding perpendicular bisector of two complex points",
+        "L3": "Solving tangency condition for one complex solution"
+    },
+    "difficulty_band": "EXPERT",
+    "engine_id": "AIME1-2025-P08"
+}

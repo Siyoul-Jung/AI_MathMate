@@ -1,0 +1,18 @@
+{
+    "p_id": "P09",
+    "title": "Rotated Parabola Intersection",
+    "domain": "Geometry",
+    "difficulty_band": "EXPERT",
+    "dna_tags": [
+        "Parabolas",
+        "Coordinate Geometry",
+        "Rotations",
+        "Symmetry"
+    ],
+    "drill_config": {
+        "L1": "Basic parabola intersection with fixed lines.",
+        "L2": "Finding points on the angle bisector of a rotation.",
+        "L3": "Full rotation and intersection analysis in different quadrants."
+    },
+    "engine_id": "AIME1-2025-P09"
+}

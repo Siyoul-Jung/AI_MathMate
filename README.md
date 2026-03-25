@@ -1,111 +1,54 @@
-# AI MathMate: Adaptive AI Engine for AIME Excellence
+# AI_MathMate: Solver-Centric AIME Mock/Drill Platform
 
-AI MathMate is an advanced full-stack educational platform designed to generate and validate high-competition mathematical problems. By engineering a specialized pipeline around Large Language Models(LLMs), this project transforms abstract mathematical logic into highly structured, predictable educational content.
+AI_MathMate is a sophisticated mathematical education platform designed to elevate AIME (American Invitational Mathematics Examination) preparation. It combines custom-coded mathematical solvers with LLM-based narrative generation to provide an infinite supply of rigorous, verified, and pedagogically sound practice problems.
 
-## Key Engineering Features
+## 🚀 Key Features
 
-### LLM Output Control and Strict JSON Structuring
-Unlike simple prompt wrappers, AI MathMate enforces strict output schemas. The backend logic relies on advanced NLP prompts to ensure the LLM consistently returns complex mathematical narratives, hints, and solutions in highly predictable, parsed JSON formats.
+- **Solver-Driven Pipeline**: Unlike traditional RAG systems, AI_MathMate uses deterministic Python solvers to define the "Mathematical DNA" of a problem, which is then used by Gemini to weave complex narratives.
+- **Two-Track Learning**:
+  - **Final Mock**: Simulates the real AIME experience with 15 problems ranging from Challenger to Master levels.
+  - **Drill Workshop (Drill Bridge)**: When a student struggles, the "Drill Bridge" offers targeted practice on foundational concepts (LV1-LV3) relevant to the specific AIME problem.
+- **Visual Intelligence**: Automatically generates geometric and combinatorial illustrations using custom `matplotlib` logic.
+- **Zero-Hallucination Architecture**: Every answer is verified by local solver execution before being served to the user.
 
-### DNA-Driven Problem Generation Pipeline
-The system separates mathematical logic from narrative synthesis. Core mathematical seeds are algorithmically generated and verified for solvability using Python before being processed by the LLM. This pipeline ensures absolute factual accuracy and eliminates hallucinations in the core mathematical concepts.
+## 🛠 Tech Stack
 
-### Full-Stack Architecture and Low-Latency APIs
-Built with a robust FastAPI backend and a Next.js frontend, the system handles real-time AI inferences efficiently. RESTful APIs connect the backend with the frontend, ensuring reliable data flow and bridging complex backend processing with an intuitive user interface.
+- **Frontend**: Next.js 15 (App Router), Tailwind CSS, Framer Motion.
+- **Backend**: FastAPI (Python), SQLite, SQLAlchemy.
+- **AI/LLM**: Google Gemini API, Custom Solver-to-Prompt Pipeline.
+- **DevOps**: Docker, Docker Compose.
 
-### Adaptive Scaffolding System
-The platform features a Drill Bridge that provides a seamless transition from complex AIME problems to targeted conceptual practice. The system dynamically serves Level 1 to 3 drills to isolate specific concepts, demonstrating strong algorithmic state management.
+## 🐳 Quick Start with Docker
 
-## Technical Stack
+Ensure you have Docker and Docker Compose installed.
 
-### Backend Architecture
-- **Language**: Python
-- **Framework**: FastAPI with Uvicorn for asynchronous performance
-- **AI Integration**: OpenAI GPT-4o-mini
-- **Database**: SQLite for stable problem storage and variant management
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-username/AI_MathMate.git
+   cd AI_MathMate
+   ```
 
-### Frontend Experience
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript for robust state management
-- **Styling**: Tailwind CSS and Vanilla CSS for a premium glassmorphism aesthetic
-- **Math Rendering**: KaTeX for high-performance inline and block equation display
+2. **Set Environment Variables**:
+   Create a `.env` file in the root directory:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
 
-## System Architecture Pipeline
+3. **Run with Docker Compose**:
+   ```bash
+   docker compose up --build
+   ```
 
-```plaintext
-[AIME SOLVER DNA] -> [PYTHON SEED GENERATOR] -> [NARRATIVE LLM]
-                                                |
-[JSON SCHEMA VALIDATION] <----------------------+
-|
-[FASTAPI ENDPOINT (backend/app)] <-> [SQLITE DB]
-|
-[NEXT.JS FRONTEND UI (frontend/app)]
-```
+4. **Access the Application**:
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:8088`
 
-## Quick Start
+## 📂 Project Structure
 
-### 1. Clone & Install
-```bash
-git clone https://github.com/Siyoul-Jung/AI_MathMate.git
-cd AI_MathMate
-# Install backend dependencies
-cd backend
-pip install -r requirements.txt
-# Install frontend dependencies
-cd ../frontend
-npm install
-```
-
-### 2. Environment Configuration
-Create a `.env` file in the `backend/` directory:
-```bash
-cd backend
-cp .env.example .env
-```
-Edit `backend/.env` to include your OpenAI API Key:
-```
-OPENAI_API_KEY=your_key_here
-```
-
-**Frontend Environment:**
-Create a `.env.local` file in the `frontend/` directory (optional if using default localhost:8001):
-```bash
-cd ../frontend
-cp .env.local.example .env.local
-```
-
-### 3. Running the Platform
-**Start Backend API:**
-```bash
-cd backend
-python main.py
-```
-**Start Frontend:**
-```bash
-cd frontend
-npm run dev
-```
-
-### 4. Running Tests (Optional)
-To verify the backend installation and core logic:
-```bash
-cd backend
-python -m pytest tests/
-```
-
-## Future Roadmap
-
-The AI MathMate engine is designed with modularity at its core, allowing for seamless expansion into broader mathematical disciplines:
-
-- **AMC Series Integration**: Expanding the DNA-driven generator to support AMC 8, 10, and 12 problem sets.
-- **K-Math Curriculum Adaptivity**: Incorporating local K-math (Korean curriculum) standards for broader accessibility.
-- **Enhanced Scaffolding Architecture**: Developing a "Peer-to-Peer" AI tutoring module for more nuanced step-by-step guidance.
-- **Multi-Modal Problem Generation**: Integrating visual geometry recognition and generation using multimodal LLM capabilities.
-
-## License & Copyright
-This project is for educational purposes. 
-The mathematical structures are inspired by the AIME 2025 I exam. 
-Original AIME problems are copyright © [Mathematical Association of America (MAA)](https://www.maa.org/).
+- `/frontend`: Next.js application and UI components.
+- `/backend`: FastAPI server and engine services.
+- `/backend/amc_engine`: The core math engine containing solvers and the generation pipeline.
+- `/backend/amc_factory.db`: Pre-generated and verified problem variants.
 
 ---
-*Developed as a high-fidelity demonstration of AI-driven pedagogy.*
+Developed as a high-impact engineering portfolio project.

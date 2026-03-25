@@ -221,11 +221,54 @@ def stage2_deep_math(narrative: str, seed: dict, dna_tag: str) -> tuple:
 
 
 # ─────────────────────────────────────────────────────────────
+# Stage 3: Integrity Check (LaTeX Hallucinations)
+# ─────────────────────────────────────────────────────────────
+def stage3_integrity(narrative: str) -> tuple:
+    """
+    Check for common LaTeX mangling patterns (imes, extcirc, etc.)
+    """
+    forbidden_patterns = [
+        (r'\bimes\b', "Mangled \\times (found 'imes')"),
+        (r'\\textcirc', "Mangled \\circ (found '\\textcirc')"),
+        (r'extcirc', "Mangled \\circ (found 'extcirc')"),
+        (r'\\t\s+\\', "Redundant \\t before command"),
+        (r'\bbullet\b', "Mangled \\circ (found 'bullet')"),
+        (r'\{reqs\}', "Unfilled placeholder '{reqs}'"),
+        (r'\breqs\b', "Internal placeholder artifact 'reqs' found in text"),
+    ]
+    
+    for pattern, reason in forbidden_patterns:
+        if re.search(pattern, narrative):
+            return False, f"Integrity Failure: {reason}"
+            
+    return True, "OK"
+
+
+# ─────────────────────────────────────────────────────────────
+# Stage 4: Visual Check (Image Consistency)
+# ─────────────────────────────────────────────────────────────
+def stage4_visual(narrative: str, has_image_dna: bool) -> tuple:
+    """
+    Check if the narrative mentions figures/graphs and matches DNA support.
+    """
+    figure_keywords = ['figure', 'graph', 'diagram', 'triangle', 'circle', 'parabola', 'coordinate plane', 'plot']
+    mentions_figure = any(kw in narrative.lower() for kw in figure_keywords)
+    
+    if mentions_figure and not has_image_dna:
+        return False, "Visual Mismatch: Problem mentions a figure/graph but Solver lacks image DNA."
+    
+    # We don't necessarily reject if DNA has image but text doesn't explicitly say "Figure", 
+    # but we should ensure the renderer isn't left in a weird state.
+    
+    return True, "OK"
+
+
+# ─────────────────────────────────────────────────────────────
 # 통합 검증 실행기
 # ─────────────────────────────────────────────────────────────
-def run_all_stages(narrative: str, seed: dict, dna_tag: str) -> tuple:
+def run_all_stages(narrative: str, seed: dict, dna_tag: str, has_image_dna: bool = False) -> tuple:
     """
-    Stage 1 → Stage 2 순서로 실행.
+    Stage 1 → 2 → 3 → 4 순서로 실행.
     Returns: (ok: bool, failed_stage: int, reason: str)
     """
     ok1, msg1 = stage1_surface(narrative)
@@ -235,5 +278,13 @@ def run_all_stages(narrative: str, seed: dict, dna_tag: str) -> tuple:
     ok2, msg2 = stage2_deep_math(narrative, seed, dna_tag)
     if not ok2:
         return False, 2, msg2
+        
+    ok3, msg3 = stage3_integrity(narrative)
+    if not ok3:
+        return False, 3, msg3
+        
+    ok4, msg4 = stage4_visual(narrative, has_image_dna)
+    if not ok4:
+        return False, 4, msg4
 
     return True, 0, "OK"

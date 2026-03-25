@@ -1,12 +1,17 @@
 {
-  "p_id": "P14",
-  "title": "Pentagonal Fermat Point Optimization",
-  "domain": "Geometry",
-  "difficulty_band": "MASTER",
-  "dna_tags": ["Optimization", "Steiner Trees", "Law of Cosines"],
-  "drill_config": {
-    "L1": "Fermat point configuration angles (120 degree rule).",
-    "L2": "Distance minimization for points within a rhombus.",
-    "L3": "Global distance sum minimization for convex pentagons."
-  }
+    "p_id": "P14",
+    "title": "Pentagonal Fermat Point Optimization",
+    "domain": "Geometry",
+    "difficulty_band": "MASTER",
+    "dna_tags": [
+        "Optimization",
+        "Steiner Trees",
+        "Law of Cosines"
+    ],
+    "drill_config": {
+        "L1": "Fermat point configuration angles (120 degree rule).",
+        "L2": "Distance minimization for points within a rhombus.",
+        "L3": "Global distance sum minimization for convex pentagons."
+    },
+    "engine_id": "AIME1-2025-P14"
 }

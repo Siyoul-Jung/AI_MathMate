@@ -31,7 +31,15 @@ export default function ProblemViewer({
   band,
   metadata
 }: ProblemViewerProps) {
-  
+  if (!problem) {
+    return (
+      <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50 text-slate-400">
+        <div className="text-4xl mb-4">🧬</div>
+        <p className="font-medium">No problem selected or generated yet.</p>
+        <p className="text-xs mt-2">Try clicking "Shuffle Variant" or select a challenge phase.</p>
+      </div>
+    );
+  }
   const themeClasses = {
     indigo: { button: 'bg-indigo-600 hover:bg-indigo-700', text: 'text-indigo-700', bg: 'bg-indigo-50', border: 'border-indigo-200' },
     purple: { button: 'bg-purple-600 hover:bg-purple-700', text: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200' },
@@ -50,6 +58,14 @@ export default function ProblemViewer({
   };
 
   // Unified rendering function (Block Math -> HTML -> Inline Math -> Text)
+  const resolveImageUrl = (url: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    // Ensure 'images/' prefix for local backend static serving
+    const cleanPath = url.replace(/^images\//, '');
+    return `http://localhost:8088/images/${cleanPath}`;
+  };
+
   const renderContent = (content: string) => {
     if (!content) return null;
     
@@ -60,7 +76,14 @@ export default function ProblemViewer({
       // $$ ... $$ 또는 \[ ... \] 처리
       if ((block.startsWith('$$') && block.endsWith('$$')) || (block.startsWith('\\[') && block.endsWith('\\]'))) {
         const math = block.startsWith('$$') ? block.slice(2, -2) : block.slice(2, -2);
-        return <div key={i} className="my-4"><BlockMath math={math} /></div>;
+        return (
+          <div key={i} className="my-4 overflow-x-auto">
+            <BlockMath 
+              math={math} 
+              renderError={(error) => <div className="text-red-500 font-mono text-xs p-2 bg-red-50 rounded select-all border border-red-100">Math Error: {error.message} <br/> Raw: {math}</div>}
+            />
+          </div>
+        );
       }
       
       // 2. Separate HTML (div including SVG)
@@ -78,27 +101,47 @@ export default function ProblemViewer({
           if (imgPart.startsWith('![') && imgPart.includes('](')) {
             const alt = imgPart.match(/!\[(.*?)\]/)?.[1] || 'image';
             const url = imgPart.match(/\((.*?)\)/)?.[1] || '';
-            const fullUrl = url.startsWith('http') ? url : `http://localhost:8002/${url}`;
+            const fullUrl = resolveImageUrl(url);
             return (
               <div key={`${i}-${j}-${imgIdx}`} className="my-6 flex justify-center">
                 <img 
                   src={fullUrl} 
                   alt={alt} 
-                  className="max-w-full rounded-xl shadow-md border border-slate-100"
+                  className="max-w-full md:max-w-[85%] max-h-[400px] object-contain rounded-xl shadow-md border border-slate-100 transition-all hover:shadow-lg"
                 />
               </div>
             );
           }
 
           // 4. Separate Inline Math ($ ... $ or \( ... \))
-          const inlineParts = imgPart.split(/(\$[\s\S]*?\$|\\\([\s\S]*?\\\))/g);
-          return inlineParts.map((part, k) => {
-            const isMath = (part.startsWith('$') && part.endsWith('$')) || (part.startsWith('\\(') && part.endsWith('\\)'));
-            
-            if (isMath) {
-              const math = part.startsWith('$') ? part.slice(1, -1) : part.slice(2, -2);
-              return <InlineMath key={`${i}-${j}-${imgIdx}-${k}`} math={math} />;
-            }
+          const inlineParts = imgPart.split(/(\$\$[\s\S]*?\$\$|\$[\s\S]*?\$|\\\([\s\S]*?\\\))/g);
+
+           return inlineParts.map((part, k) => {
+             const isBlock = part.startsWith('$$') && part.endsWith('$$');
+             const isMath = (part.startsWith('$') && part.endsWith('$')) || (part.startsWith('\\(') && part.endsWith('\\)'));
+             
+             if (isBlock) {
+               const math = part.slice(2, -2);
+               return (
+                 <div key={`${i}-${j}-${imgIdx}-${k}`} className="overflow-x-auto py-2">
+                   <BlockMath 
+                     math={math} 
+                     renderError={(error) => <div className="text-red-500 font-mono text-xs p-1 bg-red-50 rounded">Block Error: {math}</div>}
+                   />
+                 </div>
+               );
+             }
+             if (isMath) {
+               const math = part.startsWith('$') ? part.slice(1, -1) : part.slice(2, -2);
+               return (
+                 <InlineMath 
+                   key={`${i}-${j}-${imgIdx}-${k}`} 
+                   math={math} 
+                   renderError={(error) => <span className="text-red-400 font-serif px-1 bg-red-50 text-[10px]" title={error.message}>({math})</span>}
+                 />
+               );
+             }
+
 
             // Deduplication: Check if this text is a redundant fallback for the NEXT math part
             let textToRender = part;
@@ -134,11 +177,7 @@ export default function ProblemViewer({
       <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
         {(band || metadata) && (
           <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-            {band ? (
-              <span className="px-3 py-1 bg-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-widest rounded-full border border-slate-200">
-                {band} PHASE
-              </span>
-            ) : <div />}
+            <div />
             {metadata && (
               <div className="flex flex-col items-end">
                 <span className="text-[10px] text-slate-400 font-bold italic">
@@ -157,12 +196,12 @@ export default function ProblemViewer({
         )}
         <div className="text-lg sm:text-xl font-medium text-slate-800 leading-relaxed">
           {renderContent(problem.question)}
-          {problem.image && (
+          {problem.image && !problem.question.includes(problem.image.split('/').pop() || '___') && (
             <div className="mt-6 flex justify-center">
               <img 
-                src={problem.image.startsWith('http') ? problem.image : `http://localhost:8002/${problem.image}`} 
+                src={resolveImageUrl(problem.image)} 
                 alt="Problem Illustration" 
-                className="max-w-full rounded-lg shadow-sm border border-slate-100"
+                className="max-w-full md:max-w-[85%] max-h-[400px] object-contain rounded-lg shadow-sm border border-slate-100 transition-all hover:shadow-md"
               />
             </div>
           )}
@@ -238,7 +277,14 @@ export default function ProblemViewer({
             </div>
             
             <div className="grid grid-cols-3 gap-2">
-              {[1, 2, 3].map(lvl => (
+              {[1, 2, 3].filter(lvl => {
+                // Determine available levels from metadata prop or problem metadata
+                const config = metadata?.drill_config || problem?.metadata?.drill_config;
+                if (config) {
+                  return !!config[`L${lvl}`];
+                }
+                return true;
+              }).map(lvl => (
                 <button
                   key={lvl}
                   onClick={() => onDrillClick?.(lvl)}

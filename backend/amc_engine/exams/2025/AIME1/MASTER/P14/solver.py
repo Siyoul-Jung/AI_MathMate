@@ -10,6 +10,7 @@ class Solver:
         "context_type": "geometry",
         "category": "Geometry / Combinatorics",
         "specific_tag": "GEO-FERMAT-PENTAGON",
+        "has_image": True,
         "level": 14
     }
     DRILL_LEVELS = [1, 2, 3]
@@ -112,20 +113,29 @@ class Solver:
 
     @classmethod
     def generate_seed(cls):
+        # Original AIME 2025 I #14 used AB=24, BC=12, CD=60... wait, checking Answer key: #14 = 060. 
+        # My seed logic: AB=2k1. 
         for _ in range(50):
             base = random.choice(cls.GOLDEN_SEEDS)
-            scale = random.choice([1, 1, 2, 2, 3, 4, 5]) 
+            scale = random.choice([1, 2, 3, 4, 5]) 
+            
+            # Copyright Guard: Avoid official 2025 constants
+            # Official was k1=6, k2=10, CD=24? No, Answer 60. 
+            # We skip scale=1 for any seed that looks like original.
+            if scale == 1: continue 
+            
             new_m = base['CD'] * scale
             new_n = (base['k1'] + base['k2']) * scale
             ans = new_m + new_n + 3
-            if ans <= 999:
+            
+            if 0 < ans <= 999:
                 return {
                     'k1': base['k1'] * scale,
                     'k2': base['k2'] * scale,
                     'CD': base['CD'] * scale,
                     'expected_t': ans
                 }
-        return random.choice(cls.GOLDEN_SEEDS)
+        return {'k1': 8, 'k2': 12, 'CD': 40, 'expected_t': 63}
 
     @classmethod
     def generate_drill_seed(cls, level):

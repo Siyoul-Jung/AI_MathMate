@@ -1,0 +1,17 @@
+{
+    "p_id": "P05",
+    "title": "22-Divisibility of 8-Digit Permutations",
+    "domain": "Number Theory / Combinatorics",
+    "dna_tags": [
+        "DIVISIBILITY-11",
+        "PERMUTATIONS",
+        "MODULAR-ARITHMETIC",
+        "DIGIT-PROBLEMS"
+    ],
+    "drill_config": {
+        "L1": "Divisibility rule for 11 (8-digit test)",
+        "L2": "Counting specific permutations with fixed units digit"
+    },
+    "difficulty_band": "CHALLENGER",
+    "engine_id": "AIME1-2025-P05"
+}

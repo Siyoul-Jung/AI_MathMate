@@ -1,11 +1,16 @@
-# Mathematical DNA
-- **Topic**: Combinatorics
-- **Sub-topic**: Permutations, Block Distribution, Franel numbers
-- **Difficulty Pattern**: Advanced (Level 10)
-- **Tag**: `COMBINATORICS-GRID-FRANEL`
+## [PROBLEM DNA: {specific_tag}]
 
-# Structure
-The problem asks for the number of ways to fill a $3 \times 3K$ grid using numbers $1$ to $3K$. The grid is partitioned into three $3 \times K$ blocks. Each row must be a permutation of $1$ to $3K$, and each $3 \times K$ block must be a permutation of $1$ to $3K$. This structure matches the first 3 rows of a Sudoku puzzle. The answer simplifies to evaluating factorials and the sum of cubes of binomial coefficients (Franel numbers).
+### 1. MATHEMATICAL CORE
+- Grid of 3 rows and {row_length} columns.
+- Block partition: three $3 \times {K}$ blocks.
+- Fill with numbers 1 to {row_length}.
+- Rules: Each row and each block must contain a permutation of 1 to {row_length}.
+- Question asks for the total number of valid grids.
+- Prime factorization: $\prod p_i^{e_i}$.
+- Final answer: Find $\sum (p_i \cdot e_i)$.
 
-# Narrative Instruction
-{{ NARRATIVE_INSTRUCTION }}
+### 2. STYLE & NARRATIVE GUIDELINE
+{NARRATIVE_INSTRUCTION}
+
+### 3. REQUIRED PAYLOAD
+- K: {K}, expected_t: {expected_t}

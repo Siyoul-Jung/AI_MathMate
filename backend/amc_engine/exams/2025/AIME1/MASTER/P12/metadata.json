@@ -1,12 +1,17 @@
 {
-  "p_id": "P12",
-  "title": "3D Plane Inequalities",
-  "domain": "Geometry / Algebra",
-  "difficulty_band": "MASTER",
-  "dna_tags": ["3D Coordinate Geometry", "Inequality Factoring", "Area Calculation"],
-  "drill_config": {
-    "L1": "Evaluating 3D expressions for specific points on a plane.",
-    "L2": "Factoring complex inequalities into geometric boundaries.",
-    "L3": "Calculating finite polygon areas on inclined planes."
-  }
+    "p_id": "P12",
+    "title": "3D Plane Inequalities",
+    "domain": "Geometry / Algebra",
+    "difficulty_band": "MASTER",
+    "dna_tags": [
+        "3D Coordinate Geometry",
+        "Inequality Factoring",
+        "Area Calculation"
+    ],
+    "drill_config": {
+        "L1": "Evaluating 3D expressions for specific points on a plane.",
+        "L2": "Factoring complex inequalities into geometric boundaries.",
+        "L3": "Calculating finite polygon areas on inclined planes."
+    },
+    "engine_id": "AIME1-2025-P12"
 }

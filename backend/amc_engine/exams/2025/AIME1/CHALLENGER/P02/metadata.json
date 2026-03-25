@@ -1,0 +1,20 @@
+{
+    "p_id": "P02",
+    "title": "Triangle Area vs Heptagon Reflection",
+    "domain": "Geometry",
+    "sub_domain": "Area Ratios & Reflections",
+    "difficulty": "Challenger",
+    "tags": [
+        "Triangle Area",
+        "Similarity",
+        "Reflections",
+        "Area Ratio"
+    ],
+    "drill_config": {
+        "L1": "Calculating base triangle area using similarity ratios.",
+        "L2": "Finding specific quadrilateral areas via nested triangle subtraction."
+    },
+    "dna": "GEOM-AREA-REF-L1",
+    "difficulty_band": "CHALLENGER",
+    "engine_id": "AIME1-2025-P02"
+}

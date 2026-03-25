@@ -1,0 +1,19 @@
+{
+    "p_id": "P03",
+    "title": "Flavor Assignments Casework",
+    "domain": "Combinatorics",
+    "sub_domain": "Multinomial Coefficients",
+    "difficulty": "Challenger",
+    "tags": [
+        "Counting",
+        "Multinomial",
+        "Casework"
+    ],
+    "drill_config": {
+        "L1": "Multinomial basics: 3 players, 3 flavors",
+        "L2": "Multinomial coefficient calculation for fixed counts"
+    },
+    "dna": "COMB-MULT-CAS-L1",
+    "difficulty_band": "CHALLENGER",
+    "engine_id": "AIME1-2025-P03"
+}

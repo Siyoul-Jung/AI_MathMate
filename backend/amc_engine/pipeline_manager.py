@@ -6,6 +6,7 @@ import os
 import time
 import re
 import random
+import hashlib
 
 # 경로 설정
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -138,14 +139,8 @@ class ProblemFactory:
             conn.commit()
 
     def _seed_is_duplicate(self, seed_key: str) -> bool:
-        """동일 시드가 이미 DB에 있는지 확인"""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "SELECT 1 FROM generated_problems WHERE seed_key = ? LIMIT 1",
-                (seed_key,)
-            )
-            return cursor.fetchone() is not None
+        """동일 시드가 이미 DB에 있는지 확인 (Legacy Deprecated)"""
+        return False
 
     def get_supported_levels(self, year, exam, p_id):
         try:
@@ -173,7 +168,7 @@ class ProblemFactory:
             metadata = self.get_problem_metadata(year, exam, p_id)
             return {"levels": levels, "band": band, "metadata": metadata}
         except Exception:
-            return {"levels": [], "band": "UNKNOWN", "metadata": None}
+            return {"levels": [1, 2, 3], "band": "UNKNOWN", "metadata": None}
 
     def get_problem_metadata(self, year, exam, p_id):
         """Loads metadata.json from the P-Centric folder."""
@@ -264,7 +259,7 @@ class ProblemFactory:
         
         return base_prompt, selected_log_theme
 
-    def _run_llm_generation_loop(self, base_prompt, perfect_seed, dna_tag):
+    def _run_llm_generation_loop(self, base_prompt, perfect_seed, dna_tag, has_image_dna=False):
         """LLM 생성 + 검증 (Retry-with-Feedback 루프)"""
         feedback = ""
         for attempt in range(1, MAX_LLM_RETRIES + 1):
@@ -282,9 +277,11 @@ class ProblemFactory:
                 continue
 
             new_data['4_solver_payload'] = perfect_seed
+            # Normalize BEFORE verification to remove recoverable artifacts (like \t)
+            self._normalize_latex_in_response(new_data)
+            
             narrative = new_data.get('3_presentation', {}).get('problem_statement', '')
-
-            ok, failed_stage, reason = run_all_stages(narrative, perfect_seed, dna_tag)
+            ok, failed_stage, reason = run_all_stages(narrative, perfect_seed, dna_tag, has_image_dna)
             if ok:
                 print(f"  ↳ 시도 {attempt}: ✅ 검증 통과")
                 return new_data, attempt
@@ -300,32 +297,220 @@ class ProblemFactory:
         solver_instance = TargetSolver(payload, {})
         return abs(solver_instance.execute() - perfect_seed['expected_t']) <= FLOAT_TOLERANCE
 
-    def _handle_image_generation(self, TargetSolver, seed_key, year, exam, p_id, new_data):
-        """이미지 생성 및 임베딩"""
-        if not getattr(TargetSolver, 'DNA', {}).get('has_image', False):
+    def _handle_image_generation(self, TargetSolver, perfect_seed, seed_key, year, exam, p_id, new_data):
+        """이미지 생성 및 임베딩 + 스마트 감지"""
+        has_image_dna = getattr(TargetSolver, 'DNA', {}).get('has_image', False)
+        
+        # Check if narrative mentions figures regardless of DNA
+        narrative = new_data.get('3_presentation', {}).get('problem_statement', '')
+        figure_keywords = ['figure', 'graph', 'diagram', 'triangle', 'circle', 'parabola', 'coordinate plane', 'plot']
+        mentions_figure = any(kw in narrative.lower() for kw in figure_keywords)
+
+        if not has_image_dna:
+            if mentions_figure:
+                print(f"  ↳ ⚠️ WARNING: Figure referenced in text but Solver lacks image-DNA.")
+                new_data['validation_warnings'] = new_data.get('validation_warnings', []) + ["Figure mentioned but no graph DNA found"]
             return
 
-        img_dir = os.path.join(os.path.dirname(__file__), 'images', str(year), exam)
+        img_dir = os.path.join(os.path.dirname(__file__), 'images', str(year), exam, p_id)
         os.makedirs(img_dir, exist_ok=True)
         
-        import hashlib
         hash_suffix = hashlib.md5(seed_key.encode('utf-8')).hexdigest()[:8]
         img_filename = f"{p_id}_{hash_suffix}.png"
         img_path = os.path.join(img_dir, img_filename)
         
+        # public/images relative path for frontend
+        public_url = f"images/{year}/{exam}/{p_id}/{img_filename}"
+        
         try:
             TargetSolver.generate_image(perfect_seed, img_path)
-            image_md = f"\n\n![Graph](images/{year}/{exam}/{img_filename})\n\n"
-            if '3_presentation' in new_data and 'problem_statement' in new_data['3_presentation']:
-                new_data['3_presentation']['problem_statement'] += image_md
-            print(f"  ↳ 🖼️ 이미지 임베딩 성공 ({img_filename})")
+            new_data['image_url'] = public_url
+            print(f"  ↳ 🖼️ 이미지 생성 성공 ({img_filename})")
         except Exception as e:
             print(f"  ↳ ⚠️ 이미지 생성 실패: {e}")
+            new_data['validation_warnings'] = new_data.get('validation_warnings', []) + [f"Image generation failed: {e}"]
+
+    def _validate_latex(self, text):
+        """Checks for balanced braces and structural LaTeX integrity."""
+        errors = []
+        if not text: return errors
+        
+        # 1. Brace check
+        brace_diff = text.count('{') - text.count('}')
+        if brace_diff != 0:
+            errors.append(f"Unbalanced braces {{}}: {text.count('{')} vs {text.count('}')}")
+        
+        # 2. Math delimiter check
+        if text.count('$') % 2 != 0:
+            errors.append("Unbalanced math delimiters $")
+        
+        # 3. Environment check
+        env_starts = re.findall(r'\\begin\{(.*?)\}', text)
+        env_ends = re.findall(r'\\end\{(.*?)\}', text)
+        if len(env_starts) != len(env_ends):
+            errors.append(f"Unbalanced environments: begin={len(env_starts)}, end={len(env_ends)}")
+        
+        return errors
 
     def _normalize_latex(self, text):
         if not text: return text
+        
+        # 0. Recover characters eaten by control char interpretation
+        # This occurs when Gemini's JSON response has unescaped backslashes and json.loads() runs.
+        # e.g. \text{if} -> \t ext... -> TAB + ext
+        text = text.replace('\b', '\\b')
+        text = text.replace('\f', '\\f')
+        text = text.replace('\t', '\\t')
+        text = text.replace('\n', ' ')
+        text = text.replace('\r', '') # Keep carriage returns clean
+        
+        # Cleanup redundant literal \t artifacts (backslash + t)
+        text = text.replace('\\t\\text', '\\text')
+        text = text.replace('\\t\\times', '\\times')
+        text = text.replace('\\t \\times', '\\times')
+        text = text.replace('\\t\\Delta', '\\Delta')
+        text = text.replace('\\t\\angle', '\\angle')
+        text = text.replace('\\t\\triangle', '\\triangle')
+        text = text.replace('\\t\\frac', '\\frac')
+        text = text.replace('\\t \\frac', '\\frac')
+        text = text.replace('\\t ', ' ')
+        
+        # Aggressive backslash-t cleanup
+        text = re.sub(r'\\t\s*\\', r'\\', text)
+
+        # 1. Standardize delimiters and cleanup common mangled patterns
         text = re.sub(r'\\\((.*?)\\\)', r'$\1$', text)
         text = re.sub(r'\\\[(.*?)\\\]', r'$$\1$$', text, flags=re.DOTALL)
+        
+        # Cleanup repeated variables (e.g. "a b a b")
+        text = re.sub(r'\\+\s*\\+', r'\\', text) # Fix double/triple backslashes with spaces
+        text = re.sub(r'\s{2,}', ' ', text) # Fix redundant multiple spaces
+
+        
+        text = re.sub(r'([a-zA-Z])\s+([a-zA-Z])\s+\1\s+\2', r'\1\2', text) # "a b a b" -> "ab"
+        # Actually for Master P12, "expressed in the form a b a b" probably meant "$a\sqrt{b}$" but was mangled.
+        # Let's be more specific for P12
+        text = text.replace('a b a b', 'a\\sqrt{b}')
+        
+        # Cleanup specific Gemini hallucinations around triangle
+        text = text.replace('\\ t \\ \\ t \\ triangle', '\\triangle')
+        text = text.replace('\\ t \\ triangle', '\\triangle')
+        text = text.replace('t \\ triangle', '\\triangle')
+        text = text.replace('\\ \\t \\triangle', '\\triangle')
+        text = text.replace('\\t \\triangle', '\\triangle')
+        text = text.replace('\\t\\triangle', '\\triangle')
+        text = text.replace('\\  \\triangle', '\\triangle')
+        text = text.replace('\\ \\triangle', '\\triangle')
+        text = text.replace('  triangle', ' \\triangle')
+        
+        # Cleanup missing line breaks in cases environments
+        if '\\begin{cases}' in text:
+            # Replace single backslash line separators with double backslashes
+            # Catch single backslash before a pipe, digit, or variable (often happens in systems)
+            text = re.sub(r'(\d|\||\})\s*\\(\s*[\|0-9a-zA-Zx])', r'\1 \\\\ \2', text)
+            # Catch specific "p_id 397" style and variants: "... \ -" or "... \ 2n"
+            text = re.sub(r'(\w)\s*\\\s*([\d\-])', r'\1 \\\\ \2', text)
+            # Cleanup specific "7 \ |z" mangling from P08
+            text = text.replace(r' \ |z', r' \\ |z')
+            text = text.replace(r'\ |z', r' \\ |z')
+
+        # 2. Fix Unicode math symbols and spacing hallucinations
+        unicode_map = {
+            '⌊': r'\lfloor ', '⌋': r'\rfloor ',
+            '⌈': r'\lceil ', '⌉': r'\rceil ',
+            'θ': r'\theta ', 'α': r'\alpha ', 'β': r'\beta ', 'π': r'\pi ',
+            '∆': r'\Delta ', '∠': r'\angle ', '⊥': r'\perp ',
+            '±': r'\pm ', '×': r'\times ', '÷': r'\div ',
+            '≤': r'\le ', '≥': r'\ge ', '≠': r'\ne ',
+            '≈': r'\approx ', '∞': r'\infty ', '√': r'\sqrt ',
+            '∈': r'\in ', '∉': r'\notin ', 'ℤ': r'\mathbb{Z}', 'ℝ': r'\mathbb{R}',
+            '−': r'-', '·': r'\cdot '
+        }
+        for u_char, tex in unicode_map.items():
+            text = text.replace(u_char, tex)
+        
+        # 3. Backslash Restoration (Heavy-duty recovery for JSON-swallowed backslashes)
+        # We split them into "Word-based" which need boundaries, and "Symbol-based"
+        word_cmds = [
+            'le', 'ge', 'ne', 'pm', 'alpha', 'beta', 'theta', 'pi', 
+            'Delta', 'triangle', 'angle', 'perp', 'approx', 'infty', 'cdot', 'mathbb{Z}', 'mathbb{R}'
+        ]
+        symbol_cmds = ['begin{cases}', 'end{cases}', 'text{', 'frac{', 'sqrt{', 'pmod{', 'times', 'circ']
+        
+        for cmd in word_cmds:
+             # Only restore if it's a standalone word (or at least preceded by a space/backslash)
+             pattern = r'(?<!\\)\b' + re.escape(cmd.strip()) + r'\b'
+             text = re.sub(pattern, r'\\' + cmd.strip(), text)
+             
+        for cmd in symbol_cmds:
+             # Symbols dont need word boundaries
+             pattern = r'(?<!\\)' + re.escape(cmd)
+             text = re.sub(pattern, r'\\' + cmd, text)
+        
+        # Literal fixes for common letter-set hallucinations
+        text = text.replace(' n in Z', r' n \in \mathbb{Z}')
+        text = text.replace(' n \in Z', r' n \in \mathbb{Z}')
+
+
+        # Fix spacing hallucinations in common math patterns
+        text = re.sub(r'f\s*\(\s*x\s*\)', 'f(x)', text)
+        text = re.sub(r'g\s*\(\s*x\s*\)', 'g(x)', text)
+        text = re.sub(r'P\s*\(\s*x\s*\)', 'P(x)', text)
+        
+        # 3. Fix degree/symbol hallucinations simply
+        text = text.replace('\\text{circ}', r'^\circ')
+        text = text.replace('\\text{\\circ}', r'^\circ')
+        text = text.replace('\\text{degree}', r'^\circ')
+        text = text.replace('\\text{\\degree}', r'^\circ')
+        text = text.replace('\\bullet', r'^\circ')
+        text = text.replace('text{circ}', r'^\circ')
+        text = text.replace('ext{circ}', r'^\circ')
+        text = text.replace('textcirc', r'^\circ')
+        text = text.replace('extcirc', r'^\circ')
+        text = text.replace('bullet', r'^\circ')
+        text = text.replace('\\text{\\sqrt }', '\\sqrt ')
+        text = text.replace('\\text{\\sqrt}', '\\sqrt')
+        text = text.replace('\\text{\\sqrt{', '\\sqrt{')
+
+        # --- Deep Cleansing: Systemic Deduplication ---
+        # 0. Fix modulo notation mangling
+        text = text.replace('mod1000', r' \pmod{1000}')
+        text = text.replace('mod 1000', r' \pmod{1000}')
+        text = text.replace('modulo 1000', r' \pmod{1000}')
+        text = text.replace('(\pmod{1000})', r'\pmod{1000}') # Avoid double parens
+        
+        # 1. Remove internal artifacts like {reqs} or just "reqs"
+        text = text.replace('{reqs}', '').replace('reqs', '')
+        
+        # 2. Fix duplicated degree symbols: $120^\circ 120^\circ$ or $120^\circ 120 ^\circ$
+        text = re.sub(r'(\d+)\^\\circ\s+\1\^\\circ', r'\1^\\circ', text)
+        text = re.sub(r'(\d+)\^\\circ\s+counterclockwise', r'\1^\\circ counterclockwise', text) # Special for P09
+        
+        # 3. General Numerical Deduplication: "120 120", "4 4" (often happens before/after math)
+        # We only do this if it's the exact same number separated by space.
+        text = re.sub(r'\b(\d+)\b\s+\1\b', r'\1', text)
+        
+        # 4. Math-Text Redundancy: "$r$ $r$", "$s$ $s$"
+        text = re.sub(r'\$([a-zA-Z])\$\s+\$\1\$', r'$\1$', text)
+        text = re.sub(r'\b([a-zA-Z])\b\s+\$\1\$', r'$\1$', text) # "r $r$" -> "$r$"
+        text = re.sub(r'\$([a-zA-Z])\$\s+\b\1\b', r'$\1$', text) # "$r$ r" -> "$r$"
+        
+        # 5. Fix duplicated units/words: "units units", "ways ways"
+        text = re.sub(r'\b(\w{3,})\b\s+\1\b', r'\1', text) 
+
+        return text.strip()
+        
+        # 4. Fix 'times' mangling (often becomes imes or  imes)
+        text = text.replace(' imes', ' \\times ')
+        text = re.sub(r'(\d)\s*imes\s*(\d)', r'\1 \\times \2', text)
+        text = text.replace('\\ imes', ' \\times ')
+        text = text.replace('  times', ' \\times ')
+        
+        # Cleanup redundant carets or spaces around carets
+        text = re.sub(r'\^+\s*\\circ', r'^\\circ', text)
+        text = text.replace('^^', '^')
+        text = text.replace('^ ^', '^')
+        
         return text
 
     def _normalize_latex_in_response(self, new_data):
@@ -356,9 +541,10 @@ class ProblemFactory:
         # 3. 프롬프트 빌드 및 LLM 실행
         base_prompt, selected_log_theme = self._build_prompt(md_text, perfect_seed, TargetSolver, metadata, mode, drill_level)
         dna_tag = getattr(TargetSolver, 'DNA', {}).get('specific_tag', '')
+        has_image_dna = getattr(TargetSolver, 'DNA', {}).get('has_image', False)
         print(f"🎲 [{year} {exam} {p_id}] DNA: {dna_tag} | 시드: {perfect_seed}")
         
-        new_data, attempt = self._run_llm_generation_loop(base_prompt, perfect_seed, dna_tag)
+        new_data, attempt = self._run_llm_generation_loop(base_prompt, perfect_seed, dna_tag, has_image_dna)
         if not new_data:
             print(f"❌ [{p_id}] {MAX_LLM_RETRIES}회 재시도 후 생성 실패")
             return False
@@ -368,15 +554,30 @@ class ProblemFactory:
             print("❌ Solver 실행 결과 불일치")
             return False
 
-        self._handle_image_generation(TargetSolver, seed_key, year, exam, p_id, new_data)
-        self._normalize_latex_in_response(new_data)
+        self._handle_image_generation(TargetSolver, perfect_seed, seed_key, year, exam, p_id, new_data)
+        # (Normalization already handled in generation loop before verification)
+
+        # --- Validation & Quality Audit ---
+        narrative = new_data.get('3_presentation', {}).get('problem_statement', '')
+        latex_errors = self._validate_latex(narrative)
+        warnings = new_data.get('validation_warnings', [])
+        
+        if latex_errors or warnings:
+            print(f"  ↳ 🔍 Quality Alert for {p_id}:")
+            for err in latex_errors: print(f"    - [LATEX ERROR] {err}")
+            for wrn in warnings: print(f"    - [WARNING] {wrn}")
+        else:
+            print(f"  ↳ ⭐ Quality Check Passed (Perfect)")
 
         # 5. DB 저장
         self._save_to_db(new_data, year, exam, p_id, selected_log_theme, seed_key, attempt, mode, drill_level)
+        new_data['engine_id'] = self._get_engine_id(year, exam, p_id)
         print(f"✅ 생성 성공 (정답: {perfect_seed['expected_t']})")
         return new_data
 
     def _save_to_db(self, data, year, exam, p_id, theme_name, seed_key, attempt_count, mode, drill_level):
+        if mode == MODE_MOCK:
+            drill_level = None
         engine_id = self._get_engine_id(year, exam, p_id)
         pres = data.get('3_presentation', {})
         payload = data.get('4_solver_payload', {})
@@ -396,8 +597,8 @@ class ProblemFactory:
             query_v3 = """
                 INSERT INTO variants
                 (engine_id, mode, drill_level, drill_focus, narrative, variables_json,
-                 solution_json, correct_answer, theme_name, seed_key)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 solution_json, correct_answer, theme_name, image_url, seed_key)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """
             cursor.execute(query_v3, (
                 engine_id, mode, drill_level, drill_focus,
@@ -406,35 +607,17 @@ class ProblemFactory:
                 json.dumps(sol.get('step_by_step')),
                 str(payload.get('expected_t')),
                 meta_theme,
+                data.get('image_url'),
                 seed_key
             ))
             
-            # 3. Save to Legacy table (optional, for safety)
-            query_legacy = """
-                INSERT INTO generated_problems
-                (exam_year, exam_type, problem_num, narrative, variables,
-                 solution_steps, correct_answer, theme, seed_key, attempt_count, problem_mode, drill_level)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """
-            cursor.execute(query_legacy, (
-                year, exam, p_id,
-                pres.get('problem_statement'),
-                json.dumps(payload),
-                json.dumps(sol.get('step_by_step')),
-                payload.get('expected_t'),
-                meta_theme,
-                seed_key,
-                attempt_count,
-                mode,
-                drill_level
-            ))
             conn.commit()
 
     def get_random_variant(self, year, exam, p_id, mode=MODE_MOCK, drill_level=None):
         """DB에서 조건에 맞는 무작위 변형 문항 하나를 가져옵니다 (V3 Schema)."""
         engine_id = self._get_engine_id(year, exam, p_id)
         query = """
-            SELECT narrative, variables_json, solution_json, correct_answer, theme_name, seed_key
+            SELECT engine_id, narrative, variables_json, solution_json, correct_answer, theme_name, image_url, seed_key
             FROM variants
             WHERE engine_id = ? AND mode = ?
         """
@@ -466,10 +649,13 @@ class ProblemFactory:
                 pass
 
             return {
+                "engine_id": row["engine_id"],
                 "2_generation_metadata": {"problem_style": row["theme_name"]},
                 "3_presentation": {"problem_statement": row["narrative"]},
                 "4_solver_payload": json.loads(row["variables_json"]),
-                "5_solution": {"step_by_step": solution_steps}
+                "5_solution": {"step_by_step": solution_steps},
+                "image_url": row["image_url"],
+                "seed_key": row["seed_key"]
             }
 
 

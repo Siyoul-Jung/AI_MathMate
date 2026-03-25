@@ -129,5 +129,6 @@ class BaseTMaster(ABC):
             "explanation": explanation,
             "image": data.get('image', None),
             "logic_steps": logic_steps,
-            "strategy": data.get('strategy', None) 
+            "strategy": data.get('strategy', None),
+            "engine_id": data.get('engine_id')
         }

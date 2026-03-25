@@ -99,20 +99,23 @@ const ExamModule: React.FC<ExamModuleProps> = ({
       </div>
 
       <div className="relative">
-        <ProblemViewer
-          problem={examProblems[currentExamIndex]}
-          selectedAnswer={examAnswers[currentExamIndex] || null}
-          isCorrect={examSubmitted ? String(examAnswers[currentExamIndex]) === String(examProblems[currentExamIndex].answer) : null}
-          showExplanation={examSubmitted}
-          hintIndex={examSubmitted ? 99 : -1}
-          onAnswerClick={handleExamAnswer}
-          setHintIndex={() => {}}
-          setShowExplanation={() => {}}
-          themeColor={themeColor}
-          onDrillClick={category === 'AIME' ? (lvl) => handleDrillBridge?.(examProblems[currentExamIndex], lvl) : undefined}
-          band={examProblems[currentExamIndex].band}
-          metadata={amcMode === 'DRILL' ? examProblems[currentExamIndex].metadata : null}
-        />
+        {examProblems[currentExamIndex] && (
+          <ProblemViewer
+            problem={examProblems[currentExamIndex]}
+            selectedAnswer={examAnswers[currentExamIndex] || null}
+            isCorrect={examSubmitted ? String(examAnswers[currentExamIndex]) === String(examProblems[currentExamIndex].answer) : null}
+            showExplanation={examSubmitted}
+            hintIndex={examSubmitted ? 99 : -1}
+            onAnswerClick={handleExamAnswer}
+            setHintIndex={() => {}}
+            setShowExplanation={() => {}}
+            themeColor={themeColor}
+            onDrillClick={category === 'AIME' ? (lvl) => handleDrillBridge?.(examProblems[currentExamIndex], lvl) : undefined}
+            band={examProblems[currentExamIndex]?.band}
+            metadata={amcMode === 'DRILL' ? examProblems[currentExamIndex]?.metadata : null}
+          />
+        )}
+
         <Scratchpad isActive={showScratchpad} onClose={() => setShowScratchpad(false)} />
       </div>
 
