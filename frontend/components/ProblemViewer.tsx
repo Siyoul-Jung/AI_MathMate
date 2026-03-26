@@ -63,7 +63,8 @@ export default function ProblemViewer({
     if (url.startsWith('http')) return url;
     // Ensure 'images/' prefix for local backend static serving
     const cleanPath = url.replace(/^images\//, '');
-    return `http://localhost:8088/images/${cleanPath}`;
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8088';
+    return `${backendUrl}/images/${cleanPath}`;
   };
 
   const renderContent = (content: string) => {

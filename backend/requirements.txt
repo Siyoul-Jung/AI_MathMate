@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic-settings
+python-dotenv
+openai
+pytest
+flake8
+jinja2
+python-multipart
+matplotlib
+numpy
