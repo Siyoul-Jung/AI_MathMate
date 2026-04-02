@@ -67,6 +67,13 @@ A **Neuro-Symbolic Loop** designed to eliminate LLM hallucinations:
 3.  **Solver Execution**: Deterministic execution verifies answer integrity (001-999).
 4.  **Reflection**: Failures trigger an agentic feedback loop to refine the narrative until symbolic consistency is reached.
 
+### 3.3. Key Technical Modules (Knowledge Atoms)
+The orchestration of high-rigor problems is demonstrated in our [AIME High-Rigor Orchestrator](file:///c:/AI_MathMate/backend/engine_v2/scripts/aime_high_rigor_orchestrator.py), which utilizes the following atoms:
+*   **Extremal Principle Module**: Leverages the extremal principle to ensure the existence of combinatorial structures.
+*   **Roots of Unity Filter**: Applies algebraic filtering to extract specific sums of coefficients.
+*   **Symmetry Breaker**: Injects asymmetric prime constants (e.g., 683) to invalidate heuristic-based pattern matching.
+*   **Invariant Design**: Constructs properties that remain unchanged under a set of operations to define the core problem constraint.
+
 ## 4. Case Study: P11 Masterpiece Build
 
 | Category | V1 (Fixed Solver) | V2 (Heritage 90 Build) |

@@ -1,0 +1,468 @@
+[
+  {
+    "module_id": "algebra_vieta_formulas",
+    "domain": "algebra",
+    "name": "비에타의 공식",
+    "description": "다항식의 근과 계수 사이의 관계를 이용하여 문제 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2013,
+      2014
+    ]
+  },
+  {
+    "module_id": "nt_modular_arithmetic",
+    "domain": "number_theory",
+    "name": "합동식",
+    "description": "정수의 나눗셈과 나머지에 대한 성질을 이용하여 문제 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2013,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_constrained_arrangements",
+    "domain": "combinatorics",
+    "name": "제약 조건이 있는 배열 및 순열",
+    "description": "특정 제약 조건(예: 인접성, 위치, 원형) 하에 객체를 배열하거나 순열을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "algebra_kinematics_relative_motion",
+    "domain": "algebra",
+    "name": "운동학 (속도, 거리, 시간)",
+    "description": "상대 운동을 포함하여 속도, 거리, 시간 관련 문제 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2014
+    ]
+  },
+  {
+    "module_id": "nt_base_representation_digit_manipulation",
+    "domain": "number_theory",
+    "name": "진법 표현 및 숫자 조작",
+    "description": "다른 진법으로 표현된 숫자의 속성을 분석하고 자릿수를 조작 (회문, 반복 소수 포함).",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2013,
+      2014,
+      2015
+    ]
+  },
+  {
+    "module_id": "algebra_complex_numbers_general",
+    "domain": "algebra",
+    "name": "복소수 (일반 속성 및 시스템)",
+    "description": "복소수의 연산, 모듈러스, 편각 등 속성 분석 및 복소수 연립 방정식 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2014,
+      2016
+    ]
+  },
+  {
+    "module_id": "geometry_3d_solids_properties",
+    "domain": "geometry",
+    "name": "3D 입체 도형 (속성 및 계산)",
+    "description": "3D 입체 도형(예: 큐브, 피라미드, 원뿔)의 부피, 교차점, 각도(예: 이면각), 내접 구 등 관련 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_path_counting_grids_graphs",
+    "domain": "combinatorics",
+    "name": "경로 세기 (그리드 및 그래프)",
+    "description": "그리드 또는 그래프에서 특정 규칙을 따르는 경로의 수 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2014,
+      2016
+    ]
+  },
+  {
+    "module_id": "geometry_circles_tangents",
+    "domain": "geometry",
+    "name": "원과 접선",
+    "description": "여러 원과 접선, 현, 반지름 비율, 공통 접선, 공선성 등 관련 속성 문제 해결.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2014,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "algebra_logarithmic_equations_inequalities",
+    "domain": "algebra",
+    "name": "로그 방정식/부등식",
+    "description": "로그를 포함하는 방정식 및 부등식 해결, 종종 정수 제약 조건 포함.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2013
+    ]
+  },
+  {
+    "module_id": "nt_divisor_counting_properties",
+    "domain": "number_theory",
+    "name": "약수 개수 및 속성",
+    "description": "특정 속성을 가진 숫자의 약수 개수 계산 및 분석.",
+    "logic_depth": 3,
+    "source_years": [
+      2015
+    ]
+  },
+  {
+    "module_id": "algebra_sequences_arithmetic_geometric",
+    "domain": "algebra",
+    "name": "수열 (등차 및 등비)",
+    "description": "등차수열 및 등비수열의 속성, 항의 합, 변형 문제 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_probability_general",
+    "domain": "combinatorics",
+    "name": "확률 (일반)",
+    "description": "다양한 사건에 대한 확률 계산 (항아리 문제, 편향된 사건, 조건부 확률 포함).",
+    "logic_depth": 3,
+    "source_years": [
+      2014,
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "geometry_coordinate_geometry_general",
+    "domain": "geometry",
+    "name": "좌표 기하학 (일반)",
+    "description": "좌표 기하학을 사용하여 2D 및 3D 공간에서 도형의 속성 분석 (거리, 중선, 기울기 포함).",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2013,
+      2015
+    ]
+  },
+  {
+    "module_id": "algebra_functions_properties_recursive",
+    "domain": "algebra",
+    "name": "함수 속성 (재귀, 최적화)",
+    "description": "함수의 속성(정의역, 치역, 바닥/천장 함수 포함), 재귀적으로 정의된 함수 및 최적화 문제 분석.",
+    "logic_depth": 4,
+    "source_years": [
+      2013,
+      2014,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_burnsides_lemma_symmetry",
+    "domain": "combinatorics",
+    "name": "번사이드 보조정리 및 대칭",
+    "description": "대칭성을 고려한 고유한 배열 개수 계산 (번사이드 보조정리 활용).",
+    "logic_depth": 5,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "algebra_trigonometric_series_identities",
+    "domain": "algebra",
+    "name": "삼각 함수 급수 및 항등식",
+    "description": "삼각 함수를 포함하는 유한 또는 무한 급수의 합 계산 및 삼각 함수 항등식 적용.",
+    "logic_depth": 4,
+    "source_years": [
+      2013,
+      2014
+    ]
+  },
+  {
+    "module_id": "nt_diophantine_equations",
+    "domain": "number_theory",
+    "name": "디오판토스 방정식",
+    "description": "정수 해를 찾는 방정식 문제 해결, 종종 수론적 속성 포함.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2013
+    ]
+  },
+  {
+    "module_id": "geometry_area_properties_optimization",
+    "domain": "geometry",
+    "name": "면적 속성 및 최적화",
+    "description": "도형의 면적 계산 (분해, 최적화 포함).",
+    "logic_depth": 4,
+    "source_years": [
+      2013,
+      2014,
+      2015
+    ]
+  },
+  {
+    "module_id": "nt_perfect_powers_properties",
+    "domain": "number_theory",
+    "name": "완전 제곱/세제곱 속성",
+    "description": "완전 제곱수 및 완전 세제곱수의 속성 분석, 종종 거듭제곱의 차이와 관련.",
+    "logic_depth": 3,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "combinatorics_probability_expected_value",
+    "domain": "combinatorics",
+    "name": "확률 (기댓값)",
+    "description": "경로 또는 사건 시퀀스에 대한 기댓값 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2016
+    ]
+  },
+  {
+    "module_id": "nt_prime_factorization_properties",
+    "domain": "number_theory",
+    "name": "소인수분해 속성",
+    "description": "소인수분해 및 소인수 개수와 관련된 속성 분석.",
+    "logic_depth": 3,
+    "source_years": [
+      2016
+    ]
+  },
+  {
+    "module_id": "algebra_polynomial_roots_general",
+    "domain": "algebra",
+    "name": "다항식의 근 (실수 및 복소수)",
+    "description": "다항식의 실수 및 복소수 근의 속성 분석.",
+    "logic_depth": 3,
+    "source_years": [
+      2012,
+      2015
+    ]
+  },
+  {
+    "module_id": "combinatorics_recursive_counting",
+    "domain": "combinatorics",
+    "name": "재귀적 개수 세기",
+    "description": "재귀 관계를 사용하여 개수 세기 문제 해결.",
+    "logic_depth": 4,
+    "source_years": [
+      2012,
+      2014
+    ]
+  },
+  {
+    "module_id": "geometry_power_of_a_point",
+    "domain": "geometry",
+    "name": "방멱 정리",
+    "description": "원 기하학에서 방멱 정리 적용.",
+    "logic_depth": 4,
+    "source_years": [
+      2012
+    ]
+  },
+  {
+    "module_id": "nt_integer_properties_general",
+    "domain": "number_theory",
+    "name": "정수 속성 (일반)",
+    "description": "정수의 일반적인 속성 분석 및 나머지 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2015
+    ]
+  },
+  {
+    "module_id": "algebra_system_equations_real_numbers",
+    "domain": "algebra",
+    "name": "실수 연립 방정식",
+    "description": "실수 변수를 포함하는 연립 방정식 해결.",
+    "logic_depth": 3,
+    "source_years": [
+      2015,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_set_operations",
+    "domain": "combinatorics",
+    "name": "집합 연산",
+    "description": "집합 연산(예: 집합의 원소 차이)으로 인한 원소 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2012
+    ]
+  },
+  {
+    "module_id": "nt_arithmetic_sequences_properties",
+    "domain": "number_theory",
+    "name": "등차수열 속성",
+    "description": "정수 제약 조건이 있는 등차수열의 속성.",
+    "logic_depth": 3,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "combinatorics_tiling_counting",
+    "domain": "combinatorics",
+    "name": "타일링 개수 세기",
+    "description": "특정 제약 조건으로 영역을 타일링하는 방법 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "nt_sum_of_integers_properties",
+    "domain": "number_theory",
+    "name": "정수 합 속성",
+    "description": "정수의 합 및 모듈러 산술 속성 분석.",
+    "logic_depth": 3,
+    "source_years": [
+      2014,
+      2016
+    ]
+  },
+  {
+    "module_id": "combinatorics_graph_theory_distribution",
+    "domain": "combinatorics",
+    "name": "그래프 이론 분포",
+    "description": "네트워크 구조 내의 분포 또는 흐름 관련 문제.",
+    "logic_depth": 4,
+    "source_years": [
+      2012
+    ]
+  },
+  {
+    "module_id": "nt_perfect_squares_avoidance",
+    "domain": "number_theory",
+    "name": "완전 제곱수 회피",
+    "description": "완전 제곱수를 포함하지 않는 정수 시퀀스 찾기.",
+    "logic_depth": 3,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "geometry_cyclic_quadrilaterals",
+    "domain": "geometry",
+    "name": "원형 사각형",
+    "description": "원형 사각형의 속성 및 내접원과의 관계.",
+    "logic_depth": 3,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "nt_harmonic_mean_properties",
+    "domain": "number_theory",
+    "name": "조화 평균 속성",
+    "description": "정수의 조화 평균 속성 분석.",
+    "logic_depth": 3,
+    "source_years": [
+      2015
+    ]
+  },
+  {
+    "module_id": "combinatorics_constrained_strings",
+    "domain": "combinatorics",
+    "name": "제약 조건이 있는 문자열",
+    "description": "동일한 인접 문자에 대한 제약 조건이 있는 문자열 개수 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2015
+    ]
+  },
+  {
+    "module_id": "geometry_complex_numbers_geometric_shapes",
+    "domain": "geometry",
+    "name": "복소수의 기하학적 해석",
+    "description": "복소수를 사용하여 기하학적 도형을 표현하고 분석.",
+    "logic_depth": 4,
+    "source_years": [
+      2014
+    ]
+  },
+  {
+    "module_id": "geometry_circles_rolling_distance",
+    "domain": "geometry",
+    "name": "구르는 원",
+    "description": "구르는 원과 거리 계산 관련 문제.",
+    "logic_depth": 4,
+    "source_years": [
+      2014
+    ]
+  },
+  {
+    "module_id": "nt_grid_properties_odd_integers",
+    "domain": "number_theory",
+    "name": "그리드 속성 (홀수 정수)",
+    "description": "그리드 내의 홀수 정수 및 기하학적 선의 속성 분석.",
+    "logic_depth": 4,
+    "source_years": [
+      2016
+    ]
+  },
+  {
+    "module_id": "geometry_trapezoids_circles_tangents",
+    "domain": "geometry",
+    "name": "사다리꼴, 원, 접선",
+    "description": "복잡한 구성에서 사다리꼴, 원 및 접선의 속성.",
+    "logic_depth": 4,
+    "source_years": [
+      2014
+    ]
+  },
+  {
+    "module_id": "combinatorics_ordered_triples_counting",
+    "domain": "combinatorics",
+    "name": "순서 있는 세 쌍 세기",
+    "description": "특정 수론적 조건을 만족하는 순서 있는 세 쌍 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2013
+    ]
+  },
+  {
+    "module_id": "geometry_triangle_medians_altitudes",
+    "domain": "geometry",
+    "name": "삼각형의 중선 및 높이",
+    "description": "삼각형의 중선 및 높이와 관련 선분 속성.",
+    "logic_depth": 3,
+    "source_years": [
+      2014
+    ]
+  },
+  {
+    "module_id": "algebra_sequences_summation",
+    "domain": "algebra",
+    "name": "수열 (합산)",
+    "description": "수열의 항의 합 계산, 종종 실제 시나리오와 관련.",
+    "logic_depth": 3,
+    "source_years": [
+      2013
+    ]
+  }
+]

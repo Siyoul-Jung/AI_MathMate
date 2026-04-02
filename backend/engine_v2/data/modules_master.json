@@ -1,0 +1,712 @@
+{
+  "algebra": [
+    {
+      "module_id": "algebra_polynomials_vieta",
+      "name": "다항식과 근과 계수의 관계 (비에타 공식)",
+      "description": "다항식의 근과 계수 사이의 관계(비에타 공식), 대칭 다항식, 뉴턴 합 등을 활용하여 방정식의 해를 분석하고 관련 값을 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 9.25,
+      "tags": [
+        "polynomial",
+        "vieta",
+        "roots",
+        "symmetric_polynomial",
+        "newton_sums"
+      ]
+    },
+    {
+      "module_id": "algebra_sequences_series_recurrence",
+      "name": "수열, 급수 및 점화식",
+      "description": "등차수열, 등비수열, 점화식으로 정의된 수열의 일반항, 합, 주기성 등을 분석합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 8.5,
+      "tags": [
+        "sequence",
+        "series",
+        "recurrence",
+        "arithmetic_progression",
+        "geometric_progression"
+      ]
+    },
+    {
+      "module_id": "algebra_logarithms_exponents",
+      "name": "로그 및 지수 함수",
+      "description": "로그와 지수의 기본 성질, 밑변환 공식 등을 이용하여 방정식 및 부등식을 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 7.75,
+      "tags": [
+        "logarithm",
+        "exponent",
+        "equation"
+      ]
+    },
+    {
+      "module_id": "algebra_complex_numbers",
+      "name": "복소수와 드무아브르 정리",
+      "description": "복소수의 사칙연산, 켤레복소수, 절댓값, 편각, 드무아브르 정리를 활용하여 거듭제곱을 계산하고 방정식의 해를 구합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 7.25,
+      "tags": [
+        "complex_number",
+        "de_moivre",
+        "roots_of_unity",
+        "polar_form"
+      ]
+    },
+    {
+      "module_id": "algebra_systems_of_equations",
+      "name": "연립방정식",
+      "description": "선형 또는 비선형 연립방정식의 해를 구하며, 대칭성을 이용하거나 변수를 치환하여 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 6.0,
+      "tags": [
+        "system_of_equations",
+        "linear_algebra",
+        "non_linear_system"
+      ]
+    },
+    {
+      "module_id": "algebra_functions_and_properties",
+      "name": "함수와 그 성질",
+      "description": "함수 방정식, 함수의 주기성, 일대일 대응, 합성함수, 역함수 등 함수의 여러 성질을 분석하고 적용합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 5.25,
+      "tags": [
+        "function",
+        "functional_equation",
+        "periodicity",
+        "optimization"
+      ]
+    },
+    {
+      "module_id": "algebra_trigonometry",
+      "name": "삼각함수 항등식과 방정식",
+      "description": "삼각함수의 덧셈정리, 배각 공식 등 다양한 항등식을 활용하여 식을 변형하거나 삼각방정식을 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 5.0,
+      "tags": [
+        "trigonometry",
+        "identity",
+        "equation",
+        "summation"
+      ]
+    },
+    {
+      "module_id": "algebra_floor_ceiling_functions",
+      "name": "바닥 및 천장 함수 (정수 부분 함수)",
+      "description": "바닥(가우스), 천장, 소수 부분 함수의 정의와 성질을 이용하여 방정식이나 부등식을 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 4.75,
+      "tags": [
+        "floor_function",
+        "ceiling_function",
+        "integer_part",
+        "fractional_part"
+      ]
+    },
+    {
+      "module_id": "algebra_binomial_theorem",
+      "name": "이항정리",
+      "description": "이항정리를 이용하여 다항식을 전개하고 특정 항의 계수를 찾거나, 이항계수의 성질을 활용합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.5,
+      "tags": [
+        "binomial_theorem",
+        "combination",
+        "coefficient",
+        "pascal_triangle"
+      ]
+    },
+    {
+      "module_id": "algebra_kinematics",
+      "name": "운동학 (속도, 거리, 시간)",
+      "description": "속도, 거리, 시간 사이의 관계를 이용하여 상대 운동, 평균 속도 등 다양한 상황의 문제를 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.25,
+      "tags": [
+        "kinematics",
+        "speed",
+        "distance",
+        "time",
+        "relative_motion"
+      ]
+    },
+    {
+      "module_id": "algebra_absolute_value",
+      "name": "절댓값 함수와 방정식",
+      "description": "절댓값을 포함하는 함수를 구간별로 분석하거나 그래프를 이용하여 방정식 및 부등식의 해를 구합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 2.75,
+      "tags": [
+        "absolute_value",
+        "piecewise_function",
+        "inequality"
+      ]
+    },
+    {
+      "module_id": "algebra_inequalities",
+      "name": "대수 부등식과 최적화",
+      "description": "산술-기하 평균 부등식, 코시-슈바르츠 부등식 등을 활용하여 식의 최댓값 또는 최솟값을 구합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 2.5,
+      "tags": [
+        "inequality",
+        "am_gm",
+        "cauchy_schwarz",
+        "optimization"
+      ]
+    },
+    {
+      "module_id": "algebra_basic_manipulation",
+      "name": "기본 대수 조작",
+      "description": "유리식, 무리식, 비례식 등 복잡한 대수식을 간단히 하거나 특정 값을 계산합니다.",
+      "logic_depth": 2,
+      "daps_contribution": 2.25,
+      "tags": [
+        "algebraic_manipulation",
+        "ratio",
+        "radical",
+        "expression"
+      ]
+    },
+    {
+      "module_id": "algebra_statistics",
+      "name": "통계 (평균, 중앙값, 최빈값)",
+      "description": "주어진 데이터 집합의 평균, 중앙값, 최빈값 등 통계적 대푯값을 계산하고 그 의미를 분석합니다.",
+      "logic_depth": 2,
+      "daps_contribution": 1.75,
+      "tags": [
+        "statistics",
+        "mean",
+        "median",
+        "mode"
+      ]
+    },
+    {
+      "module_id": "algebra_matrices_determinants",
+      "name": "행렬과 행렬식",
+      "description": "행렬의 기본 연산과 행렬식의 성질을 이용하여 연립방정식을 풀거나 기하학적 변환을 분석합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 1.25,
+      "tags": [
+        "matrix",
+        "determinant",
+        "linear_algebra"
+      ]
+    }
+  ],
+  "geometry": [
+    {
+      "module_id": "geometry_triangle_properties",
+      "name": "삼각형의 기본 성질과 닮음",
+      "description": "삼각형의 합동, 닮음 조건, 중점 연결 정리, 피타고라스 정리 등을 활용하여 변의 길이나 각의 크기를 구합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 9.75,
+      "tags": [
+        "triangle",
+        "similarity",
+        "congruence",
+        "pythagorean_theorem"
+      ]
+    },
+    {
+      "module_id": "geometry_circle_theorems",
+      "name": "원의 성질 (현, 접선, 원주각)",
+      "description": "원주각과 중심각의 관계, 원에 내접하는 사각형의 성질, 접선과 현이 이루는 각 등 원의 기본 정리를 적용합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 9.5,
+      "tags": [
+        "circle",
+        "chord",
+        "tangent",
+        "inscribed_angle",
+        "cyclic"
+      ]
+    },
+    {
+      "module_id": "geometry_coordinate_analytic",
+      "name": "해석기하 (좌표평면)",
+      "description": "도형을 좌표평면에 표현하여 점과 직선 사이의 거리, 직선의 방정식, 넓이(신발끈 공식) 등을 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 8.0,
+      "tags": [
+        "coordinate_geometry",
+        "analytic_geometry",
+        "distance_formula",
+        "shoelace_formula"
+      ]
+    },
+    {
+      "module_id": "geometry_solid_3d",
+      "name": "3차원 입체도형",
+      "description": "다면체, 구, 원뿔 등 입체도형의 겉넓이와 부피를 계산하고, 공간좌표를 이용하여 점, 직선, 평면의 위치 관계를 분석합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 7.75,
+      "tags": [
+        "3d_geometry",
+        "solid_geometry",
+        "polyhedron",
+        "volume",
+        "surface_area"
+      ]
+    },
+    {
+      "module_id": "geometry_area_and_volume",
+      "name": "넓이 및 부피 계산과 비율",
+      "description": "다양한 도형의 넓이와 부피를 구하는 공식(헤론의 공식 등)을 적용하고, 닮음비를 이용하여 넓이비와 부피비를 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 6.5,
+      "tags": [
+        "area",
+        "volume",
+        "ratio",
+        "heron_formula"
+      ]
+    },
+    {
+      "module_id": "geometry_power_of_a_point",
+      "name": "방멱 정리와 근축",
+      "description": "원의 할선과 접선에 대한 방멱 정리를 적용하여 선분의 길이를 구하고, 두 원의 공통현 또는 근축의 성질을 이용합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 5.5,
+      "tags": [
+        "power_of_a_point",
+        "radical_axis",
+        "circle_geometry"
+      ]
+    },
+    {
+      "module_id": "geometry_triangle_centers",
+      "name": "삼각형의 오심 (내심, 외심, 무게중심 등)",
+      "description": "삼각형의 내심, 외심, 무게중심, 수심, 방심의 정의와 성질을 이해하고, 내접원과 외접원의 반지름을 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 5.25,
+      "tags": [
+        "triangle_centers",
+        "incenter",
+        "circumcenter",
+        "centroid",
+        "orthocenter"
+      ]
+    },
+    {
+      "module_id": "geometry_trigonometry_laws",
+      "name": "삼각법의 활용 (사인/코사인 법칙)",
+      "description": "사인 법칙과 코사인 법칙을 삼각형에 적용하여 변의 길이나 각의 크기를 구하고, 넓이를 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 5.0,
+      "tags": [
+        "trigonometry",
+        "law_of_sines",
+        "law_of_cosines",
+        "triangle_solving"
+      ]
+    },
+    {
+      "module_id": "geometry_polygons",
+      "name": "다각형의 성질",
+      "description": "사각형(평행사변형, 사다리꼴 등) 및 정다각형의 내각, 외각, 대각선의 성질을 분석하고 넓이를 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 4.75,
+      "tags": [
+        "polygon",
+        "quadrilateral",
+        "regular_polygon",
+        "angle_sum"
+      ]
+    },
+    {
+      "module_id": "geometry_circles_tangency",
+      "name": "접하는 원들의 기하학",
+      "description": "두 원이 내접 또는 외접할 때 중심거리, 공통접선의 길이 등 기하학적 관계를 분석합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 4.5,
+      "tags": [
+        "tangent_circles",
+        "common_tangent",
+        "circle_packing"
+      ]
+    },
+    {
+      "module_id": "geometry_cyclic_quadrilaterals",
+      "name": "원에 내접하는 사각형",
+      "description": "원에 내접하는 사각형의 성질(마주보는 각의 합이 180도)과 톨레미 정리(Ptolemy's Theorem)를 활용합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 3.75,
+      "tags": [
+        "cyclic_quadrilateral",
+        "ptolemy_theorem",
+        "brahmagupta"
+      ]
+    },
+    {
+      "module_id": "geometry_transformations",
+      "name": "기하 변환 (평행이동, 대칭, 회전)",
+      "description": "좌표평면에서 점이나 도형을 평행이동, 대칭이동, 회전이동 시켰을 때의 위치 변화를 분석합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.5,
+      "tags": [
+        "transformation",
+        "rotation",
+        "reflection",
+        "translation"
+      ]
+    },
+    {
+      "module_id": "geometry_angle_bisector_theorem",
+      "name": "각의 이등분선 정리",
+      "description": "삼각형의 내각 또는 외각의 이등분선에 대한 선분 길이의 비례 관계를 이용하여 문제를 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.0,
+      "tags": [
+        "angle_bisector_theorem",
+        "triangle",
+        "ratio"
+      ]
+    },
+    {
+      "module_id": "geometry_complex_numbers_in_geometry",
+      "name": "복소평면을 이용한 기하",
+      "description": "복소평면에서 점을 복소수로 표현하여 회전, 닮음 등 기하학적 변환을 대수적으로 해결합니다.",
+      "logic_depth": 5,
+      "daps_contribution": 2.75,
+      "tags": [
+        "complex_plane",
+        "geometric_interpretation",
+        "rotation"
+      ]
+    },
+    {
+      "module_id": "geometry_vectors",
+      "name": "벡터를 이용한 기하",
+      "description": "벡터의 덧셈, 뺄셈, 스칼라배, 내적을 이용하여 선분의 내분점, 무게중심 등을 표현하고 기하학적 관계를 증명합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 2.0,
+      "tags": [
+        "vector",
+        "dot_product",
+        "position_vector"
+      ]
+    },
+    {
+      "module_id": "geometry_locus",
+      "name": "자취의 방정식",
+      "description": "주어진 조건을 만족하는 점들이 그리는 도형(자취)의 방정식을 구하고 그 넓이나 길이를 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 1.5,
+      "tags": [
+        "locus",
+        "analytic_geometry",
+        "path"
+      ]
+    }
+  ],
+  "number_theory": [
+    {
+      "module_id": "nt_divisibility_and_primes",
+      "name": "약수, 배수와 소인수분해",
+      "description": "정수의 약수와 배수의 성질, 소인수분해의 유일성을 이용하여 약수의 개수와 합을 구하고 나눗셈 문제를 해결합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 9.5,
+      "tags": [
+        "divisibility",
+        "prime_factorization",
+        "divisor_function",
+        "gcd",
+        "lcm"
+      ]
+    },
+    {
+      "module_id": "nt_modular_arithmetic",
+      "name": "합동식과 모듈러 연산",
+      "description": "정수의 나머지에 대한 합동식을 다루고, 페르마 소정리, 오일러 정리 등을 활용하여 큰 수의 거듭제곱의 나머지를 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 8.75,
+      "tags": [
+        "modular_arithmetic",
+        "congruence",
+        "fermats_little_theorem",
+        "eulers_totient_theorem"
+      ]
+    },
+    {
+      "module_id": "nt_base_representation_and_digits",
+      "name": "진법과 자릿수 분석",
+      "description": "십진법이 아닌 다른 진법으로 수를 표현하고, 각 자릿수의 합이나 특정 패턴 등 자릿수와 관련된 성질을 분석합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 8.25,
+      "tags": [
+        "base_representation",
+        "number_base",
+        "digit_manipulation",
+        "palindrome"
+      ]
+    },
+    {
+      "module_id": "nt_diophantine_equations",
+      "name": "디오판토스 방정식 (정수해)",
+      "description": "방정식의 해를 정수 범위로 한정하여 찾는 문제로, 유클리드 호제법, 합동식, 인수분해 등을 이용하여 해를 구합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 6.25,
+      "tags": [
+        "diophantine_equation",
+        "integer_solution",
+        "linear_diophantine",
+        "pell_equation"
+      ]
+    },
+    {
+      "module_id": "nt_perfect_powers",
+      "name": "완전제곱수와 완전세제곱수",
+      "description": "수가 완전제곱수 또는 완전세제곱수가 될 조건을 분석하고, 제곱수의 나머지의 특징 등을 활용합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 4.5,
+      "tags": [
+        "perfect_square",
+        "perfect_cube",
+        "number_properties"
+      ]
+    },
+    {
+      "module_id": "nt_gcd_lcm",
+      "name": "최대공약수와 최소공배수",
+      "description": "유클리드 호제법을 이용하여 두 수의 최대공약수를 구하고, GCD와 LCM의 관계(ab = gcd(a,b)lcm(a,b))를 활용합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 4.0,
+      "tags": [
+        "gcd",
+        "lcm",
+        "euclidean_algorithm"
+      ]
+    },
+    {
+      "module_id": "nt_divisor_functions",
+      "name": "약수 함수 (개수와 합)",
+      "description": "자연수 n의 양의 약수의 개수(tau, d(n))와 양의 약수의 총합(sigma, σ(n))을 소인수분해를 통해 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.75,
+      "tags": [
+        "divisor_function",
+        "tau_function",
+        "sigma_function",
+        "number_of_divisors"
+      ]
+    },
+    {
+      "module_id": "nt_chinese_remainder_theorem",
+      "name": "중국인의 나머지 정리",
+      "description": "연립 합동식의 해를 구하는 중국인의 나머지 정리를 이해하고 적용합니다.",
+      "logic_depth": 5,
+      "daps_contribution": 2.5,
+      "tags": [
+        "chinese_remainder_theorem",
+        "crt",
+        "system_of_congruences"
+      ]
+    },
+    {
+      "module_id": "nt_frobenius_coin_problem",
+      "name": "프로베니우스 동전 문제",
+      "description": "서로소인 두 자연수 a, b에 대해 ax+by (x,y는 음이 아닌 정수) 꼴로 나타낼 수 없는 가장 큰 정수를 찾는 문제를 해결합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 1.75,
+      "tags": [
+        "frobenius_coin_problem",
+        "coin_problem",
+        "number_theory"
+      ]
+    },
+    {
+      "module_id": "nt_order_and_primitive_roots",
+      "name": "위수와 원시근",
+      "description": "모듈러 n에 대한 정수 a의 위수(order)를 찾고, 원시근의 존재성과 성질을 활용하여 지수 합동식을 해결합니다.",
+      "logic_depth": 5,
+      "daps_contribution": 1.5,
+      "tags": [
+        "order",
+        "primitive_root",
+        "modular_arithmetic"
+      ]
+    }
+  ],
+  "combinatorics": [
+    {
+      "module_id": "comb_basic_counting",
+      "name": "기본 경우의 수 (순열과 조합)",
+      "description": "합의 법칙, 곱의 법칙을 기반으로 순열, 조합, 중복순열, 중복조합을 이용하여 다양한 상황의 경우의 수를 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 10.0,
+      "tags": [
+        "counting",
+        "permutation",
+        "combination",
+        "casework"
+      ]
+    },
+    {
+      "module_id": "comb_probability",
+      "name": "확률 계산",
+      "description": "전체 경우의 수에 대한 특정 사건의 경우의 수의 비율로 확률을 계산하며, 조건부 확률과 독립 사건의 개념을 적용합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 8.5,
+      "tags": [
+        "probability",
+        "conditional_probability",
+        "events",
+        "counting"
+      ]
+    },
+    {
+      "module_id": "comb_constrained_arrangements",
+      "name": "제약 조건이 있는 배열",
+      "description": "특정 원소가 이웃하거나 이웃하지 않는 조건, 순서가 정해진 조건 등 다양한 제약 하에서의 순열 및 배열의 수를 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 6.75,
+      "tags": [
+        "constrained_permutation",
+        "arrangement",
+        "derangement"
+      ]
+    },
+    {
+      "module_id": "comb_recursion_dp",
+      "name": "재귀적 계산과 동적 계획법",
+      "description": "점화식을 세워 경우의 수를 구하거나, 동적 계획법(Dynamic Programming)을 이용하여 부분 문제의 해를 저장하고 전체 문제의 해를 구합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 6.0,
+      "tags": [
+        "recursion",
+        "dynamic_programming",
+        "recurrence_relation",
+        "counting"
+      ]
+    },
+    {
+      "module_id": "comb_path_counting",
+      "name": "경로 찾기",
+      "description": "격자(grid) 위에서 최단 경로의 수를 계산하거나, 그래프에서 특정 조건을 만족하는 경로의 수를 셉니다.",
+      "logic_depth": 4,
+      "daps_contribution": 5.0,
+      "tags": [
+        "path_counting",
+        "grid_walking",
+        "lattice_path",
+        "graph_theory"
+      ]
+    },
+    {
+      "module_id": "comb_set_theory_and_subsets",
+      "name": "집합론과 부분집합",
+      "description": "집합의 연산(합집합, 교집합, 여집합)을 이해하고, 특정 조건을 만족하는 부분집합의 개수를 계산합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 4.75,
+      "tags": [
+        "set_theory",
+        "subset",
+        "venn_diagram",
+        "power_set"
+      ]
+    },
+    {
+      "module_id": "comb_expected_value",
+      "name": "기댓값",
+      "description": "확률 변수가 가질 수 있는 값과 그 값에 해당하는 확률을 곱하여 모두 더한 기댓값을 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 3.5,
+      "tags": [
+        "expected_value",
+        "probability",
+        "random_variable"
+      ]
+    },
+    {
+      "module_id": "comb_inclusion_exclusion",
+      "name": "포함-배제의 원리",
+      "description": "여러 속성을 가진 집합의 원소 개수를 셀 때, 각 집합의 합에서 교집합을 빼고 더하는 과정을 반복하여 정확한 개수를 구합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.25,
+      "tags": [
+        "inclusion_exclusion_principle",
+        "counting",
+        "set_theory"
+      ]
+    },
+    {
+      "module_id": "comb_distributions_partitions",
+      "name": "분할과 분배 (별과 막대)",
+      "description": "동일한 물건을 서로 다른 상자에 나누어 담는 경우의 수(중복조합, 별과 막대 이론)나 자연수를 여러 자연수의 합으로 나타내는 경우(분할)를 셉니다.",
+      "logic_depth": 3,
+      "daps_contribution": 3.0,
+      "tags": [
+        "stars_and_bars",
+        "partition",
+        "distribution",
+        "integer_partition"
+      ]
+    },
+    {
+      "module_id": "comb_geometric_probability",
+      "name": "기하학적 확률",
+      "description": "전체 영역의 길이, 넓이, 부피에 대한 특정 조건을 만족하는 영역의 비율로 확률을 계산합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 2.75,
+      "tags": [
+        "geometric_probability",
+        "area",
+        "length",
+        "volume"
+      ]
+    },
+    {
+      "module_id": "comb_graph_theory",
+      "name": "그래프 이론 기초",
+      "description": "점(vertex)과 선(edge)으로 이루어진 그래프의 기본 용어(차수, 경로, 사이클)를 이해하고, 그래프 색칠 문제 등을 해결합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 2.5,
+      "tags": [
+        "graph_theory",
+        "vertex",
+        "edge",
+        "path",
+        "coloring"
+      ]
+    },
+    {
+      "module_id": "comb_pigeonhole_principle",
+      "name": "비둘기집 원리",
+      "description": "n+1개의 물건을 n개의 상자에 넣으면 적어도 하나의 상자에는 2개 이상의 물건이 들어있다는 원리를 이용하여 존재성을 증명합니다.",
+      "logic_depth": 3,
+      "daps_contribution": 2.0,
+      "tags": [
+        "pigeonhole_principle",
+        "proof",
+        "combinatorics"
+      ]
+    },
+    {
+      "module_id": "comb_symmetry_and_burnside",
+      "name": "대칭성을 이용한 계산 (번사이드 보조정리)",
+      "description": "회전이나 대칭을 고려했을 때 서로 같은 것을 하나로 취급하여 경우의 수를 세는 문제로, 번사이드 보조정리나 폴리아 열거 정리를 사용합니다.",
+      "logic_depth": 5,
+      "daps_contribution": 1.5,
+      "tags": [
+        "symmetry",
+        "burnsides_lemma",
+        "polya_enumeration",
+        "group_theory"
+      ]
+    },
+    {
+      "module_id": "comb_game_theory",
+      "name": "게임 이론",
+      "description": "두 사람이 번갈아 진행하는 게임에서 필승 전략이 존재하는지 분석하거나, 특정 상태가 이기는 상태인지 지는 상태인지 판별합니다.",
+      "logic_depth": 4,
+      "daps_contribution": 1.0,
+      "tags": [
+        "game_theory",
+        "winning_strategy",
+        "combinatorial_game"
+      ]
+    }
+  ]
+}

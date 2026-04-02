@@ -1,0 +1,1203 @@
+[
+  {
+    "module_id": "comb_counting_triangles_non_collinear",
+    "domain": "combinatorics",
+    "name": "비공선점 삼각형 개수 세기",
+    "description": "주어진 점들 중에서 삼각형을 형성하는 경우의 수를 계산하며, 동일 직선 상에 있는 점들로 인해 삼각형이 형성되지 않는 경우를 제외하는 기법.",
+    "logic_depth": 2,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_common_remainder_gcd",
+    "domain": "number_theory",
+    "name": "공통 나머지 최대공약수",
+    "description": "여러 정수를 나눴을 때 동일한 나머지를 갖는 제수를 찾는 문제. 차이들의 공약수를 활용.",
+    "logic_depth": 3,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_units_digit_sum_cyclicity",
+    "domain": "number_theory",
+    "name": "단위 숫자 합의 주기성",
+    "description": "자연수 합의 단위 숫자의 주기성을 이용하여 큰 합의 나머지를 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "geo_pyramid_volume_heron_pythagoras",
+    "domain": "geometry",
+    "name": "피라미드 부피 (헤론의 공식, 피타고라스)",
+    "description": "삼각뿔의 부피 계산 (밑면적 * 높이 / 3) 및 밑면 삼각형의 넓이를 헤론의 공식으로, 높이를 피타고라스 정리로 구함.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_base_conversion_system_equations",
+    "domain": "number_theory",
+    "name": "진법 변환 및 연립방정식",
+    "description": "다른 진법으로 표현된 숫자를 10진법으로 변환하고, 자릿수에 대한 연립방정식을 풀어 값을 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2017,
+      2018,
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_probability_inscribed_angles",
+    "domain": "geometry",
+    "name": "내접각 확률",
+    "description": "원에 내접하는 이등변 삼각형과 원 위에서 무작위로 선택된 두 점을 잇는 현이 삼각형과 교차할 확률 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_binomial_sum_pascal",
+    "domain": "combinatorics",
+    "name": "이항 계수 합 (파스칼 삼각형)",
+    "description": "이항 계수의 합 (파스칼 삼각형의 합)을 계산하고, 그 결과를 특정 수로 나눈 나머지를 구함.",
+    "logic_depth": 3,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "geo_probability_coordinate_angles",
+    "domain": "geometry",
+    "name": "좌표 기하학적 각도 확률",
+    "description": "좌표 평면에서 무작위로 선택된 점들로 이루어진 기하학적 조건(각도, 거리)을 만족하는 확률 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_recurrence_modular_divisibility",
+    "domain": "number_theory",
+    "name": "점화식 모듈러 나누기",
+    "description": "점화식으로 정의된 수열의 항이 특정 수의 배수가 되는 최소 인덱스를 모듈러 연산을 통해 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_permutations_median_casework",
+    "domain": "combinatorics",
+    "name": "순열 중앙값 경우의 수",
+    "description": "배열의 순열에서 행별 중앙값과 그 중앙값들의 중앙값을 계산하고, 특정 조건을 만족하는 순열의 수를 셈.",
+    "logic_depth": 5,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_product_free_subsets",
+    "domain": "combinatorics",
+    "name": "곱이 없는 부분집합",
+    "description": "주어진 집합에서 원소들의 곱이 다른 원소가 되지 않는 부분집합의 수를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_perfect_cubes_in_range",
+    "domain": "number_theory",
+    "name": "범위 내 완전 세제곱수",
+    "description": "주어진 길이의 구간 내에 항상 완전 세제곱수가 존재하도록 하는 최소 길이를 찾고, 이 값들의 합을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "alg_logarithm_equations",
+    "domain": "algebra",
+    "name": "로그 방정식",
+    "description": "로그의 성질을 이용하여 복잡한 로그 방정식을 풀고, 해의 나머지를 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "geo_equilateral_triangle_area_minimization",
+    "domain": "geometry",
+    "name": "정삼각형 면적 최소화",
+    "description": "직각삼각형의 각 변에 한 꼭짓점을 갖는 가장 작은 정삼각형의 넓이를 최소화하는 문제.",
+    "logic_depth": 5,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_isosceles_triangles_regular_polygon",
+    "domain": "combinatorics",
+    "name": "정다각형 이등변 삼각형",
+    "description": "정다각형의 꼭짓점을 이용해 만들 수 있는 이등변 삼각형의 수를 세고, 특정 조건을 만족하는 다각형의 변의 수를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_inclusion_exclusion_subsets",
+    "domain": "combinatorics",
+    "name": "포함-배제의 원리 (부분집합)",
+    "description": "포함-배제의 원리를 사용하여 특정 조건을 만족하지 않는 부분집합의 수를 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "comb_tournament_probability",
+    "domain": "combinatorics",
+    "name": "토너먼트 확률",
+    "description": "토너먼트 경기에서 각 팀의 승리 확률이 주어졌을 때, 특정 팀이 우승할 확률을 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "geo_voronoi_diagram_area_probability",
+    "domain": "geometry",
+    "name": "보로노이 다이어그램 면적 확률",
+    "description": "삼각형 내부의 무작위 점이 특정 꼭짓점에 더 가까울 확률을 보로노이 다이어그램(수직 이등분선)과 면적 계산을 통해 구함.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "nt_perfect_square_probability_dice",
+    "domain": "number_theory",
+    "name": "주사위 완전제곱수 확률",
+    "description": "주사위를 여러 번 굴렸을 때 나온 숫자들의 곱이 완전제곱수가 될 확률을 소인수분해와 경우의 수를 통해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_log_quadratic_single_solution",
+    "domain": "algebra",
+    "name": "로그 이차방정식 단일 해",
+    "description": "로그 방정식이 유일한 실근을 갖도록 하는 정수 매개변수 k의 값을 로그의 정의와 이차방정식의 판별식을 이용해 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "alg_complex_polynomial_roots_unity",
+    "domain": "algebra",
+    "name": "복소 다항식 단위근",
+    "description": "복소수, 특히 단위근의 성질을 이용한 다항식의 값 계산 및 모듈러 연산.",
+    "logic_depth": 5,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_divisor_function_k_pretty",
+    "domain": "number_theory",
+    "name": "약수 함수 k-pretty",
+    "description": "약수 함수(tau 함수)의 성질을 이용하여 k-pretty 숫자를 정의하고, 특정 조건을 만족하는 k-pretty 숫자들의 합을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_trigonometric_angle_properties",
+    "domain": "algebra",
+    "name": "삼각함수 각도 성질",
+    "description": "탄젠트 함수의 주기성과 각도 배수 관계를 이용하여 특정 조건을 만족하는 각도를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_circles_tangents_power_of_point",
+    "domain": "geometry",
+    "name": "원 접선 점의 거듭제곱",
+    "description": "원, 접선, 점의 거듭제곱 정리, 닮은 삼각형을 활용하여 원과 삼각형의 교차점 사이의 길이를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_progressive_sequences_divisibility_sum",
+    "domain": "number_theory",
+    "name": "진행 수열 나누기 합",
+    "description": "증가하고 각 항이 다음 항을 나누는 수열의 합이 특정 값과 같도록 하는 수열의 수를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_regular_polygon_area_partition",
+    "domain": "geometry",
+    "name": "정다각형 면적 분할",
+    "description": "정다각형과 원의 면적 분할 문제. 섹터와 삼각형의 면적 계산을 통해 특정 영역의 면적을 구함.",
+    "logic_depth": 4,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_frobenius_coin_problem",
+    "domain": "number_theory",
+    "name": "프로베니우스 동전 문제",
+    "description": "프로베니우스 동전 문제(Frobenius Coin Problem)를 이용하여 특정 금액을 만들 수 없는 가장 큰 금액을 찾고, 이를 만족하는 정수 n의 값을 결정.",
+    "logic_depth": 4,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_cyclic_quad_power_of_point",
+    "domain": "geometry",
+    "name": "순환 사각형 점의 거듭제곱",
+    "description": "직교하는 발을 포함하는 사각형의 순환성, 점의 거듭제곱 정리, 닮은 삼각형을 활용하여 길이의 곱을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2017,
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_finite_taylor_sum_integer_check",
+    "domain": "number_theory",
+    "name": "유한 테일러 합 정수 확인",
+    "description": "팩토리얼을 포함하는 유한 합이 정수가 되도록 하는 양의 정수 n의 값을 모듈러 연산을 통해 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2017
+    ]
+  },
+  {
+    "module_id": "alg_quadratic_integer_factorization",
+    "domain": "algebra",
+    "name": "이차식 정수 인수분해",
+    "description": "이차 다항식이 정수 계수를 갖는 두 개의 선형 인수로 인수분해될 조건을 판별식과 정수근의 성질을 이용해 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "comb_permutations_identical_items_probability",
+    "domain": "combinatorics",
+    "name": "동일 항목 순열 확률",
+    "description": "동일한 항목을 포함하는 순열에서 특정 조건을 만족하는 배열의 확률을 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "geo_isosceles_triangle_angle_relations",
+    "domain": "geometry",
+    "name": "이등변 삼각형 각도 관계",
+    "description": "이등변 삼각형에서 각 이등분선 정리, 닮은 삼각형, 코사인 법칙을 활용하여 길이 관계를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "alg_logarithm_quadratic_forms",
+    "domain": "algebra",
+    "name": "로그 이차 형식",
+    "description": "로그의 성질과 이차 형식을 이용하여 연립 방정식을 풀고, 가능한 모든 K 값의 곱을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "alg_complex_roots_unity_real_condition",
+    "domain": "algebra",
+    "name": "복소수 단위근 실수 조건",
+    "description": "단위근의 성질과 오일러 공식을 이용하여 복소수 표현식이 실수가 되는 조건을 찾고, 해당 복소수의 개수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "comb_isosceles_triangles_3d_prism",
+    "domain": "combinatorics",
+    "name": "3D 프리즘 이등변 삼각형",
+    "description": "정육각기둥의 꼭짓점을 이용해 만들 수 있는 이등변 삼각형의 수를 3D 공간에서 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "geo_equiangular_hexagon_inradius",
+    "domain": "geometry",
+    "name": "등각 육각형 내접원 반지름",
+    "description": "등각 육각형의 성질과 평행한 변의 관계를 이용하여 내접하는 가장 큰 원의 지름을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "comb_subset_sum_conditions",
+    "domain": "combinatorics",
+    "name": "부분집합 합 조건",
+    "description": "주어진 집합에서 특정 합 조건을 만족하는 4원소 부분집합의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "comb_graph_path_counting_recurrence",
+    "domain": "combinatorics",
+    "name": "그래프 경로 계산 점화식",
+    "description": "그래프에서 특정 규칙을 따르는 경로의 수를 점화식 또는 행렬 거듭제곱을 이용해 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "nt_modular_base_conversion_order",
+    "domain": "number_theory",
+    "name": "모듈러 진법 변환 순서",
+    "description": "특정 진법으로 표현된 숫자의 마지막 자릿수 조건과 오일러 파이 함수를 이용한 모듈러 연산.",
+    "logic_depth": 5,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "comb_subset_sum_modulo_probability",
+    "domain": "combinatorics",
+    "name": "부분집합 합 모듈러 확률",
+    "description": "부분집합 원소들의 합이 특정 수로 나누어떨어질 확률을 모듈러 연산과 생성 함수를 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "geo_incenter_area_minimization",
+    "domain": "geometry",
+    "name": "내심 면적 최소화",
+    "description": "삼각형의 내심과 각 이등분선의 성질을 이용하여 특정 삼각형의 면적을 최소화하는 문제.",
+    "logic_depth": 5,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "geo_cyclic_quad_area_diagonals",
+    "domain": "geometry",
+    "name": "순환 사각형 면적 대각선",
+    "description": "원에 내접하는 사각형의 넓이를 대각선과 그 사이 각도를 이용해 계산하고, 프톨레마이오스 정리 등을 활용.",
+    "logic_depth": 5,
+    "source_years": [
+      2018
+    ]
+  },
+  {
+    "module_id": "nt_sum_of_digits_arithmetic_series",
+    "domain": "number_theory",
+    "name": "자릿수 합 산술 수열",
+    "description": "`10^k - 1` 형태의 숫자들의 합에서 자릿수의 합을 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "comb_probability_distance_between_choices",
+    "domain": "combinatorics",
+    "name": "선택 간 거리 확률",
+    "description": "두 개의 무작위 선택된 숫자 사이의 거리가 특정 값 이상일 확률을 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_hexagon_area_right_triangle",
+    "domain": "geometry",
+    "name": "육각형 면적 직각삼각형",
+    "description": "직각삼각형 내부에 형성된 육각형의 면적을 헤론의 공식과 피타고라스 정리를 이용해 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "comb_permutations_substitutions_counting",
+    "domain": "combinatorics",
+    "name": "순열 교체 계산",
+    "description": "선수 교체 규칙을 따르는 순열의 수를 동적 계획법 또는 점화식을 이용해 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_logarithm_system_equations",
+    "domain": "algebra",
+    "name": "로그 연립방정식",
+    "description": "로그의 성질을 이용하여 미지수 b를 포함하는 연립 로그 방정식을 풀고, 유일한 실근 조건을 활용.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_similar_triangles_parallel_lines",
+    "domain": "geometry",
+    "name": "닮은 삼각형 평행선",
+    "description": "닮은 삼각형과 평행선의 성질을 이용하여 새로운 삼각형의 둘레를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_log_gcd_lcm_prime_factors",
+    "domain": "number_theory",
+    "name": "로그 GCD LCM 소인수",
+    "description": "로그 방정식과 GCD/LCM의 성질, 소인수분해를 이용하여 미지수의 소인수 개수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_trigonometric_power_identities",
+    "domain": "algebra",
+    "name": "삼각함수 거듭제곱 항등식",
+    "description": "삼각함수 항등식의 대수적 조작을 통해 고차 삼각함수 표현식의 값을 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_divisor_function_sum_condition",
+    "domain": "number_theory",
+    "name": "약수 함수 합 조건",
+    "description": "약수 함수의 성질을 이용하여 `tau(n) + tau(n+1) = 7` 조건을 만족하는 n을 찾고, 그 합을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_vieta_formulas_complex_polynomial",
+    "domain": "algebra",
+    "name": "비에타 공식 복소 다항식",
+    "description": "비에타의 공식을 복소수 다항식의 근에 적용하여 계수와 근의 관계를 이용해 특정 합을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_incenter_excircles_tangency",
+    "domain": "geometry",
+    "name": "내심 방심원 접선",
+    "description": "삼각형의 내심, 방심원, 원의 접선 관계를 이용하여 삼각형 둘레의 최소값을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "alg_complex_geometry_right_triangle",
+    "domain": "algebra",
+    "name": "복소수 기하학 직각삼각형",
+    "description": "복소수의 기하학적 해석(직각삼각형 조건)과 다항식 방정식을 이용하여 복소수 z의 실수부와 허수부를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_circumcircles_power_of_point_lengths",
+    "domain": "geometry",
+    "name": "외접원 점의 거듭제곱 길이",
+    "description": "외접원, 점의 거듭제곱 정리, 코사인 법칙, 각 추적을 활용하여 길이 관계를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_prime_factor_fermat_little",
+    "domain": "number_theory",
+    "name": "소수 인수 페르마 소정리",
+    "description": "페르마의 소정리와 원시근의 개념을 이용하여 특정 수의 소수 인수를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_circles_radical_axis_power_of_point",
+    "domain": "geometry",
+    "name": "원 근축 점의 거듭제곱",
+    "description": "원, 점의 거듭제곱 정리, 근축, 닮은 삼각형을 활용하여 길이 관계를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_congruent_triangles_intersection_area",
+    "domain": "geometry",
+    "name": "합동 삼각형 교차 면적",
+    "description": "합동 삼각형의 교차 영역 면적을 헤론의 공식과 좌표 기하학을 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "comb_frog_jumps_probability_recurrence",
+    "domain": "combinatorics",
+    "name": "개구리 점프 확률 점화식",
+    "description": "개구리의 무작위 점프 시퀀스에서 특정 지점을 통과할 확률을 점화식 또는 동적 계획법을 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "nt_system_equations_prime_factorization",
+    "domain": "number_theory",
+    "name": "연립방정식 소인수분해",
+    "description": "연립 방정식의 정수 해를 소인수분해와 경우의 수를 통해 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "comb_circular_permutations_constrained",
+    "domain": "combinatorics",
+    "name": "원형 순열 제약 조건",
+    "description": "원형 테이블에 특정 제약 조건(짝수 의자, 인접성)을 만족하며 사람들을 앉히는 경우의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2019
+    ]
+  },
+  {
+    "module_id": "geo_isosceles_triangle_angle_chasing",
+    "domain": "geometry",
+    "name": "이등변 삼각형 각도 추적",
+    "description": "이등변 삼각형의 성질을 이용하여 각도 관계를 추적하고 미지 각도를 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_logarithm_geometric_progression",
+    "domain": "algebra",
+    "name": "로그 등비수열",
+    "description": "로그의 성질과 등비수열의 정의를 이용하여 방정식을 풀고 미지수 x를 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_divisibility_sum_of_digits",
+    "domain": "number_theory",
+    "name": "나누기 자릿수 합",
+    "description": "숫자의 대수적 표현과 나누기 규칙을 이용하여 특정 조건을 만족하는 숫자들의 자릿수 합을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "comb_permutations_ordered_subsets",
+    "domain": "combinatorics",
+    "name": "순열 정렬된 부분집합",
+    "description": "순열에서 특정 조건을 만족하는 정렬된 부분집합의 수를 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_cones_sphere_intersection_maximization",
+    "domain": "geometry",
+    "name": "원뿔 구 교차 최대화",
+    "description": "원뿔의 교차 영역에 내접하는 구의 반지름을 좌표 기하학과 점과 직선 사이의 거리를 이용해 최대화.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "comb_binomial_committee_selection",
+    "domain": "combinatorics",
+    "name": "이항 위원회 선택",
+    "description": "이항 계수와 조합론적 항등식을 이용하여 특정 조건을 만족하는 위원회 구성의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_complex_geometric_series_path",
+    "domain": "geometry",
+    "name": "복소수 기하 수열 경로",
+    "description": "복소수와 등비수열의 합을 이용하여 기하학적 경로의 극한 지점 좌표를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_divisibility_probability_prime_factors",
+    "domain": "number_theory",
+    "name": "나누기 확률 소인수",
+    "description": "약수의 성질과 소인수분해를 이용하여 특정 나누기 조건을 만족하는 확률을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_divisibility_gcd_prime_powers",
+    "domain": "number_theory",
+    "name": "나누기 GCD 소수 거듭제곱",
+    "description": "GCD, 소인수분해, 모듈러 연산을 이용하여 특정 나누기 조건을 만족하는 m+n의 최소값을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_polynomial_roots_casework",
+    "domain": "algebra",
+    "name": "다항식 근 경우의 수",
+    "description": "다항식의 근과 비에타의 공식을 이용하여 특정 조건을 만족하는 정수 계수 삼중쌍의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_line_segment_integer_grid",
+    "domain": "geometry",
+    "name": "선분 정수 격자",
+    "description": "정수 격자에서 두 점을 잇는 선분이 특정 격자점의 내부를 통과하는 조건을 좌표 기하학과 부등식을 이용해 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_tangential_polygon_area_inradius",
+    "domain": "geometry",
+    "name": "접선 다각형 면적 내접원 반지름",
+    "description": "접선 다각형의 성질과 코사인 법칙을 이용하여 내접원을 갖는 오각형의 면적을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_floor_fractional_part_equations",
+    "domain": "algebra",
+    "name": "바닥 함수 소수 부분 방정식",
+    "description": "바닥 함수와 소수 부분 함수를 포함하는 방정식을 풀고, 해의 개수를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_orthocenter_circumcircle_tangent_area",
+    "domain": "geometry",
+    "name": "직교중심 외접원 접선 면적",
+    "description": "직교중심, 외접원, 접선의 성질, 점의 거듭제곱 정리를 활용하여 삼각형의 면적을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_prime_factorization_counting_pairs",
+    "domain": "number_theory",
+    "name": "소인수분해 쌍 계산",
+    "description": "소인수분해를 이용하여 특정 조건을 만족하는 양의 정수 쌍의 수를 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_probability_slope_inequality",
+    "domain": "geometry",
+    "name": "기울기 부등식 확률",
+    "description": "단위 정사각형 내부의 무작위 점과 고정된 점을 잇는 선분의 기울기가 특정 값보다 클 확률을 좌표 기하학과 부등식을 이용해 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_logarithm_change_of_base",
+    "domain": "algebra",
+    "name": "로그 밑변환",
+    "description": "로그의 밑변환 공식을 이용하여 로그 방정식을 풀고 미지수 x를 찾음.",
+    "logic_depth": 3,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_rotation_transformation_coordinates",
+    "domain": "geometry",
+    "name": "회전 변환 좌표",
+    "description": "좌표 평면에서 삼각형의 회전 변환을 분석하여 회전 중심과 각도를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_base_conversion_sum_of_digits_hex",
+    "domain": "number_theory",
+    "name": "진법 변환 자릿수 합 (16진법)",
+    "description": "여러 진법에서의 자릿수 합을 계산하고, 16진법 표현의 특정 조건을 만족하는 최소 n을 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_recurrence_sequence_periodicity",
+    "domain": "algebra",
+    "name": "점화식 수열 주기성",
+    "description": "점화식으로 정의된 수열의 주기성을 찾아 특정 항의 값을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_recursive_absolute_value_roots_sum",
+    "domain": "algebra",
+    "name": "재귀 절댓값 함수 근의 합",
+    "description": "재귀적으로 정의된 절댓값 함수에서 근의 합이 특정 값을 초과하는 최소 n을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "comb_permutations_constrained_seating",
+    "domain": "combinatorics",
+    "name": "순열 제약 조건 좌석 배치",
+    "description": "특정 제약 조건(인접성)을 만족하는 순열의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_sum_of_cubes_modular_remainder",
+    "domain": "number_theory",
+    "name": "세제곱 합 모듈러 나머지",
+    "description": "세제곱 합 공식과 모듈러 연산을 이용하여 특정 나머지를 갖는 정수 n의 합을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_polynomial_roots_vieta_system",
+    "domain": "algebra",
+    "name": "다항식 근 비에타 연립방정식",
+    "description": "다항식의 근과 비에타의 공식을 이용하여 연립 방정식을 풀고 미지수 R(0)의 값을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "nt_modular_exponentiation_order_crt",
+    "domain": "number_theory",
+    "name": "모듈러 지수화 순서 CRT",
+    "description": "오일러 파이 함수, 중국인의 나머지 정리, 원시근의 개념을 이용하여 합동식의 최소 해를 찾고 약수의 개수를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_angle_bisector_perpendicular_area",
+    "domain": "geometry",
+    "name": "각 이등분선 수직 면적",
+    "description": "각 이등분선 정리, 수직 이등분선, 외접원, 각 추적을 활용하여 삼각형의 면적을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "alg_polynomial_composition_roots_vieta",
+    "domain": "algebra",
+    "name": "다항식 합성 근 비에타",
+    "description": "다항식 합성의 근과 비에타의 공식을 이용하여 복소수 해의 특정 표현식의 값을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "geo_circumcircle_tangents_cyclic_quad",
+    "domain": "geometry",
+    "name": "외접원 접선 순환 사각형",
+    "description": "직교중심, 외접원, 접선의 성질, 순환 사각형의 성질을 활용하여 길이 관계를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2020
+    ]
+  },
+  {
+    "module_id": "comb_conditional_probability_markov",
+    "domain": "combinatorics",
+    "name": "조건부 확률 마르코프 체인",
+    "description": "조건부 확률과 마르코프 체인(간단한 형태)을 이용하여 특정 결과가 나올 확률을 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_rectangle_intersection_area_coordinates",
+    "domain": "geometry",
+    "name": "직사각형 교차 면적 좌표",
+    "description": "두 직사각형의 교차 영역 면적을 좌표 기하학을 이용해 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_difference_of_powers_of_two",
+    "domain": "number_theory",
+    "name": "2의 거듭제곱 차이",
+    "description": "2의 거듭제곱의 차이로 표현될 수 있는 양의 정수의 개수를 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "comb_integer_partitions_constrained",
+    "domain": "combinatorics",
+    "name": "정수 분할 제약 조건",
+    "description": "정수 분할 문제에서 특정 제약 조건(비어 있지 않음, 순서)을 만족하는 경우의 수를 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_arithmetic_sequence_quadratic_equations",
+    "domain": "algebra",
+    "name": "등차수열 이차방정식",
+    "description": "등차수열의 성질과 이차 방정식을 이용하여 특정 조건을 만족하는 수열의 항을 찾고 그 합을 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_3d_distance_cube_coordinates",
+    "domain": "geometry",
+    "name": "3D 거리 정육면체 좌표",
+    "description": "3D 좌표 기하학에서 정육면체 내의 점과 꼭짓점 사이의 거리 공식을 이용하여 미지 길이를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_trigonometric_max_value_equations",
+    "domain": "algebra",
+    "name": "삼각함수 최대값 방정식",
+    "description": "사인 함수의 최대값 성질을 이용하여 삼각 방정식을 풀고, 조건을 만족하는 정수 쌍의 수를 계산.",
+    "logic_depth": 3,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_absolute_value_graphical_roots",
+    "domain": "algebra",
+    "name": "절댓값 그래프 해",
+    "description": "절댓값 방정식을 함수의 그래프 분석을 통해 해의 개수를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_isosceles_trapezoid_area_distance",
+    "domain": "geometry",
+    "name": "이등변 사다리꼴 면적 거리",
+    "description": "이등변 사다리꼴의 면적을 점과 직선 사이의 거리, 닮은 삼각형을 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_rational_sequence_recurrence_fractions",
+    "domain": "number_theory",
+    "name": "유리수 수열 점화식 분수",
+    "description": "유리수 수열의 점화식과 분수의 성질을 이용하여 특정 형태의 유리수를 찾는 문제.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_cyclic_quad_pedal_quadrilateral",
+    "domain": "geometry",
+    "name": "순환 사각형 수족 사각형",
+    "description": "순환 사각형과 수선의 발로 이루어진 사각형의 둘레를 닮은 삼각형과 기하학적 성질을 이용해 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "comb_markov_expected_value_graph",
+    "domain": "combinatorics",
+    "name": "마르코프 기대값 그래프",
+    "description": "마르코프 체인과 그래프 이론을 이용하여 무작위 보행의 기대값을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_circles_radical_axis_tangency_distance",
+    "domain": "geometry",
+    "name": "원 근축 접선 거리",
+    "description": "원, 근축, 접선의 성질, 점의 거듭제곱 정리를 활용하여 원의 중심 사이의 거리를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_divisor_sum_modular_prime_factors",
+    "domain": "number_theory",
+    "name": "약수 합 모듈러 소인수",
+    "description": "약수 합 함수와 모듈러 연산을 이용하여 특정 조건을 만족하는 n의 소인수 합을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_parabola_intersection_cyclic_points",
+    "domain": "algebra",
+    "name": "포물선 교차 순환점",
+    "description": "포물선의 교점과 원의 성질을 이용하여 특정 조건을 만족하는 정수 k의 범위를 찾고 그 합을 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_palindromes_arithmetic_mean",
+    "domain": "number_theory",
+    "name": "회문 산술 평균",
+    "description": "세 자리 회문(palindrome)의 산술 평균을 계산.",
+    "logic_depth": 2,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_equilateral_similar_triangles_area_ratio",
+    "domain": "geometry",
+    "name": "정삼각형 닮은 삼각형 면적 비율",
+    "description": "정삼각형, 평행선, 닮은 삼각형의 성질과 면적 비율을 이용하여 길이 관계를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "comb_permutations_sum_products_modulo",
+    "domain": "combinatorics",
+    "name": "순열 곱의 합 모듈러",
+    "description": "순열에서 원소들의 곱의 합이 특정 수로 나누어떨어질 조건을 모듈러 연산을 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_polynomial_common_complex_root_vieta",
+    "domain": "algebra",
+    "name": "다항식 공통 복소수 근 비에타",
+    "description": "다항식의 근과 비에타의 공식을 이용하여 공통 복소수 근의 실수부와 허수부를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_triangle_area_obtuse_congruence",
+    "domain": "geometry",
+    "name": "삼각형 면적 둔각 합동",
+    "description": "삼각형의 면적 공식, 코사인 법칙, 둔각 삼각형 조건을 이용하여 특정 조건을 만족하는 면적 s의 범위를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "comb_set_operations_equations",
+    "domain": "combinatorics",
+    "name": "집합 연산 방정식",
+    "description": "집합 연산의 성질을 이용하여 집합 크기에 대한 방정식을 풀고, 조건을 만족하는 순서쌍의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_vieta_newton_sums_symmetric_polynomials",
+    "domain": "algebra",
+    "name": "비에타 뉴턴 합 대칭 다항식",
+    "description": "비에타의 공식과 뉴턴의 합을 이용하여 기본 대칭 다항식의 값을 계산하고, 제곱의 합을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "comb_random_walk_cube_recurrence_probability",
+    "domain": "combinatorics",
+    "name": "정육면체 무작위 보행 확률 점화식",
+    "description": "정육면체 그래프에서 무작위 보행의 확률을 점화식을 이용해 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_gcd_powers_of_two",
+    "domain": "number_theory",
+    "name": "GCD 2의 거듭제곱",
+    "description": "`2^a +/- 1` 형태의 숫자들의 GCD 성질을 이용하여 특정 조건을 만족하는 정수 쌍의 수를 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_3d_spheres_planes_tangency_distance",
+    "domain": "geometry",
+    "name": "3D 구 평면 접선 거리",
+    "description": "3D 공간에서 구와 평면의 접선 관계 및 점과 직선 사이의 거리를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_logic_deduction_divisibility_consecutive",
+    "domain": "number_theory",
+    "name": "논리 추론 나누기 연속",
+    "description": "논리적 추론과 정수의 성질(연속성, 나누기)을 이용하여 특정 조건을 만족하는 집합의 원소를 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_quadrilateral_area_diagonals_angle",
+    "domain": "geometry",
+    "name": "사각형 면적 대각선 각도",
+    "description": "볼록 사각형의 면적과 대각선 사이의 각도 관계를 코사인 법칙과 면적 공식을 이용해 계산.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "nt_modular_exponentiation_crt",
+    "domain": "number_theory",
+    "name": "모듈러 지수화 CRT",
+    "description": "오일러 파이 함수와 중국인의 나머지 정리를 이용하여 합동식의 최소 해를 찾음.",
+    "logic_depth": 4,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "geo_circumcenter_centroid_angle_chasing",
+    "domain": "geometry",
+    "name": "외심 무게중심 각도 추적",
+    "description": "외심, 무게중심, 접선, 수직선의 성질과 각 추적을 활용하여 삼각형의 각도를 계산.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  },
+  {
+    "module_id": "alg_recursive_functions_integer_sqrt",
+    "domain": "algebra",
+    "name": "재귀 함수 정수 제곱근",
+    "description": "재귀적으로 정의된 함수에서 정수 제곱근을 포함하는 조건을 만족하는 공통 값을 찾음.",
+    "logic_depth": 5,
+    "source_years": [
+      2021
+    ]
+  }
+]

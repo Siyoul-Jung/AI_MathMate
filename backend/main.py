@@ -10,7 +10,7 @@ backend_dir = os.path.dirname(os.path.abspath(__file__))
 if backend_dir not in sys.path:
     sys.path.append(backend_dir)
 
-from app.api.v1.endpoints import problems
+from app.api.v2.endpoints import synthesis
 from app.core.config import settings
 
 # Initialize FastAPI with professional metadata for Swagger UI
@@ -27,7 +27,7 @@ and leverages LLMs for narrative weaving.
 * **Problem Verification**: Zero-hallucination verification using symbolic math.
 """,
     version=settings.VERSION,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    openapi_url=f"/api/v2/openapi.json",
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -65,17 +65,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files to serve generated problem illustrations
-images_path = os.path.join(backend_dir, 'amc_engine', 'images')
+# Mount static files to serve generated problem illustrations (Heritage 90)
+images_path = os.path.join(backend_dir, 'images')
 if not os.path.exists(images_path):
     os.makedirs(images_path)
 app.mount("/images", StaticFiles(directory=images_path), name="images")
 
-# Register API routers with descriptive tags
+# Register API V2 - Heritage 90 Synthesis Engine
 app.include_router(
-    problems.router, 
-    prefix="/api", 
-    tags=["AIME Problem Engine"]
+    synthesis.router, 
+    prefix="/api/v2", 
+    tags=["AIME Heritage 90 Synthesis"]
 )
 
 @app.get("/", tags=["Health Check"])
@@ -87,4 +87,6 @@ if __name__ == "__main__":
     import uvicorn
     # Log startup message
     print(f"Starting {settings.PROJECT_NAME} API at http://0.0.0.0:8088")
-    uvicorn.run("main:app", host="0.0.0.0", port=8088, reload=True)
+    # Using the app object directly and disabling reload to avoid Windows subprocess/path issues
+    print("Finishing server startup...")
+    uvicorn.run(app, host="0.0.0.0", port=8089)

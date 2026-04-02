@@ -1,0 +1,490 @@
+[
+  {
+    "module_id": "algebra_logarithmic_equations",
+    "domain": "algebra",
+    "name": "Logarithmic Equations and Properties",
+    "description": "Solving equations and systems of equations involving logarithms, using properties like change of base, product/quotient/power rules.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1984,
+      1988
+    ]
+  },
+  {
+    "module_id": "algebra_absolute_value_analysis",
+    "domain": "algebra",
+    "name": "Absolute Value Functions and Inequalities",
+    "description": "Analyzing functions and solving inequalities involving absolute values, often requiring piecewise definitions or minimization/maximization.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1988
+    ]
+  },
+  {
+    "module_id": "algebra_polynomial_roots_vieta_symmetric",
+    "domain": "algebra",
+    "name": "Polynomial Roots, Vieta's Formulas, and Symmetric Polynomials",
+    "description": "Relating polynomial coefficients to sums/products of roots (Vieta's formulas) and using symmetric polynomial identities, especially with complex numbers.",
+    "logic_depth": 4,
+    "source_years": [
+      1983
+    ]
+  },
+  {
+    "module_id": "geometry_circle_properties",
+    "domain": "geometry",
+    "name": "Circle Properties (Chords, Tangents, Distances, Intersections)",
+    "description": "Problems involving various properties of circles, including chords, tangents, radii, distances from points to the center, and intersections.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1984,
+      1985
+    ]
+  },
+  {
+    "module_id": "number_theory_sequences_and_modular_arithmetic",
+    "domain": "number_theory",
+    "name": "Sequences and Modular Arithmetic",
+    "description": "Analyzing sequences defined by recurrence relations, finding terms, sums, or remainders using modular arithmetic. Includes properties of powers within sequences.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1986
+    ]
+  },
+  {
+    "module_id": "combinatorics_probability_counting",
+    "domain": "combinatorics",
+    "name": "Probability and Counting Techniques",
+    "description": "Calculating probabilities using combinations, permutations, or other counting methods, often with specific conditions or for biased events.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1988,
+      1989
+    ]
+  },
+  {
+    "module_id": "number_theory_digit_and_base_representation",
+    "domain": "number_theory",
+    "name": "Digit and Base Representation Analysis",
+    "description": "Problems involving properties of digits of numbers, numbers in different bases, counting numbers with specific digit patterns, or digit manipulation.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1984,
+      1986,
+      1988,
+      1989
+    ]
+  },
+  {
+    "module_id": "geometry_volume_calculation",
+    "domain": "geometry",
+    "name": "Volume Calculation of Geometric Solids",
+    "description": "Calculating volumes of various 3D geometric solids, including cones, polyhedra, and solids formed by folding 2D shapes.",
+    "logic_depth": 4,
+    "source_years": [
+      1983,
+      1985
+    ]
+  },
+  {
+    "module_id": "algebra_trigonometric_functions_analysis",
+    "domain": "algebra",
+    "name": "Trigonometric Functions Analysis",
+    "description": "Analyzing and minimizing/maximizing expressions involving trigonometric functions, or relating trigonometric ratios to geometric properties.",
+    "logic_depth": 3,
+    "source_years": [
+      1983,
+      1989
+    ]
+  },
+  {
+    "module_id": "geometry_triangle_area_and_properties",
+    "domain": "geometry",
+    "name": "Triangle Area and Geometric Properties",
+    "description": "Calculating areas of triangles, often involving specific points (e.g., interior points, midpoints), parallel lines, altitudes, or segment lengths.",
+    "logic_depth": 3,
+    "source_years": [
+      1984,
+      1985,
+      1986,
+      1988,
+      1989
+    ]
+  },
+  {
+    "module_id": "algebra_arithmetic_progression",
+    "domain": "algebra",
+    "name": "Arithmetic Progression Sums",
+    "description": "Calculating sums of terms in an arithmetic progression.",
+    "logic_depth": 2,
+    "source_years": [
+      1984
+    ]
+  },
+  {
+    "module_id": "algebra_system_of_equations",
+    "domain": "algebra",
+    "name": "System of Equations (Linear and Non-linear)",
+    "description": "Solving systems of linear or non-linear equations, including large systems.",
+    "logic_depth": 3,
+    "source_years": [
+      1984,
+      1986,
+      1989
+    ]
+  },
+  {
+    "module_id": "algebra_piecewise_functions",
+    "domain": "algebra",
+    "name": "Piecewise Functions",
+    "description": "Evaluating and analyzing functions defined by different rules over different intervals.",
+    "logic_depth": 2,
+    "source_years": [
+      1984
+    ]
+  },
+  {
+    "module_id": "algebra_complex_numbers_general",
+    "domain": "algebra",
+    "name": "Complex Numbers (General Properties)",
+    "description": "Problems involving general properties of complex numbers, including roots of unity, arguments, and integer constraints.",
+    "logic_depth": 4,
+    "source_years": [
+      1984,
+      1985
+    ]
+  },
+  {
+    "module_id": "combinatorics_random_walks_graphs",
+    "domain": "combinatorics",
+    "name": "Random Walks on Graphs",
+    "description": "Calculating probabilities for paths on a graph (e.g., vertices of a tetrahedron) with random choices at each step.",
+    "logic_depth": 4,
+    "source_years": [
+      1985
+    ]
+  },
+  {
+    "module_id": "number_theory_greatest_integer_function",
+    "domain": "number_theory",
+    "name": "Greatest Integer Function",
+    "description": "Evaluating expressions involving the greatest integer function (floor function).",
+    "logic_depth": 3,
+    "source_years": [
+      1985
+    ]
+  },
+  {
+    "module_id": "geometry_ellipse_properties",
+    "domain": "geometry",
+    "name": "Ellipse Properties (Foci, Tangents, Axes)",
+    "description": "Problems involving properties of ellipses, including foci, tangents, and lengths of major/minor axes.",
+    "logic_depth": 3,
+    "source_years": [
+      1985
+    ]
+  },
+  {
+    "module_id": "number_theory_integer_approximation_error",
+    "domain": "number_theory",
+    "name": "Integer Approximation and Error Minimization",
+    "description": "Finding integer approximations to numbers to minimize maximum error.",
+    "logic_depth": 4,
+    "source_years": [
+      1985
+    ]
+  },
+  {
+    "module_id": "geometry_regular_polygon_properties",
+    "domain": "geometry",
+    "name": "Regular Polygon Properties",
+    "description": "Problems involving properties of regular polygons, including angles, vertices, and inscribed/circumscribed shapes.",
+    "logic_depth": 3,
+    "source_years": [
+      1986,
+      1987
+    ]
+  },
+  {
+    "module_id": "number_theory_sum_error_detection",
+    "domain": "number_theory",
+    "name": "Sums with Error Detection",
+    "description": "Problems involving sums of sequences where an error (e.g., a term added twice) needs to be identified.",
+    "logic_depth": 3,
+    "source_years": [
+      1986
+    ]
+  },
+  {
+    "module_id": "algebra_logarithms_divisors",
+    "domain": "algebra",
+    "name": "Sum of Logarithms of Divisors",
+    "description": "Calculating sums of logarithms of proper divisors of a number.",
+    "logic_depth": 3,
+    "source_years": [
+      1986
+    ]
+  },
+  {
+    "module_id": "algebra_polynomial_properties",
+    "domain": "algebra",
+    "name": "Polynomial Properties (Coefficients, Factors, Roots)",
+    "description": "Determining coefficients, factors, and integer solutions for polynomials given their form and properties.",
+    "logic_depth": 3,
+    "source_years": [
+      1986,
+      1988
+    ]
+  },
+  {
+    "module_id": "combinatorics_coin_toss_subsequences",
+    "domain": "combinatorics",
+    "name": "Coin Toss Subsequences",
+    "description": "Counting sequences of coin tosses with specific patterns of subsequences (e.g., HH, HT, TH, TT).",
+    "logic_depth": 4,
+    "source_years": [
+      1986
+    ]
+  },
+  {
+    "module_id": "number_theory_difference_of_squares",
+    "domain": "number_theory",
+    "name": "Difference of Squares",
+    "description": "Expressing integers as the difference of two squares.",
+    "logic_depth": 2,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "combinatorics_ascending_integers",
+    "domain": "combinatorics",
+    "name": "Counting Ascending Integers",
+    "description": "Counting integers where each digit is less than the digit to its right.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "algebra_ratio_problems",
+    "domain": "algebra",
+    "name": "Ratio Problems",
+    "description": "Solving problems involving ratios and fractions, often in a context of changes over time.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "combinatorics_pascals_triangle_ratios",
+    "domain": "combinatorics",
+    "name": "Pascal's Triangle Entry Ratios",
+    "description": "Finding rows in Pascal's triangle where consecutive entries have a specific ratio.",
+    "logic_depth": 4,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "number_theory_proper_divisors",
+    "domain": "number_theory",
+    "name": "Proper Divisors and 'Nice' Numbers",
+    "description": "Problems involving proper divisors of integers and defining numbers based on properties of their proper divisors.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "number_theory_unique_integer_inequalities",
+    "domain": "number_theory",
+    "name": "Unique Integer from Inequalities",
+    "description": "Finding an integer that is uniquely determined by a set of inequalities.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "number_theory_cube_root_properties",
+    "domain": "number_theory",
+    "name": "Cube Root Properties",
+    "description": "Finding integers based on properties of their cube roots.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "combinatorics_bubble_pass_probability",
+    "domain": "combinatorics",
+    "name": "Bubble Pass Probability",
+    "description": "Calculating probabilities related to the outcome of a 'bubble pass' sorting algorithm on a sequence.",
+    "logic_depth": 4,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "geometry_inscribed_squares_area",
+    "domain": "geometry",
+    "name": "Inscribed Squares and Area",
+    "description": "Properties of squares inscribed in right triangles and their areas.",
+    "logic_depth": 3,
+    "source_years": [
+      1987
+    ]
+  },
+  {
+    "module_id": "combinatorics_constrained_arrangements",
+    "domain": "combinatorics",
+    "name": "Constrained Arrangements and Permutations",
+    "description": "Counting permutations or arrangements of objects under specific constraints (e.g., lock combinations, typing orders).",
+    "logic_depth": 4,
+    "source_years": [
+      1988
+    ]
+  },
+  {
+    "module_id": "algebra_functional_equations",
+    "domain": "algebra",
+    "name": "Functional Equations",
+    "description": "Solving problems involving functions defined by a relation, often on ordered pairs, and finding properties of these functions or related polynomial roots.",
+    "logic_depth": 4,
+    "source_years": [
+      1984,
+      1988
+    ]
+  },
+  {
+    "module_id": "geometry_graph_reflection",
+    "domain": "geometry",
+    "name": "Graph Reflection",
+    "description": "Analyzing reflections of graphs across lines and finding properties of the resulting equations.",
+    "logic_depth": 3,
+    "source_years": [
+      1988
+    ]
+  },
+  {
+    "module_id": "geometry_convex_polyhedra_segments",
+    "domain": "geometry",
+    "name": "Convex Polyhedra and Interior Segments",
+    "description": "Counting segments joining vertices of a polyhedron that lie in its interior.",
+    "logic_depth": 4,
+    "source_years": [
+      1988
+    ]
+  },
+  {
+    "module_id": "algebra_complex_numbers_mean_line",
+    "domain": "algebra",
+    "name": "Mean Line in Complex Plane",
+    "description": "Properties of a 'mean line' for complex numbers, including y-intercept and slope.",
+    "logic_depth": 4,
+    "source_years": [
+      1988
+    ]
+  },
+  {
+    "module_id": "combinatorics_convex_polygons_on_circle",
+    "domain": "combinatorics",
+    "name": "Counting Convex Polygons on a Circle",
+    "description": "Counting the number of distinct convex polygons that can be formed using a subset of points on a circle.",
+    "logic_depth": 3,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "number_theory_consecutive_integers_powers",
+    "domain": "number_theory",
+    "name": "Consecutive Integers and Perfect Powers",
+    "description": "Finding sets of consecutive integers that satisfy conditions related to being perfect squares or cubes.",
+    "logic_depth": 4,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "geometry_relative_motion_meeting_point",
+    "domain": "geometry",
+    "name": "Relative Motion and Meeting Points",
+    "description": "Problems involving objects moving at different speeds and directions, finding their meeting points or distances traveled.",
+    "logic_depth": 4,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "number_theory_arithmetic_series_squares",
+    "domain": "number_theory",
+    "name": "Arithmetic Series and Squares",
+    "description": "Finding integers such that adding them to a set of numbers results in squares of consecutive terms of an arithmetic series.",
+    "logic_depth": 4,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "number_theory_eulers_conjecture",
+    "domain": "number_theory",
+    "name": "Euler's Conjecture (Counterexamples)",
+    "description": "Problems related to famous number theory conjectures, often involving finding specific integers that satisfy or disprove them.",
+    "logic_depth": 4,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "algebra_statistics_data_analysis",
+    "domain": "algebra",
+    "name": "Statistics (Mean, Mode, Data Manipulation)",
+    "description": "Problems combining statistical concepts like mean and mode with data manipulation.",
+    "logic_depth": 4,
+    "source_years": [
+      1984,
+      1989
+    ]
+  },
+  {
+    "module_id": "geometry_tetrahedron_midpoints",
+    "domain": "geometry",
+    "name": "Tetrahedron Midpoints and Distances",
+    "description": "Calculating distances between midpoints of edges in a tetrahedron.",
+    "logic_depth": 3,
+    "source_years": [
+      1989
+    ]
+  },
+  {
+    "module_id": "combinatorics_set_theory_with_constraints",
+    "domain": "combinatorics",
+    "name": "Set Theory with Sum/Difference Constraints",
+    "description": "Counting subsets or pairs of subsets of a set that satisfy conditions on the sum of their elements or differences between elements.",
+    "logic_depth": 4,
+    "source_years": [
+      1983,
+      1986,
+      1989
+    ]
+  },
+  {
+    "module_id": "algebra_expression_evaluation",
+    "domain": "algebra",
+    "name": "Expression Evaluation (Radicals, Series)",
+    "description": "Direct computation and simplification of complex algebraic expressions, including those with radicals or series.",
+    "logic_depth": 2,
+    "source_years": [
+      1987,
+      1989
+    ]
+  }
+]

@@ -1,0 +1,349 @@
+[
+  {
+    "module_id": "algebra_polynomial_vieta",
+    "domain": "algebra",
+    "name": "Polynomial Roots and Vieta's Formulas",
+    "description": "Relating coefficients of a polynomial to sums and products of its roots, including cases with non-real roots.",
+    "logic_depth": 3,
+    "source_years": [
+      1991,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_system_equations",
+    "domain": "algebra",
+    "name": "Solving Systems of Equations",
+    "description": "Techniques for solving linear and non-linear systems of equations, including those with integer or real constraints.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1991,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_logarithms",
+    "domain": "algebra",
+    "name": "Logarithmic Properties and Equations",
+    "description": "Applying properties of logarithms (e.g., change of base, product/quotient rules) to solve equations.",
+    "logic_depth": 2,
+    "source_years": [
+      1990,
+      1991,
+      1994,
+      1995
+    ]
+  },
+  {
+    "module_id": "algebra_binomial_theorem",
+    "domain": "algebra",
+    "name": "Binomial Theorem and Expansions",
+    "description": "Using the binomial theorem for series expansion and counting terms.",
+    "logic_depth": 2,
+    "source_years": [
+      1991,
+      1993,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_greatest_integer",
+    "domain": "algebra",
+    "name": "Greatest Integer Function (Floor/Ceiling)",
+    "description": "Applying properties of floor and ceiling functions in equations and inequalities.",
+    "logic_depth": 2,
+    "source_years": [
+      1990,
+      1992,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_complex_numbers",
+    "domain": "algebra",
+    "name": "Complex Number Operations and Properties",
+    "description": "Working with complex numbers, including roots of unity, modulus, argument, and polynomial roots.",
+    "logic_depth": 4,
+    "source_years": [
+      1990,
+      1992,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_sequences_series",
+    "domain": "algebra",
+    "name": "Arithmetic and Geometric Sequences/Series",
+    "description": "Properties, sums, and recursive definitions of arithmetic and geometric progressions.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "algebra_radical_simplification",
+    "domain": "algebra",
+    "name": "Radical Expressions Simplification",
+    "description": "Techniques for simplifying expressions involving square roots and other radicals.",
+    "logic_depth": 1,
+    "source_years": [
+      1990
+    ]
+  },
+  {
+    "module_id": "algebra_fractions",
+    "domain": "algebra",
+    "name": "Fraction Operations and Properties",
+    "description": "Basic operations and properties of fractions, including reducing to lowest terms.",
+    "logic_depth": 1,
+    "source_years": [
+      1992
+    ]
+  },
+  {
+    "module_id": "algebra_functional_equations",
+    "domain": "algebra",
+    "name": "Functional Equations",
+    "description": "Solving equations that define properties of functions.",
+    "logic_depth": 3,
+    "source_years": [
+      1994
+    ]
+  },
+  {
+    "module_id": "algebra_kinematics",
+    "domain": "algebra",
+    "name": "Kinematics (Motion Problems)",
+    "description": "Solving problems involving distance, speed, time, and relative motion.",
+    "logic_depth": 3,
+    "source_years": [
+      1993
+    ]
+  },
+  {
+    "module_id": "geometry_euclidean_shapes",
+    "domain": "geometry",
+    "name": "Euclidean Geometry of Shapes and Properties",
+    "description": "Fundamental properties of triangles (area, perimeter, angles, bisectors, medians) and quadrilaterals (rectangles, rhombuses, trapezoids), including congruence and similarity, and regular polygons.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "geometry_circle_properties",
+    "domain": "geometry",
+    "name": "Circle Properties (Tangents, Chords, In/Circumcircles)",
+    "description": "Theorems and properties related to circles, including tangents, chords, inscribed/circumscribed circles, and power of a point.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995
+    ]
+  },
+  {
+    "module_id": "geometry_coordinate",
+    "domain": "geometry",
+    "name": "Coordinate Geometry and Transformations",
+    "description": "Solving geometric problems using coordinates, including distances, areas, lines, reflections, and rotations.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "geometry_solid_volume_area",
+    "domain": "geometry",
+    "name": "Volume and Surface Area of Solids",
+    "description": "Calculating volumes and surface areas of polyhedra (e.g., pyramids, prisms, cubes) and cones, including Euler's formula for polyhedra.",
+    "logic_depth": 4,
+    "source_years": [
+      1990,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "geometry_similarity",
+    "domain": "geometry",
+    "name": "Geometric Similarity",
+    "description": "Using properties of similar figures (e.g., triangles, prisms) to find unknown lengths, areas, or volumes.",
+    "logic_depth": 3,
+    "source_years": [
+      1995
+    ]
+  },
+  {
+    "module_id": "number_theory_divisibility_divisors",
+    "domain": "number_theory",
+    "name": "Divisibility and Number of Divisors",
+    "description": "Counting positive divisors, properties of divisibility, GCD, and LCM.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1991,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "number_theory_modular_arithmetic",
+    "domain": "number_theory",
+    "name": "Modular Arithmetic and Congruences",
+    "description": "Working with remainders, congruences, and properties of numbers in different bases.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1993,
+      1994,
+      1996
+    ]
+  },
+  {
+    "module_id": "number_theory_prime_factorization",
+    "domain": "number_theory",
+    "name": "Prime Numbers and Factorization",
+    "description": "Properties of prime numbers and prime factorization, including factorial tails (number of trailing zeros).",
+    "logic_depth": 3,
+    "source_years": [
+      1992,
+      1994
+    ]
+  },
+  {
+    "module_id": "number_theory_integer_properties",
+    "domain": "number_theory",
+    "name": "Properties of Integers (Perfect Squares/Cubes)",
+    "description": "Identifying and using properties of perfect squares, cubes, and sums of consecutive integers.",
+    "logic_depth": 2,
+    "source_years": [
+      1990,
+      1991,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "number_theory_base_representation",
+    "domain": "number_theory",
+    "name": "Number Base Representation",
+    "description": "Converting and working with numbers in different bases (e.g., base 10, base 8, base 11).",
+    "logic_depth": 2,
+    "source_years": [
+      1990,
+      1992
+    ]
+  },
+  {
+    "module_id": "number_theory_diophantine_equations",
+    "domain": "number_theory",
+    "name": "Diophantine Equations",
+    "description": "Solving equations where only integer solutions are sought.",
+    "logic_depth": 3,
+    "source_years": [
+      1991,
+      1994
+    ]
+  },
+  {
+    "module_id": "number_theory_rational_numbers",
+    "domain": "number_theory",
+    "name": "Rational Number Properties",
+    "description": "Properties of rational numbers, including representation in lowest terms.",
+    "logic_depth": 2,
+    "source_years": [
+      1991,
+      1992
+    ]
+  },
+  {
+    "module_id": "combinatorics_counting_principles",
+    "domain": "combinatorics",
+    "name": "Fundamental Counting Principles",
+    "description": "Applying permutation, combination, and inclusion-exclusion principles to count arrangements, selections, and specific configurations.",
+    "logic_depth": 3,
+    "source_years": [
+      1990,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "combinatorics_probability",
+    "domain": "combinatorics",
+    "name": "Probability Theory (Basic, Conditional, Geometric)",
+    "description": "Calculating probabilities for various events, including conditional probability, geometric probability, and expected values.",
+    "logic_depth": 4,
+    "source_years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ]
+  },
+  {
+    "module_id": "combinatorics_game_theory",
+    "domain": "combinatorics",
+    "name": "Game Theory (Strategies)",
+    "description": "Analyzing winning strategies in simple combinatorial games.",
+    "logic_depth": 4,
+    "source_years": [
+      1992
+    ]
+  },
+  {
+    "module_id": "trigonometry_identities_equations",
+    "domain": "geometry",
+    "name": "Trigonometric Identities and Equations",
+    "description": "Applying trigonometric identities and solving trigonometric equations, often in geometric contexts.",
+    "logic_depth": 3,
+    "source_years": [
+      1991,
+      1995,
+      1996
+    ]
+  }
+]

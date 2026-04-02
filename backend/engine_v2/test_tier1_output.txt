@@ -1,0 +1,37 @@
+=== Tier 1 Modules (5 Core) Seed Generation Test ===
+
+[다항식의 근과 계수의 관계] (algebra_polynomials_vieta)
+ - Seed: {'r1': -4, 'r2': 2, 'r3': 8}
+ - Seed Validation: ✅ OK
+ - Calculated Answer: 84
+ - Answer Validation: ✅ OK
+ - Logic Steps: 4 steps generated.
+--------------------------------------------------
+[데카르트 원 정리] (geometry_circles_tangency)
+ - Seed: {'a': 1, 'b': 4, 'c': 1}
+ - Seed Validation: ✅ OK
+ - Calculated Answer: 16
+ - Answer Validation: ✅ OK
+ - Logic Steps: 5 steps generated.
+--------------------------------------------------
+[거듭제곱 합동식] (nt_power_congruence)
+ - Seed: {'K': 5, 'M': 6}
+ - Seed Validation: ✅ OK
+ - Calculated Answer: 293
+ - Answer Validation: ✅ OK
+ - Logic Steps: 5 steps generated.
+--------------------------------------------------
+[격자 경로 회피] (comb_path_counting)
+ - Seed: {'W': 5, 'H': 4, 'obs_x': 1, 'obs_y': 1}
+ - Seed Validation: ✅ OK
+ - Calculated Answer: 56
+ - Answer Validation: ✅ OK
+ - Logic Steps: 5 steps generated.
+--------------------------------------------------
+[무한 등비급수와 점화식] (algebra_sequences_series_recurrence)
+ - Seed: {'q': 9, 'p': 7, 'M': 13}
+ - Seed Validation: ✅ OK
+ - Calculated Answer: 234
+ - Answer Validation: ✅ OK
+ - Logic Steps: 5 steps generated.
+--------------------------------------------------

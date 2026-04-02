@@ -48,11 +48,10 @@ Every problem is validated through our **Iteratively Improved Program Constructi
 ---
 
 ## [KOREAN SUMMARY / 국문 요약]
-
 **AI_MathMate**는 LLM의 창의성과 심볼릭 연산의 엄밀함을 결합한 차세대 수학 문제 생성 엔진입니다. 
-- **V2 혁신**: 1:1 솔버 방식(V1)에서 벗어나, 90종의 지식 원자를 합성하는 **'Heritage 90'** 아키텍처를 도입했습니다.
-- **주요 기술**: 출제자의 의도를 모사하는 전략 계층(Tier 0), 난이도 정밀 제어(DAPS), 그리고 신경-기호 결합 검증(IIPC)을 통해 AIME 킬러 문항을 무결하게 생성합니다.
-- **학습 경험**: 실전 모의고사와 취약 개념을 보완하는 '드릴 워크숍'을 통해 학습 효율을 극대화합니다.
+- **V2 혁신**: 1:1 솔버 방식(V1)에서 벗어나, 90종의 지식 원자를 합성하는 **'Heritage 90'** MAS 아키텍처를 도입했습니다.
+- **주요 기술**: 출제자의 의도를 모사하는 전략 계층(Tier 0), 난이도 정밀 제어(DAPS), 그리고 신경-기호 결합 검증(IIPC) 루프를 통해 AIME 킬러 문항을 자율적으로 합성합니다.
+- **성과**: `aime_high_rigor_orchestrator`를 통해 AIME 15번 수준의 고난도 문항 배포 게이트웨이를 구축했습니다.
 
 ---
 Developed as a high-impact engineering portfolio by **Siyoul Jung**.
