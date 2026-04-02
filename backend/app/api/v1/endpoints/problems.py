@@ -65,6 +65,7 @@ def get_advice(student_id: str, category: str):
 def get_amc_archives():
     """
     Scans all years and exams to build a domain-based archive of all AIME missions.
+    Including real-time variant counts from the V4 database.
     """
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
     exams_root = os.path.join(base_dir, 'amc_engine', 'exams')
@@ -91,24 +92,28 @@ def get_amc_archives():
                         with open(meta_path, 'r', encoding='utf-8') as f:
                             meta = json.load(f)
                             domain_raw = meta.get('domain', 'Other')
-                            # Split hybrid domains (e.g., "Algebra / Number Theory")
                             domains = [d.strip() for d in re.split(r'[/,]', domain_raw)]
-                            
-                             # Normalize DNA tags (handle both 'tags' and 'dna_tags')
                             dna_tags = meta.get('dna_tags', meta.get('tags', []))
                             title = meta.get('title') or f"Mission {p_id}"
                             
                             for domain in domains:
                                 if domain not in archives: archives[domain] = []
-                                # Add year/exam context to the mission (will be hidden in UI but kept in data)
                                 archives[domain].append({
                                     **meta,
                                     'p_id': p_id,
                                     'title': title,
                                     'dna_tags': dna_tags,
                                     'year': year,
-                                    'exam': exam
+                                    'exam': exam,
+                                    'variant_count': 0  # Placeholder
                                 })
+                            
+    # 2. Add variant counts from DB
+    engine_counts = amc_master.get_mission_counts()
+    for entries in archives.values():
+        for entry in entries:
+            e_id = f"{entry['exam']}-{entry['year']}-{entry['p_id']}"
+            entry['variant_count'] = engine_counts.get(e_id, 0)
                             
     return {"archives": archives}
 
@@ -136,6 +141,16 @@ def generate_amc_problem(p_id: str, mode: str = "MOCK", level: Optional[int] = N
         return problem
     except Exception as e:
         return {"error": str(e), "trace": traceback.format_exc()}
+
+@router.get("/amc/stats")
+def get_amc_stats():
+    """Returns V4 schema generation statistics (Verified vs Rejected)."""
+    return amc_master.get_stats()
+
+@router.get("/amc/failures")
+def get_amc_failures(limit: int = 10):
+    """Returns recent verification failures for debugging."""
+    return amc_master.get_failures(limit=limit)
 
 @router.post("/log")
 def log_step(item: LogItem):

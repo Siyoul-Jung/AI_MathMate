@@ -1,0 +1,125 @@
+================================================================================
+🏆 AI_MathMate V2 'Heritage 90' 전수 필드 스캔 (총 104개)
+================================================================================
+
+[ ALGEBRA ]
+--------------------------------------------------------------------------------
+- alg_cyclic_ineq_plane               | Cyclic Inequalities on a Plane
+- algebra_absolute_value              | Algebra Absolute Value
+- algebra_basic_manipulation          | Algebra Basic Manipulation
+- algebra_binomial_theorem            | Algebra Binomial Theorem
+- algebra_complex_numbers             | Algebra Complex Numbers
+- algebra_floor_ceiling_functions     | Algebra Floor Ceiling Functions
+- algebra_func_equations_cauchy       | Algebra Func Equations Cauchy
+- algebra_func_periodicity            | 함수 주기성 (Advanced)
+- algebra_func_symmetry               | Algebra Func Symmetry
+- algebra_functions_and_properties    | Algebra Functions And Properties
+- algebra_inequalities                | Algebra Inequalities
+- algebra_kinematics                  | Algebra Kinematics
+- algebra_logarithms_exponents        | Algebra Logarithms Exponents
+- algebra_matrices_determinants       | Algebra Matrices Determinants
+- algebra_poly_complex_roots          | Algebra Poly Complex Roots
+- algebra_poly_vieta_newton           | Algebra Poly Vieta Newton
+- algebra_polynomials_vieta           | Algebra Polynomials Vieta
+- algebra_quadratic_lattice           | Quadratic Lattice Union
+- algebra_roots_unity_filter          | Algebra Roots Unity Filter
+- algebra_seq_characteristic_eq       | Algebra Seq Characteristic Eq
+- algebra_sequences_series_recurrence | Algebra Sequences Series Recurrence
+- algebra_statistics                  | Algebra Statistics
+- algebra_systems_of_equations        | Algebra Systems Of Equations
+- algebra_telescoping_sum             | Algebra Telescoping Sum
+- algebra_trigonometry                | Algebra Trigonometry
+
+[ COMBINATORICS ]
+--------------------------------------------------------------------------------
+- comb_catalan                        | Comb Catalan
+- comb_count_double                   | Comb Count Double
+- comb_derangement                    | Comb Derangement
+- comb_divisibility_perm              | Divisibility Permutations
+- comb_gen_func_snake_oil             | Comb Gen Func Snake Oil
+- comb_graph_coloring_chromatic       | Comb Graph Coloring Chromatic
+- comb_grid_sudoku_sum                | Grid Sudoku Sum
+- comb_multinomial_partition          | Multinomial Partition
+- comb_pairing_probability            | Pairing Probability
+- comb_path_counting                  | Comb Path Counting
+- comb_prob_absorbing_markov          | Comb Prob Absorbing Markov
+- comb_prob_transition_matrix         | Comb Prob Transition Matrix
+- comb_probability                    | Comb Probability
+- comb_recursion_dp                   | Comb Recursion Dp
+- comb_set_theory_and_subsets         | Comb Set Theory And Subsets
+- comb_symmetry_and_burnside          | Comb Symmetry And Burnside
+
+[ GEOMETRY ]
+--------------------------------------------------------------------------------
+- geo_complex_bisector_tangency       | Complex Bisector Tangency
+- geo_parabola_rotation               | Parabola Rotation
+- geo_reflection_heptagon             | Heptagon Area Reflection
+- geo_trapezoid_inscribed             | Inscribed Circle Trapezoid
+- geometry_angle_bisector_theorem     | Geometry Angle Bisector Theorem
+- geometry_area_and_volume            | Geometry Area And Volume
+- geometry_center_euler_ninepoint     | Geometry Center Euler Ninepoint
+- geometry_circle_isogonal_symmedian  | Geometry Circle Isogonal Symmedian
+- geometry_circle_ptolemy             | Geometry Circle Ptolemy
+- geometry_circle_radical             | Geometry Circle Radical
+- geometry_circle_theorems            | Geometry Circle Theorems
+- geometry_circles_tangency           | Geometry Circles Tangency
+- geometry_complex_numbers_in_geometry | Geometry Complex Numbers In Geometry
+- geometry_coordinate_analytic        | Geometry Coordinate Analytic
+- geometry_coordinate_intersections   | 곡선 교점 분석 (Advanced)
+- geometry_cyclic_quadrilaterals      | Geometry Cyclic Quadrilaterals
+- geometry_locus                      | Geometry Locus
+- geometry_polygons                   | Geometry Polygons
+- geometry_power_of_a_point           | Geometry Power Of A Point
+- geometry_sim_homothety              | Geometry Sim Homothety
+- geometry_sim_spiral                 | Geometry Sim Spiral
+- geometry_solid_3d                   | Geometry Solid 3D
+- geometry_transform_inversion        | Geometry Transform Inversion
+- geometry_transformations            | Geometry Transformations
+- geometry_triangle_centers           | Geometry Triangle Centers
+- geometry_triangle_properties        | Geometry Triangle Properties
+- geometry_trigonometry_laws          | Geometry Trigonometry Laws
+- geometry_vectors                    | Geometry Vectors
+
+[ META ]
+--------------------------------------------------------------------------------
+- meta_anonymization                  | Meta Anonymization
+- meta_extremal_construction          | Meta Extremal Construction
+- meta_invariant_design               | Meta Invariant Design
+- meta_logic_concealer                | Meta Logic Concealer
+- meta_rationale_layering             | Meta Rationale Layering
+- meta_rosetta_mapping                | Meta Rosetta Mapping
+- meta_symmetry_breaker               | Meta Symmetry Breaker
+- meta_trace_removal                  | Meta Trace Removal
+
+[ NUMBER_THEORY ]
+--------------------------------------------------------------------------------
+- nt_base_divisibility                | Base Divisibility
+- nt_base_representation_and_digits   | Nt Base Representation And Digits
+- nt_chinese_remainder_theorem        | Nt Chinese Remainder Theorem
+- nt_diophantine_equations            | Nt Diophantine Equations
+- nt_diophantine_pell                 | Nt Diophantine Pell
+- nt_diophantine_vieta_jumping        | Nt Diophantine Vieta Jumping
+- nt_discrete_log                     | Nt Discrete Log
+- nt_divisibility_and_primes          | Nt Divisibility And Primes
+- nt_divisor_functions                | Nt Divisor Functions
+- nt_floor_legendre                   | Nt Floor Legendre
+- nt_frobenius_coin_problem           | Nt Frobenius Coin Problem
+- nt_gcd_lcm                          | Nt Gcd Lcm
+- nt_mod_lte_lemma                    | Nt Mod Lte Lemma
+- nt_mod_order_primitive              | Nt Mod Order Primitive
+- nt_modular_arithmetic               | Nt Modular Arithmetic
+- nt_order_and_primitive_roots        | Nt Order And Primitive Roots
+- nt_perfect_powers                   | Nt Perfect Powers
+- nt_quadratic_residue                | Nt Quadratic Residue
+
+[ UNKNOWN ]
+--------------------------------------------------------------------------------
+- comb_basic_counting                 | N/A
+- comb_constrained_arrangements       | N/A
+- comb_distributions_partitions       | N/A
+- comb_expected_value                 | N/A
+- comb_game_theory                    | N/A
+- comb_geometric_probability          | N/A
+- comb_graph_theory                   | N/A
+- comb_inclusion_exclusion            | N/A
+- comb_pigeonhole_principle           | N/A

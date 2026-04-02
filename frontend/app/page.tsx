@@ -241,7 +241,7 @@ export default function Home() {
   }, [amcProblemNum, category, grade]);
 
   // Problem generation request
-  const generateProblem = async (pIdOverride?: string, modeOverride?: string, levelOverride?: number) => {
+  const generateProblem = async (pIdOverride?: string, modeOverride?: string, levelOverride?: number, bandOverride?: string) => {
     if (category === 'AIME' && grade === 'AIME_1') {
       let targetPid = pIdOverride || amcProblemNum;
       const targetMode = modeOverride || amcMode;
@@ -276,8 +276,20 @@ export default function Home() {
       
       setLoading(true);
       try {
-        const data = await api.generateAmcProblem(targetPid, targetMode, targetLevel, amcYear, amcExam);
+        // Heritage 90 V2 Synthesis Mapping:
+        // P15 (Master) -> DAPS 15.2, EXPERT -> DAPS 10.0, Challenger -> DAPS 5.0
+        let targetDaps = 14.5;
+        if (targetPid === 'P15') targetDaps = 15.2;
+        else if (amcBand === 'EXPERT') targetDaps = 10.0;
+        else if (amcBand === 'CHALLENGER') targetDaps = 5.0;
+
+        const themeHint = targetPid === 'P15' ? "Heritage 90 Killer Synthesis" : `${targetPid} Style`;
         
+        const data = await api.generateAmcProblem({ 
+          mode: bandOverride || amcBand,
+          target_daps: (bandOverride || amcBand) === 'MASTER' ? 14.2 : (bandOverride || amcBand) === 'EXPERT' ? 12.0 : 8.5,
+          theme_hint: themeHint
+        });
         if (data.status === 'REGENERATING' || data.error === 'MISSION_BEING_CLEANSED') {
           // Special handling for background cleansing/generation
           alert(`🧬 High-fidelity regeneration in progress for ${targetPid}. Please try another mission for a moment or wait 30-60s for the deep cleansing to finish.`);
@@ -782,7 +794,7 @@ export default function Home() {
                   amcMetadata={amcMetadata}
                   amcArchives={amcArchives}
                   themeClasses={themeClasses}
-                  onGenerate={() => generateProblem()}
+                  onGenerate={(pid?: string, mode?: string, level?: number, band?: string) => generateProblem(pid, mode, level, band)}
                 />
             ) : (
               <PracticeModule

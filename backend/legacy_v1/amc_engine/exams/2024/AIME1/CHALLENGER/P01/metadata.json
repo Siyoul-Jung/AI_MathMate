@@ -1,0 +1,15 @@
+{
+    "title": "AIME 2024 AIME1 Problem 01",
+    "domain": "Algebra",
+    "dna_tag": "UNKNOWN",
+    "difficulty_band": "CHALLENGER",
+    "has_image_support": false,
+    "dna_tags": [
+        "Standard"
+    ],
+    "drill_config": {
+        "L1": "Basic concept check",
+        "L2": "Intermediate step",
+        "L3": "Full problem"
+    }
+}

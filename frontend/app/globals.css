@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Heritage 90 Premium Design tokens */
+@keyframes nebula-pulse {
+  0% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(16, 185, 129, 0.5); }
+  100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+}
+
+@keyframes title-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-nebula {
+  animation: nebula-pulse 3s infinite ease-in-out;
+}
+
+.daps-badge {
+  background: linear-gradient(135deg, #064e3b, #10b981);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.killer-header {
+  background: linear-gradient(90deg, #10b981, #059669, #34d399, #10b981);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: title-shimmer 4s linear infinite;
+  font-weight: 900;
+}

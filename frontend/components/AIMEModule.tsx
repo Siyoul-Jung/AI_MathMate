@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SystemHealthMonitor from './SystemHealthMonitor';
 
 interface AIMEModuleProps {
   loading: boolean;
@@ -18,7 +19,7 @@ interface AIMEModuleProps {
   amcMetadata: any;
   amcArchives: any; // { "Algebra": [meta...], "Geometry": [...] }
   themeClasses: any;
-  onGenerate?: () => void;
+  onGenerate?: (pId?: string, mode?: string, level?: number, band?: string) => void;
 }
 
 const DOMAIN_ICONS: { [key: string]: string } = {
@@ -50,6 +51,7 @@ const AIMEModule: React.FC<AIMEModuleProps> = ({
   onGenerate
 }) => {
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
+  const [isHealthModalOpen, setIsHealthModalOpen] = useState(false);
 
   const PHASES = [
     { id: 'CHALLENGER', name: 'Challenger', phase: 1, range: 'P01 ~ P05', color: 'blue', problems: ['P01', 'P02', 'P03', 'P04', 'P05'] },
@@ -104,6 +106,20 @@ const AIMEModule: React.FC<AIMEModuleProps> = ({
         >
           <span className="text-lg">🧬</span>
           Practice Hub
+        </button>
+        <button
+          onClick={() => {
+            if (!loading) {
+              setAmcMode('MOCK');
+              setAmcBand('MASTER');
+              setAmcProblemNum('P15');
+              onGenerate?.('P15', 'MOCK', 1, 'MASTER');
+            }
+          }}
+          className={`flex items-center gap-2 px-6 py-2.5 text-sm font-black rounded-xl transition-all duration-300 bg-emerald-600 text-white shadow-lg hover:bg-emerald-700 animate-nebula`}
+        >
+          <span className="text-lg">☄️</span>
+          Heritage 90 Catalyst
         </button>
       </div>
 
@@ -248,6 +264,17 @@ const AIMEModule: React.FC<AIMEModuleProps> = ({
                     {amcBand === 'CHALLENGER' ? 'LV 1-2' : 'LV 1-3'} Suites
                   </span>
                 </div>
+                <div className="w-px h-8 bg-white/10"></div>
+                <button 
+                  onClick={() => setIsHealthModalOpen(true)}
+                  className="flex flex-col items-center group/health"
+                >
+                  <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1 group-hover/health:text-white transition-colors">Health</span>
+                  <div className="flex items-center gap-1">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="text-xs font-black text-white">V4.0</span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
@@ -330,13 +357,32 @@ const AIMEModule: React.FC<AIMEModuleProps> = ({
                           }`}>
                             ACTIVE
                           </span>
+                          {meta.variant_count !== undefined && (
+                            <span className={`px-2 py-0.5 rounded-lg text-[9px] font-black flex items-center gap-1 ${
+                              meta.variant_count > 50 ? 'bg-emerald-100 text-emerald-700' : 
+                              meta.variant_count > 10 ? 'bg-amber-100 text-amber-700' : 'bg-rose-100 text-rose-700'
+                            }`}>
+                              <span className={`w-1 h-1 rounded-full ${
+                                meta.variant_count > 50 ? 'bg-emerald-500' : 
+                                meta.variant_count > 10 ? 'bg-amber-500' : 'bg-rose-500'
+                              } animate-pulse`}></span>
+                              {meta.variant_count} VARIANTS
+                            </span>
+                          )}
                         </div>
                         <span className={`text-[13px] font-black leading-snug ${isSelected ? 'text-emerald-900' : 'text-slate-700'}`}>
                           {meta.title}
                         </span>
                         <div className="flex flex-wrap gap-1 mt-3">
+                          {/* Prefer 'categories' (list) over legacy tags */}
+                          {(meta.categories || []).map((cat: string, i: number) => (
+                            <span key={`cat-${i}`} className="px-2 py-0.5 bg-slate-800 text-white text-[8px] font-black rounded-md flex items-center gap-1">
+                              <span>{DOMAIN_ICONS[cat] || '✦'}</span>
+                              {cat}
+                            </span>
+                          ))}
                           {meta.dna_tags?.slice(0, 3).map((tag: string, i: number) => (
-                            <span key={i} className="text-[9px] font-bold text-slate-400">#{tag}</span>
+                            <span key={`tag-${i}`} className="text-[9px] font-bold text-slate-400">#{tag}</span>
                           ))}
                         </div>
                       </button>
@@ -420,6 +466,12 @@ const AIMEModule: React.FC<AIMEModuleProps> = ({
           </div>
         </div>
       )}
+
+      {/* System Health Monitor Modal */}
+      <SystemHealthMonitor 
+        isOpen={isHealthModalOpen} 
+        onClose={() => setIsHealthModalOpen(false)} 
+      />
     </div>
   );
 };

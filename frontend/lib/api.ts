@@ -41,13 +41,42 @@ export const api = {
     return res.json();
   },
 
-  async generateAmcProblem(pId: string, mode: string = 'MOCK', level: number = 1, year: string = '2025', exam: string = 'AIME1') {
-    const res = await fetch(`${API_BASE_URL}/api/amc/generate?p_id=${pId}&mode=${mode}&level=${level}&year=${year}&exam=${exam}`);
+  // --- Heritage 90 V2 Synthesis ---
+  async generateAmcProblem(params: { target_daps?: number, theme_hint?: string, mode?: string }) {
+    const res = await fetch(`${API_BASE_URL}/api/v2/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        target_daps: params.target_daps || 14.5, 
+        theme_hint: params.theme_hint || "",
+        mode: params.mode || "MASTER"
+      })
+    });
+    return res.json();
+  },
+
+  async fetchHeritageAtoms() {
+    const res = await fetch(`${API_BASE_URL}/api/v2/atoms`);
+    return res.json();
+  },
+
+  async fetchSynthesisStats() {
+    const res = await fetch(`${API_BASE_URL}/api/v2/stats`);
     return res.json();
   },
 
   async fetchTextbookExamples() {
     const res = await fetch(`${API_BASE_URL}/api/textbook/examples`);
+    return res.json();
+  },
+
+  async fetchAmcStats() {
+    const res = await fetch(`${API_BASE_URL}/api/amc/stats`);
+    return res.json();
+  },
+
+  async fetchAmcFailures(limit: number = 10) {
+    const res = await fetch(`${API_BASE_URL}/api/amc/failures?limit=${limit}`);
     return res.json();
   }
 };
