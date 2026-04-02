@@ -7,11 +7,11 @@ Modules: Extremal Principle + Roots of Unity Filter + Invariant Design + Asymmet
 from __future__ import annotations
 import json
 import time
-from backend.engine_v2.modules.meta.meta_extremal_construction import MetaExtremalConstructionModule
-from backend.engine_v2.modules.algebra.algebra_roots_unity_filter import AlgebraRootsUnityFilterModule
-from backend.engine_v2.modules.meta.meta_invariant_design import MetaInvariantDesignModule
-from backend.engine_v2.modules.meta.meta_symmetry_breaker import MetaSymmetryBreakerModule
-from backend.engine_v2.iipc_validator import IIPCValidator
+from engine_v2.modules.meta.meta_extremal_construction import MetaExtremalConstructionModule
+from engine_v2.modules.algebra.algebra_roots_unity_filter import AlgebraRootsUnityFilterModule
+from engine_v2.modules.meta.meta_invariant_design import MetaInvariantDesignModule
+from engine_v2.modules.meta.meta_symmetry_breaker import MetaSymmetryBreakerModule
+from engine_v2.iipc_validator import IIPCValidator
 
 def orchestrate_high_rigor_synthesis():
     print("="*80)
