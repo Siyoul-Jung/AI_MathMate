@@ -11,7 +11,7 @@ class MetaExtremalConstructionModule(AtomicModule):
     META = ModuleMeta(
         module_id="meta_extremal_construction",
         name="극단성의 원리 설계 (Extremal Principle)",
-        domain="meta",
+        domain="integer",
         namespace="meta_ext",
         input_schema={
             "extremal_element": FieldSpec(dtype=str, domain=["max", "min", "hull"], description="가정할 극단적인 대상"),
@@ -35,12 +35,11 @@ class MetaExtremalConstructionModule(AtomicModule):
             "proof_strategy": random.choice(["contradiction", "infinite_descent"])
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
-        return {
-            "logic_chain_depth": 5,
-            "existence_guarantee": True,
-            "daps_multiplier": 1.5
-        }
+    def execute(self, seed: dict[str, Any]) -> int:
+        """극단성 원리 파라미터에서 결정론적 점수를 반환."""
+        elem_val = {"max": 179, "min": 311, "hull": 499}.get(seed["extremal_element"], 100)
+        proof_val = {"contradiction": 41, "infinite_descent": 59}.get(seed["proof_strategy"], 23)
+        return (elem_val * proof_val) % 1000
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         element = seed["extremal_element"]

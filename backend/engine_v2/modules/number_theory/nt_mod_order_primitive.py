@@ -28,7 +28,9 @@ class NTModOrderPrimitiveModule(AtomicModule):
         daps_contribution=4.5,
         min_difficulty=12,
         category="number_theory",
-        tags=["modular_arithmetic", "order", "primitive_root", "euler_totient"]
+        tags=["modular_arithmetic", "order", "primitive_root", "euler_totient"],
+        # Bridge: 이 모듈이 산출하는 위수(order)·소수(prime)를 하류 모듈에 전달
+        bridge_output_keys=["order", "prime", "base", "primitive_roots_count"],
     )
 
     def generate_seed(self, difficulty_hint: float = 12.0) -> dict[str, Any]:
@@ -44,19 +46,33 @@ class NTModOrderPrimitiveModule(AtomicModule):
             "is_primitive_root": random.choice([True, False])
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
+    def execute(self, seed: dict[str, Any]) -> int:
         p, a = seed["p"], seed["a"]
-        phi_p = p - 1
-        
-        # 1. 위수 계산 (ord_p(a))
-        order = sp.ntheory.residue_ntheory.n_order(a, p)
-        
-        # 2. 원시근 개수 (phi(phi(p)))
-        phi_phi_p = sp.totient(phi_p)
-        
+
+        # ord_p(a) + phi(phi(p)) 를 최종 답으로
+        order = int(sp.ntheory.residue_ntheory.n_order(a, p))
+        phi_phi_p = int(sp.totient(p - 1))
+
+        return (order + phi_phi_p) % 1000
+
+    def get_bridge_output(self, seed: dict[str, Any]) -> dict[str, Any]:
+        """
+        [Bridge 출력] 이 모듈이 산출한 위수·소수를 하류 모듈(예: comb_pairing_probability)에 전달합니다.
+
+        전달 값:
+          - order: ord_p(a) — 하류 모듈의 n_pairs 파라미터로 활용 가능 (4~7 범위 시)
+          - prime: 법 소수 p
+          - base: 밑 a
+          - primitive_roots_count: φ(φ(p))
+        """
+        p, a = seed["p"], seed["a"]
+        order = int(sp.ntheory.residue_ntheory.n_order(a, p))
+        phi_phi_p = int(sp.totient(p - 1))
         return {
-            "order": int(order),
-            "primitive_roots_count": int(phi_phi_p)
+            "order": order,
+            "prime": p,
+            "base": a,
+            "primitive_roots_count": phi_phi_p,
         }
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:

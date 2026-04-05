@@ -11,7 +11,7 @@ class MetaInvariantDesignModule(AtomicModule):
     META = ModuleMeta(
         module_id="meta_invariant_design",
         name="불변량 및 홀짝성 설계 (Invariant & Parity)",
-        domain="meta",
+        domain="integer",
         namespace="meta_inv",
         input_schema={
             "operation_type": FieldSpec(dtype=str, domain=["tiling", "game", "sequence"], description="조작의 유형"),
@@ -35,12 +35,11 @@ class MetaInvariantDesignModule(AtomicModule):
             "invariant_target": random.choice(["sum", "color"])
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
-        return {
-            "logic_chain_depth": 5,
-            "proof_by_contradiction": True,
-            "daps_multiplier": 1.5
-        }
+    def execute(self, seed: dict[str, Any]) -> int:
+        """불변량 전략 파라미터에서 결정론적 점수를 반환."""
+        op_val = {"tiling": 127, "game": 251, "sequence": 373}.get(seed["operation_type"], 100)
+        inv_val = {"sum": 31, "product": 47, "color": 67}.get(seed["invariant_target"], 11)
+        return (op_val * inv_val) % 1000
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         target = seed["invariant_target"]

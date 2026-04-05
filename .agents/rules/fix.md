@@ -29,12 +29,13 @@ writer.run(..., fix_history=fix_history)
 | 모호성 감지 (ambiguity) | "다음 모호한 표현을 해결하세요: [구체적 구절]" |
 | 조건 부족 (conditions < 2) | "핵심 제약 조건(범위, 관계식)을 지문에 더 명시적으로 포함하세요." |
 
-### FAIL ❌ (수학 오류)
-수학 오류는 Writer 수정으로 해결할 수 없습니다. **즉시 루프를 종료**합니다.
-```
-원인: Evaluator가 도출한 답 ≠ Python Solver의 정답 (Ground Truth)
-조치: Seed를 폐기하거나, Architect에게 반환하여 DAPS를 -1.5 하향 재설계
-```
+| 원인 | 분류 (fail_reason) | 조치 및 감점 |
+|---|---|---|
+| 정답 상이 | `MATH_ERROR` | **즉시 루프 종료**. 해당 조합에 **-30점** 부여. |
+| 서술 반복/교착 | `WRITER_LOOP` | 3회 초과 시 종료. 해당 조합에 **-5점** 부여. |
+| 중의성/모호함 | `AMBIGUITY` | 수정 권고 후 실패 시 **-10점** 부여. |
+
+**실패 이력 활용:** 모든 실패는 `combination_metrics`에 원인과 함께 기록되어 차기 Architect의 선택 후보(Top-K) 선정 시 강력한 패널티로 작용함.
 
 ---
 
@@ -52,7 +53,7 @@ new_seed = module.generate_seed(difficulty_hint=target_daps - 1.5)
 architect.run(target_daps=target_daps - 1.5, reason="CIRCUIT_BREAKER")
 ```
 
-로그에는 반드시 `status="CIRCUIT_BREAKER"` 와 실패 이력 3회분을 기록합니다.
+PS: 모든 Circuit Breaker 발동은 실패 분류(`fail_reason`)와 함께 DB에 영구 기록되어, 시스템이 스스로 나쁜 모듈 조합을 피하도록 학습합니다.
 
 ---
 

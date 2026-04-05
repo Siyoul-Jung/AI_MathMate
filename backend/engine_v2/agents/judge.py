@@ -1,6 +1,7 @@
 """
-AI_MathMate V2 — Judge 에이전트 (BEq 최종 판별)
+AI_MathMate V2 — Judge 에이전트 (BEq 최종 판별 + DAPS 사후 측정)
 역할: Evaluator의 역추론 결과를 원본 정답과 비교하고, 구체적인 수정 보고서를 발행합니다.
+     BEq PASS 시, Evaluator 풀이 데이터를 기반으로 실제 DAPS를 역산합니다.
 
 [LLM 없음 - 순수 Python]
 Judge는 외부 API를 호출하지 않습니다.
@@ -114,6 +115,78 @@ class JudgeAgent(BaseAgent):
             verdict=verdict,
             fix_instruction=fix_instruction,
         )
+
+    def measure_daps(
+        self,
+        evaluator_output: dict[str, Any],
+        module_count: int = 1,
+        estimated_daps: float = 0.0,
+    ) -> dict[str, float]:
+        """
+        [DAPS 사후 측정] Evaluator의 풀이 데이터로 실제 난이도를 역산합니다.
+
+        DAPS = α(Computational) + β(LogicalDepth) + γ(CategoryCombination) + δ(Heuristic/Trap)
+
+        측정 근거:
+          α: Evaluator 풀이 단계들의 총 계산 밀도 (단계당 수식/연산 키워드 빈도)
+          β: Evaluator가 실제로 밟은 풀이 단계 수 (steps)
+          γ: 조합된 모듈 수 (module_count) — 2모듈=1.0, 3모듈=2.0
+          δ: confidence 역수 — LOW=3.0, MEDIUM=1.5, HIGH=0.0
+             confidence가 낮다 = 직관적이지 않다 = 함정 요소가 높다
+
+        :param evaluator_output: EvaluatorAgent.run()의 output 딕셔너리
+        :param module_count: 조합된 모듈 수
+        :param estimated_daps: 모듈 META 기반 사전 추정 DAPS (비교용)
+        :return: {"measured_daps": float, "alpha": float, ...}
+        """
+        steps = evaluator_output.get("steps", [])
+        confidence = evaluator_output.get("confidence", "LOW")
+        conditions = evaluator_output.get("conditions", [])
+        strategy = evaluator_output.get("strategy", "")
+
+        # α: 계산 복잡도 — 풀이 단계에서 수식/연산 키워드 밀도 측정
+        computation_keywords = [
+            "계산", "compute", "calculate", "sum", "product", "합",
+            "multiply", "divide", "mod", "factorial", "^", "sqrt",
+            "=", "≡", "×",
+        ]
+        total_computation = 0
+        for step in steps:
+            step_lower = step.lower()
+            total_computation += sum(1 for kw in computation_keywords if kw in step_lower)
+        alpha = min(total_computation * 0.5, 5.0)  # cap 5.0
+
+        # β: 논리 깊이 — Evaluator가 실제로 밟은 단계 수
+        step_count = len(steps)
+        beta = min(step_count * 0.8, 5.0)  # cap 5.0
+
+        # γ: 카테고리 결합 — 모듈 조합 수
+        gamma = min((module_count - 1) * 1.0, 3.0)  # 1모듈=0, 2모듈=1, 3모듈=2, cap 3.0
+
+        # δ: 인지적 함정 — confidence 역수
+        delta_map = {"HIGH": 0.0, "MEDIUM": 1.5, "LOW": 3.0}
+        delta = delta_map.get(confidence, 1.5)
+
+        measured = alpha + beta + gamma + delta
+
+        # 사전 추정치와의 편차 계산
+        deviation = measured - estimated_daps if estimated_daps > 0 else 0.0
+        band = (
+            "Challenger" if measured < 9.0
+            else "Expert" if measured < 12.0
+            else "Master"
+        )
+
+        return {
+            "measured_daps": round(measured, 2),
+            "alpha_computational": round(alpha, 2),
+            "beta_logical_depth": round(beta, 2),
+            "gamma_combination": round(gamma, 2),
+            "delta_heuristic": round(delta, 2),
+            "estimated_daps": round(estimated_daps, 2),
+            "deviation": round(deviation, 2),
+            "difficulty_band": band,
+        }
 
     def generate_collision_report(
         self,

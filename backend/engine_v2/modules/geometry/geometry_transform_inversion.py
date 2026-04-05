@@ -12,7 +12,7 @@ class GeometryTransformInversionModule(AtomicModule):
     META = ModuleMeta(
         module_id="geometry_transform_inversion",
         name="반전 기하 (Inverse Geometry)",
-        domain="geometry",
+        domain="integer",
         namespace="geo_inversion",
         input_schema={
             "circle_radius": FieldSpec(dtype=float, domain="R+", description="반전 원의 반지름 R"),
@@ -36,16 +36,10 @@ class GeometryTransformInversionModule(AtomicModule):
             "scaffolding_visibility": difficulty_hint < 14.5
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
+    def execute(self, seed: dict[str, Any]) -> int:
         R = seed["circle_radius"]
-        # OP * OP' = R^2
-        # 반전 기하를 통한 문제 생성 로직 (예: Apollonian Circles 등)
-        ans = int(R**2) % 1000
-        return {
-            "inverse_point": (0.0, 0.0),
-            "transformed_shape": "circle",
-            "answer": ans
-        }
+        # OP * OP' = R^2 → R^2 mod 1000
+        return int(R ** 2) % 1000
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         R = seed["circle_radius"]
@@ -58,5 +52,5 @@ class GeometryTransformInversionModule(AtomicModule):
         else:
             steps.append("3. (은닉) 지문에서 반전의 중심과 반지름을 명시하지 않고, 도형 사이의 거리 관계만을 주어 반전 기하 사용 여부를 스스로 판단하게 합니다.")
             
-        steps.append(f"4. 변환된 평면에서 기하적 계산을 수행하여 {self.execute(seed)['answer']}를 도출합니다.")
+        steps.append(f"4. 변환된 평면에서 기하적 계산을 수행하여 R^2 mod 1000 = {self.execute(seed)}를 도출합니다.")
         return steps

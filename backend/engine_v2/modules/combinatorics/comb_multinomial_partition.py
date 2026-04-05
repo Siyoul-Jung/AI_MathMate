@@ -34,7 +34,9 @@ class CombMultinomialPartitionModule(AtomicModule):
         },
         output_schema={
             "answer": FieldSpec(dtype=int, domain="Z+", min_val=0, max_val=999, description="Total ways modulo 1000")
-        }
+        },
+        bridge_output_keys=["T", "partition_count"],
+        bridge_input_accepts=["n_elements", "sequence_value"],
     )
 
     def generate_seed(self, difficulty_hint: float = 6.5) -> Dict[str, Any]:
@@ -72,6 +74,43 @@ class CombMultinomialPartitionModule(AtomicModule):
                     ways = math.factorial(T) // (math.factorial(c) * math.factorial(v) * math.factorial(s))
                     total_count += ways
         return total_count % 1000
+
+    def get_bridge_output(self, seed: Dict[str, Any]) -> Dict[str, Any]:
+        """T와 partition_count(execute 결과)를 하류 모듈에 전달."""
+        ans = self.execute(seed)
+        return {
+            "T": seed["T"],
+            "partition_count": ans,
+        }
+
+    def generate_seed_with_bridge(
+        self, bridge: Dict[str, Any], difficulty_hint: float = 6.5
+    ) -> Dict[str, Any]:
+        """상위 모듈의 n_elements 또는 sequence_value를 T로 활용 (유효 범위 5-20)."""
+        candidate = bridge.get("n_elements") or bridge.get("sequence_value")
+        if candidate is not None:
+            candidate = int(candidate)
+            if 5 <= candidate <= 20:
+                T = candidate
+            elif candidate > 20:
+                T = 20
+            else:
+                T = max(7, candidate)
+        else:
+            T = random.randint(7, 20)
+
+        # 0-999 범위 검증
+        ans = self._solve_internal(T)
+        if 1 <= ans <= 999:
+            return {"T": T}
+
+        # 폴백: 유효 범위 내 탐색
+        for _ in range(50):
+            T = random.randint(7, 20)
+            ans = self._solve_internal(T)
+            if 1 <= ans <= 999:
+                return {"T": T}
+        return {"T": 10}
 
     def get_logic_steps(self, seed: Dict[str, Any]) -> List[str]:
         T = seed["T"]

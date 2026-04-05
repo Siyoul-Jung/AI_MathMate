@@ -52,7 +52,27 @@ tmp_*.py
 run_comparison.py
 inspect_levels.py
 validate_modules.py
+tmp/
 
-# Generated output reports (로컬 실행 결과물)
+# Generated output reports
 qa_report.html
 amc_engine/AIME_*.md
+
+# Harness results (local run data, regeneratable)
+backend/engine_v2/data/harness_results/
+
+# Legacy V1 engine (deprecated)
+backend/amc_engine/
+
+# Large regeneratable data files
+backend/engine_v2/data/pdf_cache.json
+backend/engine_v2/data/CompendiumAIME.pdf
+backend/engine_v2/data/consultation_prompt.md
+backend/engine_v2/data/missing_problems.json
+
+# Audit/debug logs
+**/audit_result.txt
+**/deep_audit_result.txt
+**/final_error_log.txt
+**/registration_log.txt
+backend/audit_heritage.py

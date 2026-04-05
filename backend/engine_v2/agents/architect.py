@@ -15,13 +15,17 @@ from typing import Any
 
 from engine_v2.agents.base_agent import BaseAgent, AgentResult
 from engine_v2.config import MODELS, get_pg_dsn
-import psycopg2
+try:
+    import psycopg2
+except ImportError:
+    psycopg2 = None
 
 
 class ArchitectAgent(BaseAgent):
     """
     모듈 조합 설계 에이전트.
-    Gemini 2.5 Flash를 사용하여 최적의 하이브리드 모듈 조합을 선택합니다.
+    config.py의 MODELS["architect"] 설정에 따라 OpenAI(gpt-*) 또는 Gemini 모델을 사용하여
+    최적의 하이브리드 모듈 조합을 선택합니다. (3-Company Separation 지원)
     """
 
     ROLE = "ARCHITECT"
@@ -58,8 +62,6 @@ class ArchitectAgent(BaseAgent):
         previously_used = previously_used or []
 
         try:
-            client = self._get_gemini_client()
-
             # 후보 조합 설명 텍스트 생성
             combo_descriptions = []
             for i, combo in enumerate(candidate_combinations):
@@ -115,13 +117,11 @@ class ArchitectAgent(BaseAgent):
                 }}
             """).strip()
 
-            response = client.models.generate_content(
-                model=self.model_name,
-                contents=prompt,
-                config={"response_mime_type": "application/json"},
-            )
-
-            result = json.loads(response.text)
+            # 3-Company Separation: 모델에 따라 OpenAI 또는 Gemini 클라이언트 사용
+            if self.model_name.startswith("gpt"):
+                result = self._call_openai(prompt)
+            else:
+                result = self._call_gemini(prompt)
             selected_idx = result.get("selected_combination_index", 1) - 1
             selected_idx = max(0, min(selected_idx, len(candidate_combinations) - 1))
             selected_combo = result.get(
@@ -166,6 +166,29 @@ class ArchitectAgent(BaseAgent):
                 input_summary=f"candidates={len(candidate_combinations)}",
                 output=None, error=str(e)
             )
+
+    def _call_openai(self, prompt: str) -> dict:
+        """OpenAI 모델로 JSON 응답을 생성합니다."""
+        client = self._get_openai_client()
+        response = client.chat.completions.create(
+            model=self.model_name,
+            messages=[
+                {"role": "system", "content": "You are an AIME problem design expert. Always respond in valid JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_object"},
+        )
+        return json.loads(response.choices[0].message.content)
+
+    def _call_gemini(self, prompt: str) -> dict:
+        """Gemini 모델로 JSON 응답을 생성합니다."""
+        client = self._get_gemini_client()
+        response = client.models.generate_content(
+            model=self.model_name,
+            contents=prompt,
+            config={"response_mime_type": "application/json"},
+        )
+        return json.loads(response.text)
 
     def _save_blueprint(
         self,

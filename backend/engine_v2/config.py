@@ -7,13 +7,13 @@ AI_MathMate V2 — 중앙 설정 파일
 # ─── LLM 모델 설정 ───────────────────────────────────────────
 MODELS = {
     # 시나리오 작성 에이전트 (비용 효율 우선)
-    "writer": "gpt-4o-mini",
+    "writer": "gpt-4o",
 
     # 역추론 검증 에이전트 (논리 정밀도 우선, 다른 회사 모델로 편향 분리)
     "evaluator": "gemini-2.5-flash",
 
-    # 모듈 조합 설계 에이전트 (전략적 판단)
-    "architect": "gemini-2.5-flash",
+    # 모듈 조합 설계 에이전트 (전략적 판단, 3-Company Separation)
+    "architect": "gpt-4o-mini",
 
     # 모듈 추출용 (대용량 PDF 분석)
     "module_extractor": "gemini-2.5-flash",
@@ -66,6 +66,7 @@ PG_DB = {
     "host": os.environ.get("PG_HOST", "localhost"),
     "port": os.environ.get("PG_PORT", "5432"),
 }
+USE_POSTGRES = os.environ.get("USE_POSTGRES", "False").lower() == "true"
 
 def get_pg_dsn() -> str:
     """PostgreSQL DSN 문자열 반환"""
@@ -81,3 +82,12 @@ SUPPORTED_EXAM_TYPES = {
 }
 
 SUPPORTED_LANGUAGES = ["en", "ko"]
+
+# ─── 조합 샘플링 설정 (Jaccard 전이 행렬 + 2-Track) ──────────
+COMBINATION_SAMPLING = {
+    "exploitation_ratio": 0.80,        # Track A 비율 (기출 기반)
+    "exploration_temperature": 1.5,    # Track B softmax 온도 (높을수록 탐색 강화)
+    "laplace_alpha": 0.01,             # 라플라스 스무딩 (J=0 쌍에 극소 확률 부여)
+    "daps_rejection_tolerance": 3.0,   # DAPS 기각 허용 오차
+    "max_exploration_attempts": 50,    # Track B 최대 시도 횟수/후보
+}

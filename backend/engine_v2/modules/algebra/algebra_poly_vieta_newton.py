@@ -13,7 +13,7 @@ class AlgebraPolyVietaNewtonModule(AtomicModule):
     META = ModuleMeta(
         module_id="algebra_poly_vieta_newton",
         name="고차 다항식과 뉴턴의 합",
-        domain="algebra",
+        domain="integer",
         namespace="alg_vieta_newton",
         input_schema={
             "degree": FieldSpec(dtype=int, domain="[3, 5]", description="다항식의 차수"),
@@ -28,7 +28,9 @@ class AlgebraPolyVietaNewtonModule(AtomicModule):
         daps_contribution=5.0,
         min_difficulty=13,
         category="algebra",
-        tags=["vieta", "newton_sums", "symmetric_polynomials"]
+        tags=["vieta", "newton_sums", "symmetric_polynomials"],
+        bridge_output_keys=["power_sum", "degree"],
+        bridge_input_accepts=["root_abs_sum", "polynomial_degree"],
     )
 
     def generate_seed(self, difficulty_hint: float = 13.0) -> dict[str, Any]:
@@ -47,22 +49,48 @@ class AlgebraPolyVietaNewtonModule(AtomicModule):
             "roots": roots
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
+    def execute(self, seed: dict[str, Any]) -> int:
+        """S_n = sum(r_i^n) mod 1000을 반환."""
         roots = seed["roots"]
         n = seed["target_power"]
-        
-        # 1. 뉴턴의 합 계산: S_n = sum(r_i^n)
-        answer = sum(r**n for r in roots)
-        
-        # 2. 다항식 계수 계산: (x-r1)(x-r2)...
-        x = sp.Symbol('x')
-        poly = sp.Poly(sp.prod([(x - r) for r in roots]), x)
-        coeffs = poly.all_coeffs()
-        
+        answer = sum(r ** n for r in roots)
+        return abs(answer) % 1000
+
+    def get_bridge_output(self, seed: dict[str, Any]) -> dict[str, Any]:
+        """power_sum(S_n)과 degree를 하류 모듈에 전달."""
+        ans = self.execute(seed)
         return {
-            "answer": int(answer),
-            "polynomial_coeffs": [int(c) for c in coeffs]
+            "power_sum": ans,
+            "degree": seed["degree"],
         }
+
+    def generate_seed_with_bridge(
+        self, bridge: dict[str, Any], difficulty_hint: float = 13.0
+    ) -> dict[str, Any]:
+        """poly_complex_roots의 root_abs_sum을 target_power 힌트로 활용."""
+        root_abs_sum = bridge.get("root_abs_sum")
+        poly_degree = bridge.get("polynomial_degree")
+
+        degree = int(poly_degree) if poly_degree is not None and 3 <= int(poly_degree) <= 5 else random.randint(3, 5)
+
+        # root_abs_sum을 target_power 힌트로 사용 (유효 범위 내로 클램핑)
+        if root_abs_sum is not None:
+            tp = int(root_abs_sum) % 6 + 3  # 3~8 범위
+        else:
+            tp = random.randint(degree, degree + 3)
+
+        roots = [random.randint(-5, 5) for _ in range(degree)]
+        roots = list(set([r for r in roots if r != 0]))
+        while len(roots) < degree:
+            new_r = random.randint(-7, 7)
+            if new_r not in roots and new_r != 0:
+                roots.append(new_r)
+
+        seed = {"degree": degree, "target_power": tp, "roots": roots}
+        ans = self.execute(seed)
+        if 0 <= ans <= 999:
+            return seed
+        return self.generate_seed(difficulty_hint)
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         return [

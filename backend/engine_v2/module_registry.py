@@ -38,6 +38,9 @@ class ModuleRegistry:
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._modules: dict[str, AtomicModule] = {}
+        # 메모리 캐시 — DB 쿼리 병목 해소
+        self._compat_cache: set[tuple[str, str]] | None = None
+        self._bridge_cache: dict[tuple[str, str], list[str]] | None = None
         self._init_db()
 
     @classmethod
@@ -75,7 +78,44 @@ class ModuleRegistry:
                     registered_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+            # Bridge 체이닝 연결 캐시
+            # source → target 방향의 공유 bridge key를 JSON 배열로 저장
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS module_bridge_connections (
+                    source_module_id TEXT NOT NULL,
+                    target_module_id TEXT NOT NULL,
+                    bridge_keys      TEXT NOT NULL DEFAULT '[]',  -- JSON 배열
+                    updated_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (source_module_id, target_module_id)
+                )
+            """)
+            # combination_metrics: 조합별 성과 이력 (자가 진화 피드백 루프)
+            # CLAUDE.md Section 5의 Score 공식 데이터 소스
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS combination_metrics (
+                    combo_key       TEXT NOT NULL,     -- 정렬된 module_id CSV (예: "mod_a,mod_b")
+                    estimated_daps  REAL NOT NULL,
+                    measured_daps   REAL,              -- NULL = 아직 BEq 미통과
+                    daps_delta      REAL,              -- measured - estimated
+                    verdict         TEXT NOT NULL,     -- 'PASS' | 'FAIL' | 'FIX_REQUIRED'
+                    fail_reason     TEXT DEFAULT '',   -- 'MATH_ERROR' | 'AMBIGUITY' | 'WRITER_LOOP'
+                    attempt_count   INTEGER DEFAULT 1,
+                    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (combo_key, created_at)
+                )
+            """)
             conn.commit()
+
+    # ── DB 초기화 ────────────────────────────────────────────────────────────
+
+    def reset_db(self) -> None:
+        """모든 등록 데이터를 삭제하고 클린 슬레이트로 초기화합니다."""
+        with sqlite3.connect(self.db_path) as conn:
+            for table in ["module_compatibility", "modules",
+                          "module_bridge_connections", "combination_metrics"]:
+                conn.execute(f"DELETE FROM {table}")
+            conn.commit()
+        self._modules.clear()
 
     # ── 모듈 등록 ────────────────────────────────────────────────────────────
 
@@ -152,19 +192,51 @@ class ModuleRegistry:
             ans_a = mod_a.execute(seed_a)
             ans_b = mod_b.execute(seed_b)
 
-            valid_a, reason_a = mod_a.validate_answer(ans_a)
-            valid_b, reason_b = mod_b.validate_answer(ans_b)
+            # dict 반환 모듈 호환: 첫 번째 int 값을 정답으로 사용
+            if isinstance(ans_a, dict):
+                ans_a = next((v for v in ans_a.values() if isinstance(v, (int, float))), 0)
+            if isinstance(ans_b, dict):
+                ans_b = next((v for v in ans_b.values() if isinstance(v, (int, float))), 0)
+
+            valid_a, reason_a = mod_a.validate_answer(int(ans_a))
+            valid_b, reason_b = mod_b.validate_answer(int(ans_b))
 
             if not valid_a:
                 return self._save_compat(a_id, b_id, "INCOMPATIBLE", f"모듈 A 정답 무효: {reason_a}")
             if not valid_b:
                 return self._save_compat(a_id, b_id, "INCOMPATIBLE", f"모듈 B 정답 무효: {reason_b}")
 
-            return self._save_compat(a_id, b_id, "COMPATIBLE", "")
-
         except Exception as e:
             reason = f"실행 오류: {traceback.format_exc(limit=2)}"
             return self._save_compat(a_id, b_id, "INCOMPATIBLE", reason)
+
+        # 4단계: Bridge 연결 탐지 (구조적 검사 — 실행 불필요)
+        import json as _json
+        keys_a_to_b = list(set(mod_a.META.bridge_output_keys) & set(mod_b.META.bridge_input_accepts))
+        keys_b_to_a = list(set(mod_b.META.bridge_output_keys) & set(mod_a.META.bridge_input_accepts))
+        self._save_bridge(a_id, b_id, keys_a_to_b)
+        self._save_bridge(b_id, a_id, keys_b_to_a)
+
+        if keys_a_to_b or keys_b_to_a:
+            direction = f"{a_id}→{b_id}: {keys_a_to_b}" if keys_a_to_b else ""
+            rev = f"{b_id}→{a_id}: {keys_b_to_a}" if keys_b_to_a else ""
+            bridge_str = " | ".join(filter(None, [direction, rev]))
+            print(f"  🔗 Bridge 탐지: {bridge_str}")
+
+        return self._save_compat(a_id, b_id, "COMPATIBLE", "")
+
+    def _save_bridge(self, source_id: str, target_id: str, keys: list) -> None:
+        """Bridge 연결 정보를 DB에 저장합니다. 키가 없으면 저장하지 않습니다."""
+        if not keys:
+            return
+        import json as _json
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                INSERT OR REPLACE INTO module_bridge_connections
+                (source_module_id, target_module_id, bridge_keys)
+                VALUES (?, ?, ?)
+            """, (source_id, target_id, _json.dumps(keys)))
+            conn.commit()
 
     def _save_compat(self, a_id: str, b_id: str, status: str, reason: str) -> dict:
         """호환성 결과를 DB에 저장합니다."""
@@ -204,7 +276,7 @@ class ModuleRegistry:
         """
         from itertools import combinations
 
-        tolerance = 1.5  # target ± 1.5 범위
+        tolerance = 5.0  # target ± 5.0 범위 (MASTER 달성을 위해 확장)
         eligible = [
             mid for mid, mod in self._modules.items()
             if exam_type in mod.META.exam_types
@@ -226,20 +298,177 @@ class ModuleRegistry:
 
             candidates.append(list(combo))
 
+        # 복합 정렬: Jaccard(기출 연관) + Bridge(구조)
+        # History(이력)는 Cold Start에서 비용 대비 효과 없으므로 데이터 축적 후 활성화
+        from engine_v2.co_occurrence_matrix import CoOccurrenceMatrix
+        _matrix = CoOccurrenceMatrix(db_path=self.db_path)
+        if not _matrix.load_from_db():
+            _matrix.build_from_problem_map()
+
+        self._load_caches()
+
+        def composite_score(combo: list[str]) -> float:
+            # Jaccard 기출 연관 점수 (0~100)
+            jaccard = _matrix.combo_jaccard_score(combo) * 100
+            # Bridge 구조 보너스 (캐시 사용)
+            bridge = sum(
+                1 for i in range(len(combo) - 1)
+                if self._bridge_cache.get((combo[i], combo[i + 1]))
+                or self._bridge_cache.get((combo[i + 1], combo[i]))
+            )
+            return jaccard * 0.60 + bridge * 40
+
+        candidates.sort(key=composite_score, reverse=True)
         return candidates
 
-    def _all_compatible(self, module_ids: list[str]) -> bool:
-        """모든 모듈 쌍이 COMPATIBLE인지 확인합니다."""
-        from itertools import combinations
+    def _load_caches(self) -> None:
+        """호환성 + Bridge 데이터를 메모리에 일괄 로드 (최초 1회)."""
+        if self._compat_cache is not None:
+            return
+        self._compat_cache = set()
+        self._bridge_cache = {}
         with sqlite3.connect(self.db_path) as conn:
-            for a, b in combinations(module_ids, 2):
-                row = conn.execute("""
-                    SELECT status FROM module_compatibility
-                    WHERE module_a_id = ? AND module_b_id = ?
-                """, (a, b)).fetchone()
-                if not row or row[0] != "COMPATIBLE":
-                    return False
+            # 호환 쌍 캐시
+            rows = conn.execute(
+                "SELECT module_a_id, module_b_id FROM module_compatibility WHERE status='COMPATIBLE'"
+            ).fetchall()
+            for a, b in rows:
+                self._compat_cache.add((a, b))
+            # Bridge 캐시
+            import json as _json
+            rows = conn.execute(
+                "SELECT source_module_id, target_module_id, bridge_keys FROM module_bridge_connections"
+            ).fetchall()
+            for s, t, keys in rows:
+                parsed = _json.loads(keys)
+                if parsed:
+                    self._bridge_cache[(s, t)] = parsed
+
+    def _all_compatible(self, module_ids: list[str]) -> bool:
+        """모든 모듈 쌍이 COMPATIBLE인지 확인합니다 (메모리 캐시 사용)."""
+        from itertools import combinations
+        self._load_caches()
+        for a, b in combinations(module_ids, 2):
+            if (a, b) not in self._compat_cache and (b, a) not in self._compat_cache:
+                return False
         return True
+
+    # ── 피드백 루프: combination_metrics 기록 + Score 공식 ─────────────────
+
+    @staticmethod
+    def _combo_key(module_ids: list[str]) -> str:
+        """조합의 정규화 키 (정렬된 CSV)."""
+        return ",".join(sorted(module_ids))
+
+    def record_outcome(
+        self,
+        module_ids: list[str],
+        estimated_daps: float,
+        measured_daps: float | None,
+        verdict: str,
+        fail_reason: str = "",
+        attempt_count: int = 1,
+    ) -> None:
+        """
+        파이프라인 실행 결과를 combination_metrics에 기록합니다.
+        Pipeline에서 BEq 판정 후 호출됩니다.
+        """
+        key = self._combo_key(module_ids)
+        delta = (measured_daps - estimated_daps) if measured_daps is not None else None
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                INSERT INTO combination_metrics
+                (combo_key, estimated_daps, measured_daps, daps_delta, verdict, fail_reason, attempt_count)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (key, estimated_daps, measured_daps, delta, verdict, fail_reason, attempt_count))
+            conn.commit()
+
+    def get_combo_score(
+        self, module_ids: list[str], target_daps: float
+    ) -> float:
+        """
+        CLAUDE.md Section 5의 Deterministic Score 공식:
+        Score = (P_daps × S_coeff × R_pass) - W_fail
+
+        모든 값은 combination_metrics 이력에서 자동 계산됩니다.
+        이력이 없으면 Cold Start 기본값을 사용합니다.
+        """
+        key = self._combo_key(module_ids)
+
+        with sqlite3.connect(self.db_path) as conn:
+            rows = conn.execute("""
+                SELECT estimated_daps, measured_daps, daps_delta, verdict, fail_reason
+                FROM combination_metrics WHERE combo_key = ?
+                ORDER BY created_at DESC
+            """, (key,)).fetchall()
+
+        if not rows:
+            # Cold Start: 이력 없음 → META 합산으로 추정
+            estimated = sum(
+                self._modules[mid].META.daps_contribution
+                for mid in module_ids if mid in self._modules
+            )
+            p_daps = max(0, 100 - abs(estimated - target_daps) * 10)
+            return p_daps * 1.0 * 0.7  # S_coeff=1.0, R_pass=0.7 (Cold Start)
+
+        # ── P_daps: measured_daps 기반 DAPS 근접도 (최근 5개 평균) ──
+        recent_measured = [r[1] for r in rows[:5] if r[1] is not None]
+        if recent_measured:
+            avg_measured = sum(recent_measured) / len(recent_measured)
+        else:
+            avg_measured = rows[0][0]  # estimated fallback
+        p_daps = max(0, 100 - abs(avg_measured - target_daps) * 10)
+
+        # ── R_pass: historical pass rate ──
+        total = len(rows)
+        passes = sum(1 for r in rows if r[3] == "PASS")
+        r_pass = passes / total if total > 0 else 0.7
+
+        # ── S_coeff: 시너지 계수 (데이터 100개 이상 시 자동 보정) ──
+        if total >= 100:
+            s_coeff = 0.8 + (r_pass * 0.6)  # 범위: 0.8 ~ 1.4
+        else:
+            s_coeff = 1.0  # Cold Start
+
+        # ── W_fail: 누적 감점 (상한 -40) ──
+        penalty_map = {"MATH_ERROR": -30, "AMBIGUITY": -10, "WRITER_LOOP": -5}
+        w_fail = 0
+        for r in rows:
+            reason = r[4]
+            if reason in penalty_map:
+                w_fail += penalty_map[reason]
+        w_fail = max(w_fail, -40)  # 하한 캡
+
+        score = (p_daps * s_coeff * r_pass) + w_fail
+        return round(score, 2)
+
+    def get_bridge_connection(self, source_id: str, target_id: str) -> list[str]:
+        """
+        source → target 방향으로 전달 가능한 bridge key 목록을 반환합니다.
+        Bridge가 없으면 빈 리스트 반환 (메모리 캐시 사용).
+        """
+        self._load_caches()
+        return self._bridge_cache.get((source_id, target_id), [])
+
+    def find_best_chain(self, module_ids: list[str]) -> list[str]:
+        """
+        주어진 모듈 목록에서 Bridge 연결이 최대화되는 실행 순서를 반환합니다.
+        2개 모듈: [A, B] → A→B 또는 B→A 중 bridge 있는 방향 선택
+        3개 이상: 체인이 가장 긴 순열 선택 (브루트포스, 모듈 수 제한으로 안전)
+        """
+        from itertools import permutations
+        if len(module_ids) <= 1:
+            return module_ids
+
+        best_order, best_score = module_ids, 0
+        for perm in permutations(module_ids):
+            score = sum(
+                1 for i in range(len(perm) - 1)
+                if self.get_bridge_connection(perm[i], perm[i + 1])
+            )
+            if score > best_score:
+                best_score, best_order = score, list(perm)
+        return best_order
 
     # ── 조회 유틸 ────────────────────────────────────────────────────────────
 

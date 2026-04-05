@@ -74,7 +74,16 @@ class EvaluatorAgent(BaseAgent):
                 config={"response_mime_type": "application/json"},
             )
 
-            result = json.loads(response.text)
+            raw_text = response.text
+            # Gemini가 LaTeX \escape를 JSON에 넣으면 파싱 실패 → strict=False로 완화
+            try:
+                result = json.loads(raw_text)
+            except json.JSONDecodeError:
+                # 마크다운 코드블록 래핑 제거 후 재시도
+                import re
+                cleaned = re.sub(r'^```(?:json)?\s*', '', raw_text.strip())
+                cleaned = re.sub(r'\s*```$', '', cleaned)
+                result = json.loads(cleaned)
             extracted_answer = int(result.get("final_answer", -1))
             ambiguity = result.get("ambiguity_detected", "")
             confidence = result.get("confidence", "LOW")

@@ -13,7 +13,7 @@ class AlgebraRootsUnityFilterModule(AtomicModule):
     META = ModuleMeta(
         module_id="algebra_roots_unity_filter",
         name="단위근 필터 (Roots of Unity Filter)",
-        domain="algebra",
+        domain="integer",
         namespace="alg_roots_unity",
         input_schema={
             "synergy_payload": FieldSpec(dtype=dict, domain="Schema", description="스네이크 오일 모듈 등에서 넘어온 융합 데이터"),
@@ -39,26 +39,21 @@ class AlgebraRootsUnityFilterModule(AtomicModule):
             "target_mod": random.choice([2, 3, 4])
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
+    def execute(self, seed: dict[str, Any]) -> int:
+        """(1+x)^n에서 k ≡ 0 (mod m) 계수의 합 mod 1000을 반환.
+        정확한 단위근 필터: (1/m) * sum_{j=0}^{m-1} (1+omega^j)^n, omega = e^{2pi*i/m}."""
         payload = seed["synergy_payload"]
         m = seed["target_mod"]
         n = payload["n_degree"]
-        
-        # 1. 단위근 필터 공식: 1/m * Sum_{j=0}^{m-1} f(omega^j)
-        # (1+x)^n 일 때, omega^j 를 대입하여 합산
-        # 예시: m=2 (짝수항 합): (f(1) + f(-1)) / 2
-        # m=3: (f(1) + f(omega) + f(omega^2)) / 3
-        
-        if m == 2:
-            ans = (2**n) // 2
-        else:
-            # (1+x)^n 의 k ≡ 0 (mod m) 계수 합의 근사치 또는 정수 처리
-            ans = (2**n) // m 
-            
-        return {
-            "result_sum": int(ans),
-            "filter_logic": f"\\frac{{1}}{{{m}}} \\sum_{{j=0}}^{{{m}-1}} f(\\omega^j)"
-        }
+
+        # 정수 정밀 계산: (1+omega^j)^n 을 복소수로 계산 후 실수부 반올림
+        import cmath
+        total = complex(0, 0)
+        for j in range(m):
+            omega_j = cmath.exp(2j * cmath.pi * j / m)
+            total += (1 + omega_j) ** n
+        result = round(total.real / m)
+        return abs(result) % 1000
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         m = seed["target_mod"]
@@ -66,5 +61,5 @@ class AlgebraRootsUnityFilterModule(AtomicModule):
             f"1. 생성함수 f(x)의 계수 중 k ≡ 0 (mod {m})인 항의 합을 추출하기 위해 {m}차 단위근 omega를 도입합니다.",
             f"2. 단위근 필터링 공식 1/{m} * Sum_{{j=0}}^{{{m-1}}} f(omega^j) 에 f(x)를 대입합니다.",
             "3. 복소수의 거듭제곱 및 오일러 공식을 사용하여 복합 합계를 단순화합니다.",
-            f"4. 결과값 {self.execute(seed)['result_sum']}를 통해 최종 시그마 합을 도출합니다."
+            f"4. 결과값을 통해 최종 시그마 합을 도출합니다."
         ]

@@ -36,7 +36,15 @@ class ModuleMeta:
     v2_compatible: bool = True
     v2_strategy_tags: list[str] = field(default_factory=list)  # ["conceal", "asymmetry", "anonymize"]
     logic_leap_points: list[str] = field(default_factory=list) # "도약"이 필요한 지점들 설명
-    
+
+    # ── Bridge 인터페이스 (모듈 체이닝용) ──────────────────────────────────
+    # 이 모듈이 다음 모듈에 넘겨줄 수 있는 수학적 중간값 키 목록
+    # 예: ["order", "prime"] → 위수·소수를 하류 모듈에 전달 가능
+    bridge_output_keys: list[str] = field(default_factory=list)
+    # 이 모듈이 상위 모듈로부터 받아 활용할 수 있는 키 목록
+    # 예: ["order"] → ord_p(a) 값을 받아 n_pairs 파라미터로 사용
+    bridge_input_accepts: list[str] = field(default_factory=list)
+
     exam_types: list[str] = field(default_factory=lambda: ["AIME"])
     languages: list[str] = field(default_factory=lambda: ["en"])
     curriculum_standard: str = "AIME"
@@ -137,6 +145,46 @@ class AtomicModule(ABC, StrategyMixin):
 
     # ── 자동 제공 메서드 (오버라이드 불필요) ────────────────────────────────
 
+    def verify_with_sympy(self, seed: dict[str, Any]) -> int | None:
+        """
+        [Branch B — 결정론 엔진] SymPy 기반 독립 검증.
+
+        execute()와 다른 계산 경로(symbolic/exact arithmetic)로 같은 정답에 도달하는지 확인합니다.
+        부동소수점 오류, 오버플로우, 모듈 로직 버그를 잡아냅니다.
+
+        반환값:
+          - int: SymPy가 계산한 정답 (Pipeline에서 execute() 결과와 비교)
+          - None: SymPy 검증 미지원 → 해당 모듈은 검증 스킵 (통과 처리)
+
+        bridge_output_keys가 있는 소스 모듈은 구현 불필요.
+        터미널 모듈(final answer를 내는 모듈)에서 반드시 override 권장.
+        """
+        return None
+
+    def get_bridge_output(self, seed: dict[str, Any]) -> dict[str, Any]:
+        """
+        [Bridge 인터페이스] 이 모듈이 하류 모듈에 전달할 수학적 중간값을 반환합니다.
+
+        기본값: {} — 브릿지 없음.
+        META.bridge_output_keys가 선언된 모듈에서 반드시 override해야 합니다.
+        반환 dict의 키는 META.bridge_output_keys와 일치해야 합니다.
+        """
+        return {}
+
+    def generate_seed_with_bridge(
+        self, bridge: dict[str, Any], difficulty_hint: float = 10.0
+    ) -> dict[str, Any]:
+        """
+        [Bridge 인터페이스] 상위 모듈의 bridge_output을 받아 수학적으로 연결된 시드를 생성합니다.
+
+        기본값: bridge 무시 후 generate_seed() 호출 (Bridge 미지원 모듈의 폴백).
+        META.bridge_input_accepts가 선언된 모듈에서 반드시 override해야 합니다.
+
+        :param bridge: 상위 모듈의 get_bridge_output() 반환값
+        :param difficulty_hint: DAPS 목표 점수
+        """
+        return self.generate_seed(difficulty_hint=difficulty_hint)
+
     def get_daps_contribution(self, seed: dict[str, Any]) -> float:
         """이 모듈이 기여하는 DAPS 점수를 계산합니다."""
         base = self.META.daps_contribution
@@ -206,12 +254,16 @@ def check_namespace_conflict(mod_a: AtomicModule, mod_b: AtomicModule) -> tuple[
     return True, "OK"
 
 
+_VALID_DOMAINS = {"integer", "real", "complex"}
+
 def check_domain_compatibility(mod_a: AtomicModule, mod_b: AtomicModule) -> tuple[bool, str]:
-    if mod_a.META.domain != mod_b.META.domain:
-        return False, (
-            f"도메인 불일치: {mod_a.META.module_id}({mod_a.META.domain}) ↔ "
-            f"{mod_b.META.module_id}({mod_b.META.domain})"
-        )
+    """integer ⊂ real ⊂ complex 포함 관계를 반영한 도메인 호환성 검사.
+    AIME 최종 답은 항상 정수이므로 integer/real/complex 간 조합은 모두 허용."""
+    da, db = mod_a.META.domain, mod_b.META.domain
+    if da not in _VALID_DOMAINS:
+        return False, f"잘못된 도메인: {mod_a.META.module_id}({da})"
+    if db not in _VALID_DOMAINS:
+        return False, f"잘못된 도메인: {mod_b.META.module_id}({db})"
     return True, "OK"
 
 

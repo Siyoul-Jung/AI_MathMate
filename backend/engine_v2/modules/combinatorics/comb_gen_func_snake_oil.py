@@ -12,7 +12,7 @@ class CombGenFuncSnakeOilModule(AtomicModule):
     META = ModuleMeta(
         module_id="comb_gen_func_snake_oil",
         name="스네이크 오일 소거법 (Generating Functions)",
-        domain="combinatorics",
+        domain="integer",
         namespace="comb_snake",
         input_schema={
             "summation_type": FieldSpec(dtype=str, domain=["binomial_sum", "linear_recurrence"], description="소거할 시그마 유형"),
@@ -36,23 +36,31 @@ class CombGenFuncSnakeOilModule(AtomicModule):
             "n_range": random.randint(10, 50)
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
-        # Snake Oil 기법의 시뮬레이션: sum(C(n,k) * x^k) = (1+x)^n
-        # 융합을 위해 '단위근 필터' 모듈에 전달할 데이터를 생성합니다.
+    def execute(self, seed: dict[str, Any]) -> int:
+        """Snake Oil: sum_{k=0}^{n} C(n,k) = 2^n. mod 1000으로 반환."""
+        n = seed["n_range"]
+        return pow(2, n, 1000)
+
+    def get_bridge_output(self, seed: dict[str, Any]) -> dict[str, Any]:
         n = seed["n_range"]
         return {
-            "generating_function": f"(1 + x)^{{{n}}}",
-            "synergy_payload": {
-                "n_degree": n,
-                "mod_filter": 3, # mod 3 필터링 조건 등
-                "base_poly": [1] * (n + 1) # x^n + ... + 1
-            },
-            "answer": 2**n # Placeholder
+            "n_degree": n,
+            "mod_filter": 3,
+            "generating_function": f"(1+x)^{n}",
         }
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
+        n = seed["n_range"]
         return [
-            f"1. 주어진 복합 시그마 sum_{{k=0}}^{{{seed['n_range']}}} f(k, n)을 'Snake Oil' 기법을 이용해 이중 합으로 재배열합니다.",
-            "2. 내부 합을 생성함수(Generating Function)의 성질을 이용해 닫힌 형식(Closed Form)으로 변환합니다.",
-            f"3. 획득된 생성함수 {self.execute(seed)['generating_function']}를 '단위근 필터' 모듈로 전달하여 특정 나머지 조건(mod m)에 따른 계수 합을 추출합니다."
+            f"1. 복합 시그마 sum_{{k=0}}^{{{n}}} C({n},k)을 Snake Oil 기법으로 정리합니다.",
+            f"2. 생성함수 (1+x)^{n}에서 x=1을 대입하면 합 = 2^{n}.",
+            f"3. 2^{n} mod 1000 = {pow(2, n, 1000)}을 구합니다.",
         ]
+
+    def verify_with_sympy(self, seed: dict[str, Any]) -> int | None:
+        try:
+            from sympy import Integer
+            n = Integer(seed["n_range"])
+            return int(pow(2, n, 1000))
+        except Exception:
+            return None

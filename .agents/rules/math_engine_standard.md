@@ -21,26 +21,31 @@ LLM은 수학 계산의 주체가 될 수 없습니다. Writer는 `seed`와 `log
 
 ## 2. 난이도 체계: DAPS (Dynamic Difficulty Assessment & Prediction Score)
 
-### 2.1 DAPS 공식 (V2 확장판)
+### 2.1 DAPS 공식 (V2 비선형 시너지 모델)
 
-$$DAPS = \alpha(Computational) + \beta(LogicalDepth) + \gamma(CategoryCombination) + \delta(Heuristic/Trap)$$
+$$Total\_DAPS = (\sum_{i=1}^{n} \text{module}_i.daps) \times \text{Synergy}(cat_1, cat_2, ...) + \text{LogicLeap}(\gamma)$$
 
-| 변수 | 의미 | 범위(점) |
-|:---:|---|:---:|
-| α | 계산 복잡도 (브루트 포스 불가 수준) | 0–5 |
-| β | 논리적 깊이 (보조 정리 연쇄 수) | 0–5 |
-| γ | 카테고리 결합 (2개 이상 도메인 혼합) | 0–3 |
-| **δ** | **인지적 함정/발상의 전환 (Heuristic/Trap)** | **0–3** |
+| 도메인 결합 | 시너지 계수 | 특성 |
+|:---:|:---:|---|
+| 이질적 결합 (예: NT $\times$ Geo) | **1.4x** | 개념 간 변환 부하로 난이도 급상승 |
+| 인접 결합 (예: Alg $\times$ NT) | **1.2x** | 자연스러운 난이도 상승 |
+| 단일 도메인 | **1.0x** | 기본 난이도 유지 |
 
-**δ 정량화 기준:**
-- `δ=0`: 풀이 경로가 선형적이고 예측 가능함
-- `δ=1.0`: 하나의 비자명한(non-trivial) 치환 또는 관찰이 필요함
-- `δ=2.0`: 일반적 접근 전략이 실패하도록 설계된 함정 존재
+**주의:** 실측 데이터(`combination_metrics`) 축적 전까지는 1.0으로 초기화하여 보수적으로 운영함.
+
+### 2.2 결정론적 점수 및 자가 학습
+시스템 품질의 핵심은 **비결정론적 LLM 선택을 결정론적 Python 로직으로 필터링**하는 데 있음.
+
+**[Deterministic Scoring Formula]**
+$Score = (P_{daps} \times S_{coeff} \times R_{pass}) - \text{min}(\sum W_{fail}, 45)$
+- **$P_{daps}$**: 목표 DAPS 근접도 (±1.5 이내 필수).
+- **$R_{pass}$**: 과거 성공률 (Cold Start 시 **0.7**).
+- **$W_{fail}$**: 실패 감점 (Penalty Cap: **-45점**). 상한선을 두어 좋은 조합의 회생 기회를 보장함.
 - `δ=3.0`: 역발상이 핵심 메커니즘 (예: "구하는 값을 직접 구하지 않음")
 
 **δ 값이 높은 문제는 계산량이 적어도 MASTER 등급으로 분류될 수 있습니다.**
 
-### 2.2 난이도 밴드 기준
+### 2.3 난이도 밴드 기준
 
 | 밴드 | DAPS 범위 | 특성 |
 |---|---|---|
@@ -62,10 +67,12 @@ V1 DB와의 호환성을 위해 다음 매핑을 유지합니다:
 
 | 에이전트 | 역할 | LLM 사용 |
 |---|---|:---:|
-| **Architect** | 목표 DAPS에 맞는 호환 모듈 조합 선택 | ✅ |
+| **Architect** | Top-K 후보 중 서사적 테마/참신성에 따른 최종 선택 | ✅ |
 | **Writer** | seed + logic_steps → LaTeX 지문 서술 | ✅ |
 | **Evaluator** | 지문만 보고 역추론으로 정답 도출 | ✅ |
 | **Judge** | Evaluator 정답 vs 원본 정답 BEq 판정 | ❌ (Pure Python) |
+
+**Architect의 제약:** Architect는 Python 레이어(ModuleRegistry)가 선별한 상위 5개 후보 내에서만 선택할 수 있으며, 수학적 결정론을 침해할 수 없음.
 
 ### 3.2 BEq (Bidirectional Equivalence) 검증 프로토콜
 

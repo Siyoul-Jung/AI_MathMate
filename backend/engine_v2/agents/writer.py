@@ -122,34 +122,41 @@ class WriterAgent(BaseAgent):
 위 피드백을 반드시 반영하여 이전과 동일한 수학적/구조적 오류를 반복하지 마세요.
 """
 
+            # 정답은 Writer에게 노출하지 않음 (Two-Engine 원칙)
+            # Writer가 지문을 쓰고 스스로 풀어야 BEq의 의미가 있음
             prompt = textwrap.dedent(f"""
-                당신은 AIME(미국 수학 올림피아드) 전문 출제위원입니다.
-                아래 수학적 구조(DNA)를 바탕으로 AIME 스타일의 문제 지문을 작성하세요.
+                You are a professional AIME (American Invitational Mathematics Examination) problem writer.
+                Create an AIME-style problem based on the mathematical structure below.
 
-                ## 수학적 DNA (절대 변경 불가)
-                - 핵심 변수: {json.dumps(seed, ensure_ascii=False)}
-                - 논리 단계: {json.dumps(logic_steps, ensure_ascii=False)}
-                - 정답: {correct_answer} (000~999 범위 정수)
-                - 목표 난이도: DAPS {target_daps:.1f}
-                {f'- 시나리오 힌트: {theme_hint}' if theme_hint else ''}
+                ## Mathematical DNA (DO NOT MODIFY the underlying math)
+                - Variables: {json.dumps(seed, ensure_ascii=False)}
+                - Logic chain: {json.dumps(logic_steps, ensure_ascii=False)}
+                - Target difficulty: DAPS {target_daps:.1f}
+                {f'- Theme hint: {theme_hint}' if theme_hint else ''}
 
                 {fix_section}
 
-                ## AR-Sampling (Adaptive Rectification)
-                {f"💡 [Rethink Required] 이전 추론의 {failed_step_index + 1}단계에서 논리적 오류가 발견되었습니다." if failed_step_index is not None else ""}
-                {f"{failed_step_index + 1}단계 이전의 논리는 유지하되, 해당 지점부터 다시 추론(Rethink)하여 오류를 교정하세요." if failed_step_index is not None else ""}
+                {f"[Rethink Required] A logical error was found at step {failed_step_index + 1}. Keep prior steps, re-derive from that point." if failed_step_index is not None else ""}
 
-                ## 작성 규칙
-                1. 지문은 영어로 작성합니다.
-                2. 정답이 {correct_answer}임을 직접 언급하지 마세요.
-                3. 지문만 읽어도 독립적으로 풀 수 있어야 합니다.
-                4. AIME 특유의 간결하고 수학적인 문체를 사용하세요.
-                5. LaTeX 수식은 $...$ 형식으로 작성하세요.
+                ## VERIFICATION ANSWER (for self-check ONLY — do NOT reverse-engineer from this)
+                The correct answer is {correct_answer}. Write the problem FIRST based on the logic chain,
+                then verify your narrative leads to this answer. If it doesn't match, revise your narrative — never adjust the math.
 
-                ## 응답 형식 (반드시 JSON)
+                ## STRICT RULES — Violations cause immediate rejection
+                1. Write the problem statement in English.
+                2. The problem MUST be self-contained: solvable from the statement alone, with no external knowledge of the DNA.
+                3. NEVER mention mathematical technique names in the problem statement (e.g., "Vieta's formulas", "Snake Oil", "inclusion-exclusion", "Shoelace formula", "Chinese Remainder Theorem", "derangement", "Catalan"). The solver must DISCOVER which technique to use.
+                4. NEVER add mathematical conditions, constraints, or variables beyond what the logic chain provides. This is the #1 cause of failure ("Innovation Curse").
+                5. If multiple modules are involved, weave them into ONE unified scenario — do NOT present them as separate calculations joined by "and", "next", or "now consider". Create a single story where both computations emerge naturally.
+                6. Use concise AIME style: 2-4 sentences max for the setup. No preamble, no "Let's consider", no unnecessary context.
+                7. LaTeX: use $...$ for inline, avoid \\text{{}} for units. Use $^\\circ$ for degrees, $\\times$ for multiplication.
+                8. The answer MUST be an integer from 000 to 999. Frame the question so the answer naturally falls in this range (e.g., "Find the remainder when X is divided by 1000").
+                9. After writing, solve your own problem to derive extracted_answer. It MUST equal {correct_answer}.
+
+                ## Response format (MUST be valid JSON)
                 {{
-                    "narrative": "문제 지문 전체",
-                    "extracted_answer": {correct_answer}
+                    "narrative": "the complete problem statement",
+                    "extracted_answer": <integer 0-999 you derived by solving your own problem>
                 }}
             """).strip()
 
@@ -172,16 +179,10 @@ class WriterAgent(BaseAgent):
 
     def _run_branch_b(self, seed: dict, logic_steps: list[str]) -> int | None:
         """
-        Branch B: SymPy를 사용하여 시드에서 독립적으로 정답을 계산합니다.
-        구현 가능한 경우에만 실행 (모듈별로 오버라이드 가능).
-        현재는 기본적인 시드 검증만 수행합니다.
+        [Deprecated] Branch B는 Writer가 아닌 Pipeline(결정론 엔진)에서 실행됩니다.
+
+        Two-Engine 원칙에 따라 수학 검증은 LLM 레이어가 아닌
+        AtomicModule.verify_with_sympy() → Pipeline에서 실행됩니다.
+        이 메서드는 하위 호환성을 위해 유지되며, 항상 None을 반환합니다.
         """
-        try:
-            # 기본 구현: 시드 값들이 정수인지 확인
-            # 각 모듈의 SymPy 코드는 Phase 3에서 추가됩니다.
-            for k, v in seed.items():
-                if not isinstance(v, (int, float)):
-                    return None  # 계산 불가 시 None 반환 (통과 처리)
-            return None  # 현재는 Branch A만 검증 (Phase 3에서 완전 구현)
-        except Exception:
-            return None
+        return None

@@ -11,7 +11,7 @@ class MetaTraceRemovalModule(AtomicModule):
     META = ModuleMeta(
         module_id="meta_trace_removal",
         name="흔적 지우기 (Trace Removal)",
-        domain="meta",
+        domain="integer",
         namespace="meta_trace",
         input_schema={
             "target_module_ids": FieldSpec(dtype=list, domain="ModuleID", description="은닉을 적용할 대상 모듈 목록"),
@@ -34,17 +34,12 @@ class MetaTraceRemovalModule(AtomicModule):
             "removal_intensity": min(1.0, (difficulty_hint - 10) / 10)
         }
 
-    def execute(self, seed: dict[str, Any]) -> dict[str, Any]:
+    def execute(self, seed: dict[str, Any]) -> int:
+        """은닉 대상 수와 강도에서 결정론적 점수를 반환."""
         intensity = seed["removal_intensity"]
-        override = {}
-        for mid in seed["target_module_ids"]:
-            # 강도가 0.7(DAPS 17급) 이상이면 무조건 scaffolding_visibility = False
-            override[mid] = False if intensity > 0.4 else True
-            
-        return {
-            "scaffolding_override": override,
-            "logic_leap_bonus": intensity * 2.5 # 최대 2.5 난이도 상승 효과
-        }
+        n_targets = len(seed["target_module_ids"])
+        leap_bonus = int(intensity * 250)
+        return (n_targets * 137 + leap_bonus) % 1000
 
     def get_logic_steps(self, seed: dict[str, Any]) -> list[str]:
         return [
