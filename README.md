@@ -1,4 +1,4 @@
-# AI MathMate: Neuro-Symbolic AIME Problem Generation Engine
+# AIME-problem-generator: Neuro-Symbolic AIME Problem Generation Engine
 
 > **Multi-Agent System that synthesizes competition-grade mathematics problems with deterministic correctness guarantees**
 
